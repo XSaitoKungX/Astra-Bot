@@ -12,7 +12,7 @@ A modern, performant Discord Bot featuring Music, Economy, Leveling, Moderation,
 [![GitHub Stars](https://img.shields.io/github/stars/XSaitoKungX/Astra-Bot?color=yellow&logo=github&style=for-the-badge)](https://github.com/XSaitoKungX/Astra-Bot/stargazers)
 [![GitHub Forks](https://img.shields.io/github/forks/XSaitoKungX/Astra-Bot?color=blue&logo=github&style=for-the-badge)](https://github.com/XSaitoKungX/Astra-Bot/network/members)
 [![License](https://img.shields.io/github/license/XSaitoKungX/Astra-Bot?color=green&style=for-the-badge)](LICENSE)
-[![Version](https://img.shields.io/badge/version-2.4.0-purple?style=for-the-badge)](https://github.com/XSaitoKungX/Astra-Bot/releases)
+[![Version](https://img.shields.io/badge/version-2.5.0-purple?style=for-the-badge)](https://github.com/XSaitoKungX/Astra-Bot/releases)
 
 [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Discord.js](https://img.shields.io/badge/Discord.js_v14-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.js.org/)
