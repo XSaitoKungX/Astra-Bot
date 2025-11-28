@@ -398,6 +398,18 @@
 - [x] Display options (timestamp, executor, thumbnail, compact)
 - [x] Live embed preview in dashboard
 
+### 🎭 Self Roles System
+- [x] SelfRole database model with panels
+- [x] Support for Buttons, Dropdowns, Reactions
+- [x] Custom embed customization per panel
+- [x] Role limits (min/max per panel)
+- [x] Required role & blacklist support
+- [x] `/selfroles` command (deploy, list, refresh, stats)
+- [x] Button & dropdown interaction handlers
+- [x] SelfRolesSettingsPage dashboard
+- [x] Live panel preview
+- [x] Global settings (log channel, DM notifications)
+
 ### 🔧 API Enhancements
 - [ ] Rate limiting with Redis
 - [ ] API key authentication
