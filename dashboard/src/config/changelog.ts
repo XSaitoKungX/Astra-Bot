@@ -15,11 +15,38 @@ export interface ChangelogEntry {
 }
 
 // Current version
-export const CURRENT_VERSION = '2.2.0';
+export const CURRENT_VERSION = '2.3.0';
 export const VERSION_DATE = '2025-11-28';
 
 // Full changelog
 export const CHANGELOG: ChangelogEntry[] = [
+  {
+    version: '2.3.0',
+    date: '2025-11-28',
+    type: 'minor',
+    title: 'GitHub Workflows & Project Setup',
+    description: 'Complete GitHub project setup with CI/CD, security policies, and automated dependency updates.',
+    changes: [
+      // GitHub Workflows
+      { type: 'added', text: 'CI workflow with lint, typecheck, and build' },
+      { type: 'added', text: 'Release workflow with auto-tagging and changelog generation' },
+      { type: 'added', text: 'Manual release trigger via GitHub Actions' },
+      { type: 'added', text: 'Dependabot for automated dependency updates' },
+      
+      // Project Files
+      { type: 'added', text: 'SECURITY.md with vulnerability reporting guidelines' },
+      { type: 'added', text: 'CONTRIBUTORS.md with contributor avatars' },
+      { type: 'added', text: 'LICENSE (MIT)' },
+      { type: 'added', text: 'Issue templates (bug report, feature request)' },
+      { type: 'added', text: 'Pull request template' },
+      
+      // Code Quality
+      { type: 'added', text: 'ESLint 9 flat config (eslint.config.js)' },
+      { type: 'improved', text: 'README.md with badges, stats, and star history' },
+      { type: 'improved', text: '.gitignore with comprehensive patterns' },
+      { type: 'fixed', text: 'ESLint errors and warnings resolved' },
+    ],
+  },
   {
     version: '2.2.0',
     date: '2025-11-28',
