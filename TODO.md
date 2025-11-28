@@ -336,13 +336,25 @@
   - [x] Bonus entries for roles
   - [x] Auto-end with scheduled checks
   - [x] Interactive button to enter
-- [ ] Poll system with `/poll`
-- [ ] Reaction roles
-- [ ] Starboard
-- [ ] AFK system
-- [ ] Reminder system
-- [ ] Birthday system
-- [ ] Custom commands
+- [x] Poll system with `/poll` (options, timer, buttons)
+- [x] Reaction roles (`/reactionrole` add, remove, list, create)
+  - [x] Normal (toggle), Unique, Verify, Drop types
+  - [x] Event handlers for add/remove reactions
+- [x] Starboard (`/starboard` setup, disable, settings, stats)
+  - [x] Configurable threshold and emoji
+  - [x] Auto-post to starboard channel
+- [x] AFK system (`/afk`)
+  - [x] Set/remove AFK status
+  - [x] Track mentions while AFK
+- [x] Reminder system (`/reminder` set, list, delete, clear)
+  - [x] Flexible time parsing (1h30m, 2d, etc.)
+  - [x] Max 25 reminders per user
+- [x] Birthday system (`/birthday` set, remove, view, upcoming, list)
+  - [x] Monthly birthday list
+  - [x] Upcoming birthdays (30 days)
+- [x] Custom commands (`/customcommand` create, delete, edit, list, info, toggle)
+  - [x] Max 50 commands per server
+  - [x] Usage tracking
 
 ### 📝 Logging System
 - [ ] Message edit logs
