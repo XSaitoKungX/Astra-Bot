@@ -1,7 +1,7 @@
 # 🌟 Astra Bot - Development Roadmap
 
 > **Last Updated:** 28. November 2025  
-> **Version:** 2.3.0  
+> **Version:** 2.5.0  
 > **Status:** Active Development
 
 ---
@@ -21,7 +21,8 @@
 | Reusable Components | 18 | 18 | ✅ 100% |
 | Dashboard UX | 15 | 15 | ✅ 100% |
 | GitHub & DevOps | 12 | 12 | ✅ 100% |
-| **Phase 1-2 Total** | **195** | **198** | **✅ 98%** |
+| Code Protection | 8 | 8 | ✅ 100% |
+| **Phase 1-2 Total** | **203** | **206** | **✅ 99%** |
 
 ---
 
@@ -40,9 +41,30 @@
 
 ---
 
-## 🎯 Recent Updates (v2.3.0)
+## 🎯 Recent Updates (v2.5.0)
 
-### GitHub & DevOps (NEW!)
+### Code Protection & Security (NEW! v2.5.0)
+- ✅ Git-crypt encryption for source files
+- ✅ JavaScript obfuscation for distribution builds
+- ✅ Release build script (`npm run release`)
+- ✅ Separate obfuscated and source releases
+- ✅ `scripts/build-release.ts` for automated releases
+- ✅ `scripts/setup-git-crypt.sh` for easy setup
+- ✅ `.gitattributes` for encryption rules
+- ✅ CI workflow with git-crypt unlock
+- ✅ `docs/CODE_PROTECTION.md` documentation
+
+### Engagement Features (v2.4.0)
+- ✅ `/reactionrole` - Reaction roles (normal, unique, verify, drop, binding, limit)
+- ✅ `/starboard` - Starboard with configurable threshold
+- ✅ `/afk` - AFK status with mention tracking
+- ✅ `/reminder` - Reminders with snooze & recurring
+- ✅ `/birthday` - Birthday system with age calculation
+- ✅ `/customcommand` - Custom commands with aliases
+- ✅ Enhanced Mongoose models with instance/static methods
+- ✅ `messageReactionAdd` / `messageReactionRemove` events
+
+### GitHub & DevOps (v2.3.0)
 - ✅ Git repository initialized and pushed to GitHub
 - ✅ CI workflow (lint, typecheck, build)
 - ✅ Release workflow with auto-tagging
@@ -440,6 +462,9 @@ npm run dev:all
 | `npm run build` | Build for production |
 | `npm run start` | Start production server |
 | `npm run deploy:commands` | Deploy slash commands |
+| `npm run release` | Build release (obfuscated + source) |
+| `npm run typecheck` | TypeScript type checking |
+| `npm run lint` | ESLint code linting |
 
 ### Production Deployment
 ```bash
