@@ -15,11 +15,44 @@ export interface ChangelogEntry {
 }
 
 // Current version
-export const CURRENT_VERSION = '2.3.0';
+export const CURRENT_VERSION = '2.4.0';
 export const VERSION_DATE = '2025-11-28';
 
 // Full changelog
 export const CHANGELOG: ChangelogEntry[] = [
+  {
+    version: '2.4.0',
+    date: '2025-11-28',
+    type: 'minor',
+    title: 'Engagement Features & Enhanced Models',
+    description: 'Complete engagement system with Reaction Roles, Starboard, AFK, Reminders, Birthdays, and Custom Commands.',
+    changes: [
+      // New Commands
+      { type: 'added', text: '/reactionrole - Reaction roles with 4 types (normal, unique, verify, drop)' },
+      { type: 'added', text: '/starboard - Starboard system with configurable threshold and emoji' },
+      { type: 'added', text: '/afk - AFK status with mention tracking' },
+      { type: 'added', text: '/reminder - Reminder system with flexible time parsing' },
+      { type: 'added', text: '/birthday - Birthday system with upcoming list' },
+      { type: 'added', text: '/customcommand - Custom commands with usage tracking' },
+      
+      // Database Models
+      { type: 'added', text: 'ReactionRole model with instance methods' },
+      { type: 'added', text: 'Starboard model with star tracking' },
+      { type: 'added', text: 'AFK model with nickname restoration' },
+      { type: 'added', text: 'Reminder model with recurring support' },
+      { type: 'added', text: 'Birthday model with age calculation' },
+      { type: 'added', text: 'CustomCommand model with embed support' },
+      
+      // Events
+      { type: 'added', text: 'messageReactionAdd event for reaction roles & starboard' },
+      { type: 'added', text: 'messageReactionRemove event for role removal' },
+      
+      // Improvements
+      { type: 'improved', text: 'All models now have instance and static methods' },
+      { type: 'improved', text: 'Added IStarboardConfig to shared types' },
+      { type: 'fixed', text: 'TypeScript errors in engagement features' },
+    ],
+  },
   {
     version: '2.3.0',
     date: '2025-11-28',

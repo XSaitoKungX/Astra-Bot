@@ -46,7 +46,7 @@ export function generateInviteUrl(clientId?: string): string {
 // Bot Info
 export const BOT_INFO = {
   name: 'Astra',
-  version: '2.3.0',
+  version: '2.4.0',
   prefix: '/',
   description: 'All-in-one Discord bot: Music, Economy, Leveling, Moderation, Giveaways & more!',
   shortDescription: '🚀 All-in-one Discord bot: Music, Economy, Leveling, Moderation, Giveaways, Anime & more! Beautiful dashboard included.',

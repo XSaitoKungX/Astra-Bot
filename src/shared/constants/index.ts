@@ -7,7 +7,7 @@ import type { ThemeColors, ThemePreset } from '../types/index.js';
 // ============ Bot Constants ============
 
 export const BOT_NAME = process.env.BOT_NAME || 'Astra';
-export const BOT_VERSION = process.env.BOT_VERSION || '2.3.0';
+export const BOT_VERSION = process.env.BOT_VERSION || '2.4.0';
 export const BOT_COLOR = 0x9B59B6; // Purple
 export const BOT_INVITE_PERMISSIONS = '1642787765494'; // Recommended permissions
 
