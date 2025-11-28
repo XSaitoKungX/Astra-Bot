@@ -1,6 +1,14 @@
 # ===========================================
-# ASTRA BOT - Git Ignore
+# ASTRA BOT - Git Ignore Configuration
 # ===========================================
+
+# ===========================================
+# RELEASE & SECURITY
+# ===========================================
+release/
+git-crypt-key
+*.key
+*.pem
 
 # ============ Dependencies ============
 node_modules/

@@ -19,7 +19,10 @@
     "typecheck": "tsc --noEmit",
     "db:seed": "tsx src/database/seed.ts",
     "commands:deploy": "tsx src/bot/deploy-commands.ts",
-    "pelican:start": "npm run build && npm run start"
+    "pelican:start": "npm run build && npm run start",
+    "release": "tsx scripts/build-release.ts",
+    "release:obfuscated": "npm run build && tsx scripts/build-release.ts --obfuscated-only",
+    "release:source": "tsx scripts/build-release.ts --source-only"
   },
   "keywords": [
     "discord",
@@ -76,6 +79,7 @@
     "concurrently": "^9.2.1",
     "eslint": "^9.39.1",
     "globals": "^16.5.0",
+    "javascript-obfuscator": "^4.1.1",
     "tsx": "^4.20.6",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.48.0"

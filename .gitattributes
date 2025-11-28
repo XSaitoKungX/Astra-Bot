@@ -1,0 +1,37 @@
+# ===========================================
+# ASTRA BOT - Git Attributes
+# ===========================================
+# Git-crypt encryption for source files
+
+# Encrypt all source code
+src/**/*.ts filter=git-crypt diff=git-crypt
+src/**/*.js filter=git-crypt diff=git-crypt
+dashboard/src/**/*.ts filter=git-crypt diff=git-crypt
+dashboard/src/**/*.tsx filter=git-crypt diff=git-crypt
+dashboard/src/**/*.js filter=git-crypt diff=git-crypt
+dashboard/src/**/*.jsx filter=git-crypt diff=git-crypt
+dashboard/src/**/*.css filter=git-crypt diff=git-crypt
+
+# Encrypt config files with secrets
+src/shared/config/*.ts filter=git-crypt diff=git-crypt
+scripts/*.ts filter=git-crypt diff=git-crypt
+
+# Keep these files readable (NOT encrypted)
+README.md !filter !diff
+LICENSE !filter !diff
+CONTRIBUTORS.md !filter !diff
+SECURITY.md !filter !diff
+CHANGELOG.md !filter !diff
+.env.example !filter !diff
+package.json !filter !diff
+package-lock.json !filter !diff
+tsconfig.json !filter !diff
+.gitignore !filter !diff
+.gitattributes !filter !diff
+
+# Documentation stays readable
+docs/** !filter !diff
+*.md !filter !diff
+
+# GitHub workflows stay readable
+.github/** !filter !diff
