@@ -1,13 +1,44 @@
+<div align="center">
+
 # ✨ Astra Bot
 
-A modern, performant All-in-One Discord Bot with a beautiful anime-inspired web dashboard.
+<img src="https://astra.novaplex.xyz/Astra_Banner.png" alt="Astra Banner" width="100%" />
 
-**Single Port Architecture** - Optimized for Pelican.dev and similar hosting platforms.
+### 🚀 All-in-One Discord Bot with Beautiful Dashboard
 
-![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
-![Discord.js](https://img.shields.io/badge/Discord.js-5865F2?style=for-the-badge&logo=discord&logoColor=white)
-![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
-![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)
+A modern, performant Discord Bot featuring Music, Economy, Leveling, Moderation, Giveaways, and more!
+
+[![Discord](https://img.shields.io/discord/857622993702486067?color=5865F2&logo=discord&logoColor=white&label=Discord&style=for-the-badge)](https://discord.gg/KD84DmNA89)
+[![GitHub Stars](https://img.shields.io/github/stars/XSaitoKungX/Astra-Bot?color=yellow&logo=github&style=for-the-badge)](https://github.com/XSaitoKungX/Astra-Bot/stargazers)
+[![GitHub Forks](https://img.shields.io/github/forks/XSaitoKungX/Astra-Bot?color=blue&logo=github&style=for-the-badge)](https://github.com/XSaitoKungX/Astra-Bot/network/members)
+[![License](https://img.shields.io/github/license/XSaitoKungX/Astra-Bot?color=green&style=for-the-badge)](LICENSE)
+[![Version](https://img.shields.io/badge/version-2.2.0-purple?style=for-the-badge)](https://github.com/XSaitoKungX/Astra-Bot/releases)
+
+[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Discord.js](https://img.shields.io/badge/Discord.js_v14-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.js.org/)
+[![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://react.dev/)
+[![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)](https://www.mongodb.com/)
+[![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+
+[🌐 Dashboard](https://astra.novaplex.xyz) • [📖 Documentation](https://docs.novaplex.xyz) • [💬 Support](https://discord.gg/KD84DmNA89) • [🐛 Report Bug](https://github.com/XSaitoKungX/Astra-Bot/issues)
+
+</div>
+
+---
+
+## 📊 Stats
+
+<div align="center">
+
+![GitHub repo size](https://img.shields.io/github/repo-size/XSaitoKungX/Astra-Bot?style=flat-square)
+![GitHub code size](https://img.shields.io/github/languages/code-size/XSaitoKungX/Astra-Bot?style=flat-square)
+![GitHub last commit](https://img.shields.io/github/last-commit/XSaitoKungX/Astra-Bot?style=flat-square)
+![GitHub issues](https://img.shields.io/github/issues/XSaitoKungX/Astra-Bot?style=flat-square)
+![GitHub pull requests](https://img.shields.io/github/issues-pr/XSaitoKungX/Astra-Bot?style=flat-square)
+
+</div>
+
+---
 
 ## 🌟 Features
 
@@ -45,8 +76,8 @@ A modern, performant All-in-One Discord Bot with a beautiful anime-inspired web 
 
 1. **Clone the repository**
 ```bash
-git clone https://github.com/yourusername/astra-bot.git
-cd astra-bot
+git clone https://github.com/XSaitoKungX/Astra-Bot.git
+cd Astra-Bot
 ```
 
 2. **Install dependencies**
@@ -215,19 +246,51 @@ Docker support will be added in a future update.
 | **Owner** | 5 | Guild owner - all permissions |
 | **Bot Owner** | 99 | Global access to all guilds |
 
+## 👥 Contributors
+
+<a href="https://github.com/XSaitoKungX/Astra-Bot/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=XSaitoKungX/Astra-Bot" />
+</a>
+
+See [CONTRIBUTORS.md](CONTRIBUTORS.md) for a full list of contributors.
+
+## 🤝 Contributing
+
+Contributions are welcome! Please read our [Contributing Guidelines](CONTRIBUTORS.md) before submitting a Pull Request.
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
 ## 💬 Support
 
-- [Discord Server](https://discord.gg/your-server)
-- [GitHub Issues](https://github.com/yourusername/astra-bot/issues)
+<div align="center">
+
+[![Discord](https://img.shields.io/badge/Discord-Join%20Server-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/KD84DmNA89)
+[![GitHub Issues](https://img.shields.io/badge/GitHub-Report%20Issue-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/XSaitoKungX/Astra-Bot/issues)
+
+</div>
+
+## ⭐ Star History
+
+<div align="center">
+
+[![Star History Chart](https://api.star-history.com/svg?repos=XSaitoKungX/Astra-Bot&type=Date)](https://star-history.com/#XSaitoKungX/Astra-Bot&Date)
+
+</div>
 
 ---
 
-Made with ❤️ for Discord communities
+<div align="center">
+
+Made with ❤️ by [XSaitoKungX](https://github.com/XSaitoKungX) for Discord communities
+
+**[⬆ Back to Top](#-astra-bot)**
+
+</div>

@@ -1,34 +1,112 @@
-# Dependencies
+# ===========================================
+# ASTRA BOT - Git Ignore
+# ===========================================
+
+# ============ Dependencies ============
 node_modules/
 dashboard/node_modules/
+.pnp
+.pnp.js
 
-# Build outputs
+# ============ Build Outputs ============
 dist/
+build/
 dashboard/dist/
+dashboard/build/
+*.tsbuildinfo
 
-# Environment files
+# ============ Environment Files ============
+# IMPORTANT: Never commit .env files with secrets!
 .env
 .env.local
+.env.development
+.env.production
 .env.*.local
+.env.development.local
+.env.test.local
+.env.production.local
 
-# Logs
+# ============ Logs ============
 logs/
 *.log
 npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
 
-# IDE
+# ============ IDE / Editor ============
 .vscode/
+!.vscode/extensions.json
+!.vscode/settings.json
 .idea/
 *.swp
 *.swo
+*.sublime-workspace
+*.sublime-project
+.project
+.classpath
+.c9/
+*.launch
+.settings/
 
-# OS
+# ============ OS Files ============
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
 Thumbs.db
+Desktop.ini
 
-# Testing
+# ============ Testing ============
 coverage/
+.nyc_output/
+*.lcov
 
-# Misc
+# ============ Package Managers ============
 *.tgz
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
+.pnpm-store/
+
+# ============ Cache ============
 .cache/
+.parcel-cache/
+.turbo/
+.eslintcache
+.stylelintcache
+*.cache
+
+# ============ Runtime ============
+*.pid
+*.seed
+*.pid.lock
+pids/
+
+# ============ Temporary Files ============
+tmp/
+temp/
+*.tmp
+*.temp
+*.bak
+*.backup
+
+# ============ Debug ============
+.debug/
+debug/
+
+# ============ Misc ============
+.codeiumignore
+home/
+*.local
+
+# ============ Secrets (Extra Safety) ============
+secrets/
+*.pem
+*.key
+*.cert
+*.p12
