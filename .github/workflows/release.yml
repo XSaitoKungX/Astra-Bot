@@ -129,7 +129,7 @@ jobs:
           echo "- [Support Server](https://discord.gg/KD84DmNA89)" >> CHANGELOG_RELEASE.md
       
       - name: Create Release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ steps.version.outputs.tag }}
           name: "🚀 Astra Bot ${{ steps.version.outputs.tag }}"
