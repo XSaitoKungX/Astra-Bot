@@ -1,7 +1,7 @@
 # 🌟 Astra Bot - Development Roadmap
 
-> **Last Updated:** 27. November 2025  
-> **Version:** 1.12.0  
+> **Last Updated:** 28. November 2025  
+> **Version:** 2.3.0  
 > **Status:** Active Development
 
 ---
@@ -13,14 +13,15 @@
 | Core Infrastructure | 8 | 8 | ✅ 100% |
 | Database | 8 | 8 | ✅ 100% |
 | Discord Bot Core | 15 | 15 | ✅ 100% |
-| Bot Commands | 12 | 30 | 🔄 40% |
+| Bot Commands | 57 | 60 | ✅ 95% |
 | API Backend | 22 | 22 | ✅ 100% |
 | Dashboard Core | 10 | 10 | ✅ 100% |
 | Dashboard Pages | 20 | 20 | ✅ 100% |
 | Settings Pages | 10 | 10 | ✅ 100% |
 | Reusable Components | 18 | 18 | ✅ 100% |
 | Dashboard UX | 15 | 15 | ✅ 100% |
-| **Phase 1 Total** | **138** | **156** | **🔄 88%** |
+| GitHub & DevOps | 12 | 12 | ✅ 100% |
+| **Phase 1-2 Total** | **195** | **198** | **✅ 98%** |
 
 ---
 
@@ -39,9 +40,31 @@
 
 ---
 
-## 🎯 Recent Updates (v1.12.0)
+## 🎯 Recent Updates (v2.3.0)
 
-### Dashboard Modernization
+### GitHub & DevOps (NEW!)
+- ✅ Git repository initialized and pushed to GitHub
+- ✅ CI workflow (lint, typecheck, build)
+- ✅ Release workflow with auto-tagging
+- ✅ Manual release trigger via GitHub Actions
+- ✅ Dependabot for automated dependency updates
+- ✅ SECURITY.md with vulnerability reporting
+- ✅ CONTRIBUTORS.md with contributor avatars
+- ✅ LICENSE (MIT)
+- ✅ Issue templates (bug report, feature request)
+- ✅ Pull request template
+- ✅ ESLint 9 flat config (eslint.config.js)
+- ✅ Improved .gitignore with comprehensive patterns
+
+### Dynamic Links & Top.gg Ready (v2.2.0)
+- ✅ All links configurable via .env file
+- ✅ BOT_LINKS config for centralized link management
+- ✅ Support for top.gg, discord.bots.gg integration
+- ✅ Dynamic bot invite URL with configurable permissions
+- ✅ TOP_GG_LISTING.md with complete listing info
+- ✅ TOPGG_TOKEN and webhook support in .env
+
+### Dashboard Modernization (v1.12.0)
 - ✅ DashboardLayout complete redesign
 - ✅ 13 Themes across 3 categories (Dark, Light, Colorful)
 - ✅ Collapsible sidebar with server info
@@ -360,13 +383,15 @@
 - [ ] Jest unit tests
 - [ ] Supertest API tests
 - [ ] Playwright E2E tests
-- [ ] GitHub Actions CI/CD
+- [x] GitHub Actions CI/CD ✅
 
 ### 📚 Documentation
 - [ ] API documentation (Swagger/OpenAPI)
 - [ ] User guide
 - [ ] Self-hosting guide
-- [ ] Contributing guide
+- [x] Contributing guide (CONTRIBUTORS.md) ✅
+- [x] Security policy (SECURITY.md) ✅
+- [x] Top.gg listing (TOP_GG_LISTING.md) ✅
 
 ---
 
@@ -381,8 +406,8 @@
 ### Development Setup
 ```bash
 # Clone repository
-git clone https://github.com/your-username/astra-bot.git
-cd astra-bot
+git clone https://github.com/XSaitoKungX/Astra-Bot.git
+cd Astra-Bot
 
 # Install dependencies
 npm install
