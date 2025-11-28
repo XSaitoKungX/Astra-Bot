@@ -24,15 +24,34 @@ jobs:
         env:
           GIT_CRYPT_KEY: ${{ secrets.GIT_CRYPT_KEY }}
         run: |
-          if [ -n "$GIT_CRYPT_KEY" ]; then
-            echo "$GIT_CRYPT_KEY" | base64 -d > ./git-crypt-key
-            git-crypt unlock ./git-crypt-key
-            rm ./git-crypt-key
-            echo "✅ Source files decrypted"
-          else
-            echo "⚠️ GIT_CRYPT_KEY not set, skipping decryption"
+          if [ -z "$GIT_CRYPT_KEY" ]; then
+            echo "❌ GIT_CRYPT_KEY secret is not set!"
             exit 1
           fi
+          
+          echo "🔑 Decoding git-crypt key..."
+          echo "$GIT_CRYPT_KEY" | base64 -d > ./git-crypt-key
+          
+          # Verify key file
+          KEY_SIZE=$(stat -c%s ./git-crypt-key 2>/dev/null || stat -f%z ./git-crypt-key)
+          echo "📏 Key file size: $KEY_SIZE bytes"
+          
+          if [ "$KEY_SIZE" -lt 100 ]; then
+            echo "❌ Key file too small, likely corrupted"
+            exit 1
+          fi
+          
+          echo "🔓 Unlocking repository..."
+          git-crypt unlock ./git-crypt-key
+          rm ./git-crypt-key
+          
+          # Verify decryption worked
+          if head -c 10 src/index.ts | grep -q "GITCRYPT"; then
+            echo "❌ Files still encrypted!"
+            exit 1
+          fi
+          
+          echo "✅ Source files decrypted successfully"
       
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -71,6 +90,7 @@ jobs:
           echo "$GIT_CRYPT_KEY" | base64 -d > ./git-crypt-key
           git-crypt unlock ./git-crypt-key
           rm ./git-crypt-key
+          echo "✅ Source files decrypted"
       
       - name: Setup Node.js
         uses: actions/setup-node@v4
