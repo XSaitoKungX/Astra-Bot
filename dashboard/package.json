@@ -18,7 +18,7 @@
     "clsx": "^2.0.0",
     "emojibase": "^17.0.0",
     "emojibase-data": "^17.0.0",
-    "framer-motion": "^10.17.0",
+    "framer-motion": "^12.23.24",
     "lucide-react": "^0.303.0",
     "postcss": "^8.4.32",
     "react": "^18.2.0",
