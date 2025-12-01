@@ -1,44 +1,223 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     
-    <!-- Favicon -->
+    <!-- ============================================ -->
+    <!-- Favicon & App Icons -->
+    <!-- ============================================ -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#8B5CF6" />
+    <meta name="msapplication-TileColor" content="#8B5CF6" />
+    <meta name="msapplication-config" content="/browserconfig.xml" />
     
-    <!-- Meta Tags -->
-    <meta name="description" content="Astra - Your all-in-one Discord companion for moderation, leveling, economy, and entertainment. Manage your server with a beautiful dashboard." />
-    <meta name="keywords" content="Discord, Bot, Dashboard, Moderation, Leveling, Economy, Astra" />
-    <meta name="author" content="Astra Team" />
-    <meta name="theme-color" content="#8B5CF6" />
+    <!-- ============================================ -->
+    <!-- Primary Meta Tags -->
+    <!-- ============================================ -->
+    <title>Astra - All-in-One Discord Bot</title>
+    <meta name="title" content="Astra - All-in-One Discord Bot" />
+    <meta name="description" content="Astra - Your all-in-one Discord companion for moderation, leveling, economy, music, anime, and entertainment. Manage your server with a beautiful dashboard." />
+    <meta name="keywords" content="Discord, Bot, Dashboard, Moderation, Leveling, Economy, Astra, Music, Anime, Server Management" />
+    <meta name="author" content="Novaplex" />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="English" />
+    <meta name="revisit-after" content="7 days" />
     
-    <!-- Open Graph / Social Media -->
+    <!-- ============================================ -->
+    <!-- Theme & PWA -->
+    <!-- ============================================ -->
+    <meta name="theme-color" content="#8B5CF6" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#A855F7" media="(prefers-color-scheme: light)" />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Astra" />
+    <meta name="application-name" content="Astra Dashboard" />
+    <meta name="format-detection" content="telephone=no" />
+    
+    <!-- ============================================ -->
+    <!-- Open Graph / Facebook -->
+    <!-- ============================================ -->
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Astra Bot" />
     <meta property="og:url" content="https://astra.novaplex.xyz/" />
     <meta property="og:title" content="Astra - All-in-One Discord Bot" />
-    <meta property="og:description" content="Your all-in-one Discord companion for moderation, leveling, economy, and entertainment." />
+    <meta property="og:description" content="Your all-in-one Discord companion for moderation, leveling, economy, music, anime, and entertainment." />
     <meta property="og:image" content="https://astra.novaplex.xyz/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Astra Bot Dashboard Preview" />
+    <meta property="og:locale" content="en_US" />
     
+    <!-- ============================================ -->
     <!-- Twitter -->
+    <!-- ============================================ -->
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@AstraBot" />
+    <meta name="twitter:creator" content="@Novaplex" />
     <meta name="twitter:title" content="Astra - All-in-One Discord Bot" />
-    <meta name="twitter:description" content="Your all-in-one Discord companion for moderation, leveling, economy, and entertainment." />
+    <meta name="twitter:description" content="Your all-in-one Discord companion for moderation, leveling, economy, music, anime, and entertainment." />
     <meta name="twitter:image" content="https://astra.novaplex.xyz/og-image.jpg" />
     
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <!-- ============================================ -->
+    <!-- Discord Embed -->
+    <!-- ============================================ -->
+    <meta name="discord:title" content="Astra Bot Dashboard" />
+    <meta name="discord:description" content="Manage your Discord server with Astra's powerful dashboard" />
     
-    <title>Astra - All-in-One Discord Bot</title>
+    <!-- ============================================ -->
+    <!-- Security -->
+    <!-- ============================================ -->
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    
+    <!-- ============================================ -->
+    <!-- Preconnect & DNS Prefetch -->
+    <!-- ============================================ -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://cdn.discordapp.com" />
+    
+    <!-- ============================================ -->
+    <!-- Fonts (with display=swap for performance) -->
+    <!-- ============================================ -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+    
+    <!-- ============================================ -->
+    <!-- Critical CSS (inline for faster FCP) -->
+    <!-- ============================================ -->
+    <style>
+      /* Critical loading styles */
+      :root {
+        --color-background: #08080f;
+        --color-surface: #0f0f1a;
+        --color-accent: #8B5CF6;
+      }
+      
+      html {
+        background-color: var(--color-background);
+        scroll-behavior: smooth;
+      }
+      
+      body {
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        background-color: var(--color-background);
+        font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+      }
+      
+      #root {
+        min-height: 100vh;
+      }
+      
+      /* Loading animation */
+      .app-loading {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--color-background);
+        z-index: 9999;
+      }
+      
+      .app-loading-spinner {
+        width: 48px;
+        height: 48px;
+        border: 3px solid var(--color-surface);
+        border-top-color: var(--color-accent);
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+      
+      @keyframes spin {
+        to { transform: rotate(360deg); }
+      }
+      
+      /* Hide loading when app is ready */
+      .app-ready .app-loading {
+        display: none;
+      }
+    </style>
+    
+    <!-- ============================================ -->
+    <!-- Structured Data (JSON-LD) -->
+    <!-- ============================================ -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Astra Bot Dashboard",
+        "description": "All-in-one Discord bot management dashboard for moderation, leveling, economy, and more.",
+        "url": "https://astra.novaplex.xyz",
+        "applicationCategory": "UtilityApplication",
+        "operatingSystem": "Any",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "author": {
+          "@type": "Organization",
+          "name": "Novaplex"
+        }
+      }
+    </script>
   </head>
   <body>
+    <!-- Loading screen (hidden when React mounts) -->
+    <div class="app-loading" id="app-loading">
+      <div class="app-loading-spinner"></div>
+    </div>
+    
+    <!-- React root -->
     <div id="root"></div>
+    
+    <!-- Main application script -->
     <script type="module" src="/src/main.tsx"></script>
+    
+    <!-- Remove loading screen when app is ready -->
+    <script>
+      window.addEventListener('load', function() {
+        setTimeout(function() {
+          document.body.classList.add('app-ready');
+        }, 100);
+      });
+    </script>
+    
+    <!-- Noscript fallback -->
+    <noscript>
+      <style>
+        .app-loading { display: none !important; }
+        #root { 
+          display: flex; 
+          align-items: center; 
+          justify-content: center; 
+          min-height: 100vh;
+          text-align: center;
+          padding: 2rem;
+          color: #fff;
+        }
+      </style>
+      <div style="padding: 2rem; text-align: center; color: #fff;">
+        <h1>JavaScript Required</h1>
+        <p>Please enable JavaScript to use the Astra Dashboard.</p>
+        <a href="https://discord.com/oauth2/authorize?client_id=1207805728530763796&permissions=8&scope=bot%20applications.commands" style="color: #8B5CF6;">
+          Add Astra to Discord
+        </a>
+      </div>
+    </noscript>
   </body>
 </html>

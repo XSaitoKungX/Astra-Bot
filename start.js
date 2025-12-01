@@ -62,7 +62,7 @@ function logHeader() {
   console.log(`
 ${colors.magenta}╔══════════════════════════════════════════════════╗
 ║                                                  ║
-║     ${colors.bright}✨ ASTRA BOT - Production Startup${colors.reset}${colors.magenta}           ║
+║     ${colors.bright}✨ ASTRA BOT - Production Startup${colors.reset}${colors.magenta}            ║
 ║                                                  ║
 ╚══════════════════════════════════════════════════╝${colors.reset}
 `);
