@@ -11,7 +11,7 @@ A modern, performant Discord Bot featuring Music, Economy, Leveling, Moderation,
 [![Discord](https://img.shields.io/discord/857622993702486067?color=5865F2&logo=discord&logoColor=white&label=Discord&style=for-the-badge)](https://discord.gg/KD84DmNA89)
 [![GitHub Stars](https://img.shields.io/github/stars/XSaitoKungX/Astra-Bot?color=yellow&logo=github&style=for-the-badge)](https://github.com/XSaitoKungX/Astra-Bot/stargazers)
 [![GitHub Forks](https://img.shields.io/github/forks/XSaitoKungX/Astra-Bot?color=blue&logo=github&style=for-the-badge)](https://github.com/XSaitoKungX/Astra-Bot/network/members)
-[![License](https://img.shields.io/github/license/XSaitoKungX/Astra-Bot?color=green&style=for-the-badge)](LICENSE)
+[![Free](https://img.shields.io/badge/100%25-Free-green?style=for-the-badge)](https://astra.novaplex.xyz)
 [![Version](https://img.shields.io/badge/version-2.15.0-purple?style=for-the-badge)](https://github.com/XSaitoKungX/Astra-Bot/releases)
 
 [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
@@ -99,7 +99,7 @@ See [CHANGELOG](https://astra.novaplex.xyz/dashboard/changelog) for full version
 - **🛡️ Nginx Compatible** - Works behind reverse proxy
 - **🌐 Global Commands** - Slash commands deploy globally
 - **💾 MongoDB** - Persistent data storage
-- **🔒 Git-crypt** - Source code protection
+- **🔒 Secure** - Protected source code
 
 ## 🚀 Quick Start
 
@@ -329,17 +329,18 @@ See [CONTRIBUTORS.md](CONTRIBUTORS.md) for a full list of contributors.
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please read our [Contributing Guidelines](CONTRIBUTORS.md) before submitting a Pull Request.
+Interested in contributing? The source code is not publicly available, but we welcome:
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+- 🐛 **Bug Reports** - Open an issue on GitHub
+- 💡 **Feature Requests** - Suggest new features via Discord or GitHub
+- 🌐 **Translations** - Help translate Astra to other languages
+- 📖 **Documentation** - Improve our docs
+
+For code contributions, please join our [Discord Server](https://discord.gg/KD84DmNA89) and contact the development team.
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+Astra Bot is proprietary software. The source code is not publicly available. All rights reserved.
 
 ## 💬 Support
 

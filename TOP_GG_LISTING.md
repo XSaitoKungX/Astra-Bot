@@ -249,7 +249,7 @@ Manage everything from our stunning dashboard - no commands needed!
 | Feature | Astra | Other Bots |
 |---------|:-----:|:----------:|
 | 💯 **100% Free** | ✅ | ❌ Paywalled |
-| 📖 **Open Source** | ✅ | ❌ Closed |
+| 🔒 **No Data Selling** | ✅ | ❌ Sells Data |
 | 🌐 **Web Dashboard** | ✅ Free | 💰 Premium |
 | 🔓 **No Premium Locks** | ✅ | ❌ Limited |
 | 🎵 **Music + Economy + Leveling** | ✅ All-in-One | ❓ Separate Bots |
@@ -286,12 +286,12 @@ Manage everything from our stunning dashboard - no commands needed!
 
 ## 💖 Support Development
 
-Astra is **100% free** and **open source**. If you enjoy using Astra:
+Astra is **100% free forever**. If you enjoy using Astra:
 
-- ⭐ **Star us on [GitHub](https://github.com/XSaitoKungX/Astra-Bot)**
 - 📣 **Vote on top.gg** (helps us grow!)
 - 💬 **Join our [Discord](https://discord.gg/KD84DmNA89)**
 - 🐛 **Report bugs** to help us improve
+- 💖 **Spread the word** - Tell your friends!
 
 ---
 
@@ -312,7 +312,7 @@ Astra is **100% free** and **open source**. If you enjoy using Astra:
 
 ## 3. Tags (for top.gg)
 ```
-music, economy, leveling, moderation, giveaway, anime, dashboard, fun, tickets, utility, all-in-one, free, open-source
+music, economy, leveling, moderation, giveaway, anime, dashboard, fun, tickets, utility, all-in-one, free
 ```
 
 ---
