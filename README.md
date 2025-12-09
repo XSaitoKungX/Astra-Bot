@@ -141,6 +141,18 @@ Found a bug? [Open an issue](https://github.com/XSaitoKungX/Astra-Bot/issues). I
 
 ---
 
+## ⭐ Star History
+
+<a href="https://www.star-history.com/#XSaitoKungX/Astra-Bot&type=date&legend=top-left">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=XSaitoKungX/Astra-Bot&type=date&theme=dark&legend=top-left" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=XSaitoKungX/Astra-Bot&type=date&legend=top-left" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=XSaitoKungX/Astra-Bot&type=date&legend=top-left" />
+ </picture>
+</a>
+
+---
+
 <div align="center">
 
 Built by [XSaitoKungX](https://github.com/XSaitoKungX)
