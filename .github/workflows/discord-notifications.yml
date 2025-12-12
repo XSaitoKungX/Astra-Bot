@@ -1,8 +1,7 @@
 # ===========================================
-# ASTRA BOT - Advanced Discord Notifications
+# ASTRA BOT - Discord Notifications
 # ===========================================
-# Sends beautiful Discord webhook notifications for GitHub events.
-# Keeps your community updated with development progress.
+# Sends Discord webhook notifications for GitHub events.
 #
 # Required Secrets:
 #   DISCORD_WEBHOOK_URL - Your Discord webhook URL
@@ -13,7 +12,7 @@
 #   - Pull Request status updates
 #   - Issue tracking notifications
 #   - Release announcements
-#   - CI/CD status reports
+#   - CI/CD failure reports
 #   - Star/Fork milestones
 
 name: Discord Notifications
@@ -57,69 +56,62 @@ jobs:
       - name: Send Push Notification
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          COMMITS_JSON: ${{ toJson(github.event.commits) }}
         run: |
-          # Skip if no webhook configured
           if [ -z "$DISCORD_WEBHOOK" ]; then
-            echo "⚠️ DISCORD_WEBHOOK_URL secret not set, skipping notification"
+            echo "⚠️ DISCORD_WEBHOOK_URL secret not set, skipping"
             exit 0
           fi
           
-          # Get branch name
           BRANCH="${GITHUB_REF#refs/heads/}"
           
-          # Set color based on branch
           if [ "$BRANCH" = "main" ]; then
-            COLOR=5763719  # Green
+            COLOR=5763719
             EMOJI="🚀"
           else
-            COLOR=5793266  # Blue
+            COLOR=5793266
             EMOJI="🔧"
           fi
           
-          # Get commit count
-          COMMIT_COUNT=$(echo '${{ toJson(github.event.commits) }}' | jq 'length')
+          COMMIT_COUNT=$(echo "$COMMITS_JSON" | jq 'length')
           
-          # Build commit list (max 5)
+          # Build commit list
           COMMITS=""
           COUNT=0
           while IFS= read -r line; do
             if [ $COUNT -ge 5 ]; then
-              COMMITS="${COMMITS}... and more\n"
+              COMMITS="${COMMITS}... and more\\n"
               break
             fi
             SHA=$(echo "$line" | jq -r '.id' | cut -c1-7)
-            MSG=$(echo "$line" | jq -r '.message' | head -1 | cut -c1-60 | sed 's/"/\\"/g')
-            URL="${{ github.event.repository.html_url }}/commit/$(echo "$line" | jq -r '.id')"
-            COMMITS="${COMMITS}[\\\`${SHA}\\\`](${URL}) ${MSG}\n"
+            MSG=$(echo "$line" | jq -r '.message' | head -1 | cut -c1-50)
+            COMMITS="${COMMITS}[\`${SHA}\`](${{ github.event.repository.html_url }}/commit/$(echo "$line" | jq -r '.id')) ${MSG}\\n"
             COUNT=$((COUNT + 1))
-          done < <(echo '${{ toJson(github.event.commits) }}' | jq -c '.[]')
+          done < <(echo "$COMMITS_JSON" | jq -c '.[]')
           
-          # Create payload
-          PAYLOAD=$(cat <<EOF
-          {
-            "embeds": [{
-              "title": "${EMOJI} ${COMMIT_COUNT} new commit(s) to \`${BRANCH}\`",
-              "description": "${COMMITS}",
-              "url": "${{ github.event.compare }}",
-              "color": ${COLOR},
-              "author": {
-                "name": "${{ github.event.pusher.name }}",
-                "icon_url": "https://github.com/${{ github.event.pusher.name }}.png"
-              },
-              "footer": {
-                "text": "${BOT_NAME} • GitHub",
-                "icon_url": "${BOT_ICON}"
-              },
-              "timestamp": "${{ github.event.head_commit.timestamp }}"
-            }]
-          }
-          EOF
-          )
+          # Build payload using jq for proper escaping
+          PAYLOAD=$(jq -n \
+            --arg title "${EMOJI} ${COMMIT_COUNT} commit(s) pushed to ${BRANCH}" \
+            --arg desc "$COMMITS" \
+            --arg url "${{ github.event.compare }}" \
+            --argjson color "$COLOR" \
+            --arg author "${{ github.event.pusher.name }}" \
+            --arg author_icon "${{ github.event.sender.avatar_url }}" \
+            --arg footer "$BOT_NAME • GitHub" \
+            --arg footer_icon "$BOT_ICON" \
+            '{
+              embeds: [{
+                title: $title,
+                description: $desc,
+                url: $url,
+                color: $color,
+                author: { name: $author, icon_url: $author_icon },
+                footer: { text: $footer, icon_url: $footer_icon },
+                timestamp: (now | todate)
+              }]
+            }')
           
-          # Send webhook
-          curl -H "Content-Type: application/json" \
-               -d "$PAYLOAD" \
-               "$DISCORD_WEBHOOK"
+          curl -s -H "Content-Type: application/json" -d "$PAYLOAD" "$DISCORD_WEBHOOK"
 
   # ============================================
   # PULL REQUEST NOTIFICATIONS
@@ -133,6 +125,8 @@ jobs:
       - name: Send PR Notification
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_BODY: ${{ github.event.pull_request.body }}
         run: |
           if [ -z "$DISCORD_WEBHOOK" ]; then
             echo "⚠️ DISCORD_WEBHOOK_URL secret not set, skipping"
@@ -142,7 +136,6 @@ jobs:
           ACTION="${{ github.event.action }}"
           MERGED="${{ github.event.pull_request.merged }}"
           
-          # Determine title and color based on action
           case "$ACTION" in
             "opened")
               TITLE="📬 New Pull Request"
@@ -171,37 +164,41 @@ jobs:
               ;;
           esac
           
-          # Escape description
-          DESC=$(echo "${{ github.event.pull_request.body }}" | head -c 200 | sed 's/"/\\"/g' | tr '\n' ' ')
-          [ -z "$DESC" ] && DESC="No description provided."
+          DESC="${PR_BODY:-No description provided.}"
+          DESC=$(echo "$DESC" | head -c 200)
           
-          PAYLOAD=$(cat <<EOF
-          {
-            "embeds": [{
-              "title": "${TITLE}",
-              "description": "**[#${{ github.event.pull_request.number }}](${{ github.event.pull_request.html_url }}) ${{ github.event.pull_request.title }}**\n\n${DESC}",
-              "url": "${{ github.event.pull_request.html_url }}",
-              "color": ${COLOR},
-              "fields": [
-                {"name": "📊 Changes", "value": "+${{ github.event.pull_request.additions }} / -${{ github.event.pull_request.deletions }}", "inline": true},
-                {"name": "📁 Files", "value": "${{ github.event.pull_request.changed_files }}", "inline": true},
-                {"name": "🎯 Target", "value": "\`${{ github.event.pull_request.base.ref }}\`", "inline": true}
-              ],
-              "author": {
-                "name": "${{ github.event.pull_request.user.login }}",
-                "icon_url": "${{ github.event.pull_request.user.avatar_url }}"
-              },
-              "footer": {
-                "text": "${BOT_NAME} • GitHub",
-                "icon_url": "${BOT_ICON}"
-              },
-              "timestamp": "${{ github.event.pull_request.updated_at }}"
-            }]
-          }
-          EOF
-          )
+          PAYLOAD=$(jq -n \
+            --arg title "$TITLE" \
+            --arg pr_title "$PR_TITLE" \
+            --arg pr_num "#${{ github.event.pull_request.number }}" \
+            --arg pr_url "${{ github.event.pull_request.html_url }}" \
+            --arg desc "$DESC" \
+            --argjson color "$COLOR" \
+            --arg changes "+${{ github.event.pull_request.additions }} / -${{ github.event.pull_request.deletions }}" \
+            --arg files "${{ github.event.pull_request.changed_files }}" \
+            --arg target "${{ github.event.pull_request.base.ref }}" \
+            --arg author "${{ github.event.pull_request.user.login }}" \
+            --arg author_icon "${{ github.event.pull_request.user.avatar_url }}" \
+            --arg footer "$BOT_NAME • GitHub" \
+            --arg footer_icon "$BOT_ICON" \
+            '{
+              embeds: [{
+                title: $title,
+                description: "**[\($pr_num)](\($pr_url)) \($pr_title)**\n\n\($desc)",
+                url: $pr_url,
+                color: $color,
+                fields: [
+                  { name: "📊 Changes", value: $changes, inline: true },
+                  { name: "📁 Files", value: $files, inline: true },
+                  { name: "🎯 Target", value: "`\($target)`", inline: true }
+                ],
+                author: { name: $author, icon_url: $author_icon },
+                footer: { text: $footer, icon_url: $footer_icon },
+                timestamp: (now | todate)
+              }]
+            }')
           
-          curl -H "Content-Type: application/json" -d "$PAYLOAD" "$DISCORD_WEBHOOK"
+          curl -s -H "Content-Type: application/json" -d "$PAYLOAD" "$DISCORD_WEBHOOK"
 
   # ============================================
   # ISSUE NOTIFICATIONS
@@ -215,6 +212,9 @@ jobs:
       - name: Send Issue Notification
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+          ISSUE_BODY: ${{ github.event.issue.body }}
+          LABELS_JSON: ${{ toJson(github.event.issue.labels) }}
         run: |
           if [ -z "$DISCORD_WEBHOOK" ]; then
             echo "⚠️ DISCORD_WEBHOOK_URL secret not set, skipping"
@@ -241,39 +241,42 @@ jobs:
               ;;
           esac
           
-          # Get labels
-          LABELS=$(echo '${{ toJson(github.event.issue.labels) }}' | jq -r '.[].name' | tr '\n' ', ' | sed 's/, $//')
+          LABELS=$(echo "$LABELS_JSON" | jq -r '.[].name' | tr '\n' ', ' | sed 's/, $//' || echo "None")
           [ -z "$LABELS" ] && LABELS="None"
           
-          DESC=$(echo "${{ github.event.issue.body }}" | head -c 200 | sed 's/"/\\"/g' | tr '\n' ' ')
-          [ -z "$DESC" ] && DESC="No description provided."
+          DESC="${ISSUE_BODY:-No description provided.}"
+          DESC=$(echo "$DESC" | head -c 200)
           
-          PAYLOAD=$(cat <<EOF
-          {
-            "embeds": [{
-              "title": "${TITLE}",
-              "description": "**[#${{ github.event.issue.number }}](${{ github.event.issue.html_url }}) ${{ github.event.issue.title }}**\n\n${DESC}",
-              "url": "${{ github.event.issue.html_url }}",
-              "color": ${COLOR},
-              "fields": [
-                {"name": "🏷️ Labels", "value": "${LABELS}", "inline": true},
-                {"name": "💬 Comments", "value": "${{ github.event.issue.comments }}", "inline": true}
-              ],
-              "author": {
-                "name": "${{ github.event.issue.user.login }}",
-                "icon_url": "${{ github.event.issue.user.avatar_url }}"
-              },
-              "footer": {
-                "text": "${BOT_NAME} • GitHub",
-                "icon_url": "${BOT_ICON}"
-              },
-              "timestamp": "${{ github.event.issue.updated_at }}"
-            }]
-          }
-          EOF
-          )
+          PAYLOAD=$(jq -n \
+            --arg title "$TITLE" \
+            --arg issue_title "$ISSUE_TITLE" \
+            --arg issue_num "#${{ github.event.issue.number }}" \
+            --arg issue_url "${{ github.event.issue.html_url }}" \
+            --arg desc "$DESC" \
+            --argjson color "$COLOR" \
+            --arg labels "$LABELS" \
+            --arg comments "${{ github.event.issue.comments }}" \
+            --arg author "${{ github.event.issue.user.login }}" \
+            --arg author_icon "${{ github.event.issue.user.avatar_url }}" \
+            --arg footer "$BOT_NAME • GitHub" \
+            --arg footer_icon "$BOT_ICON" \
+            '{
+              embeds: [{
+                title: $title,
+                description: "**[\($issue_num)](\($issue_url)) \($issue_title)**\n\n\($desc)",
+                url: $issue_url,
+                color: $color,
+                fields: [
+                  { name: "🏷️ Labels", value: $labels, inline: true },
+                  { name: "💬 Comments", value: $comments, inline: true }
+                ],
+                author: { name: $author, icon_url: $author_icon },
+                footer: { text: $footer, icon_url: $footer_icon },
+                timestamp: (now | todate)
+              }]
+            }')
           
-          curl -H "Content-Type: application/json" -d "$PAYLOAD" "$DISCORD_WEBHOOK"
+          curl -s -H "Content-Type: application/json" -d "$PAYLOAD" "$DISCORD_WEBHOOK"
 
   # ============================================
   # RELEASE NOTIFICATIONS
@@ -287,6 +290,8 @@ jobs:
       - name: Send Release Notification
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL_RELEASES || secrets.DISCORD_WEBHOOK_URL }}
+          RELEASE_NAME: ${{ github.event.release.name }}
+          RELEASE_BODY: ${{ github.event.release.body }}
         run: |
           if [ -z "$DISCORD_WEBHOOK" ]; then
             echo "⚠️ No webhook configured, skipping"
@@ -305,41 +310,43 @@ jobs:
             TYPE="Stable Release"
           fi
           
-          # Escape and truncate body
-          BODY=$(echo "${{ github.event.release.body }}" | head -c 500 | sed 's/"/\\"/g' | tr '\n' ' ')
-          [ -z "$BODY" ] && BODY="Check the release page for details."
+          BODY="${RELEASE_BODY:-Check the release page for details.}"
+          BODY=$(echo "$BODY" | head -c 400)
           
-          PAYLOAD=$(cat <<EOF
-          {
-            "content": "🚀 **New ${BOT_NAME} Release!**",
-            "embeds": [{
-              "title": "${TITLE}",
-              "description": "**${{ github.event.release.name }}**\n\n${BODY}",
-              "url": "${{ github.event.release.html_url }}",
-              "color": ${COLOR},
-              "fields": [
-                {"name": "📦 Version", "value": "\`${{ github.event.release.tag_name }}\`", "inline": true},
-                {"name": "📋 Type", "value": "${TYPE}", "inline": true},
-                {"name": "📥 Download", "value": "[View Release](${{ github.event.release.html_url }})", "inline": true}
-              ],
-              "author": {
-                "name": "${{ github.event.release.author.login }}",
-                "icon_url": "${{ github.event.release.author.avatar_url }}"
-              },
-              "thumbnail": {
-                "url": "${BOT_ICON}"
-              },
-              "footer": {
-                "text": "${BOT_NAME} • GitHub Releases",
-                "icon_url": "${BOT_ICON}"
-              },
-              "timestamp": "${{ github.event.release.published_at }}"
-            }]
-          }
-          EOF
-          )
+          PAYLOAD=$(jq -n \
+            --arg content "🚀 **New $BOT_NAME Release!**" \
+            --arg title "$TITLE" \
+            --arg name "$RELEASE_NAME" \
+            --arg body "$BODY" \
+            --arg url "${{ github.event.release.html_url }}" \
+            --argjson color "$COLOR" \
+            --arg tag "${{ github.event.release.tag_name }}" \
+            --arg type "$TYPE" \
+            --arg author "${{ github.event.release.author.login }}" \
+            --arg author_icon "${{ github.event.release.author.avatar_url }}" \
+            --arg thumbnail "$BOT_ICON" \
+            --arg footer "$BOT_NAME • GitHub Releases" \
+            --arg footer_icon "$BOT_ICON" \
+            '{
+              content: $content,
+              embeds: [{
+                title: $title,
+                description: "**\($name)**\n\n\($body)",
+                url: $url,
+                color: $color,
+                fields: [
+                  { name: "📦 Version", value: "`\($tag)`", inline: true },
+                  { name: "📋 Type", value: $type, inline: true },
+                  { name: "📥 Download", value: "[View Release](\($url))", inline: true }
+                ],
+                author: { name: $author, icon_url: $author_icon },
+                thumbnail: { url: $thumbnail },
+                footer: { text: $footer, icon_url: $footer_icon },
+                timestamp: (now | todate)
+              }]
+            }')
           
-          curl -H "Content-Type: application/json" -d "$PAYLOAD" "$DISCORD_WEBHOOK"
+          curl -s -H "Content-Type: application/json" -d "$PAYLOAD" "$DISCORD_WEBHOOK"
 
   # ============================================
   # CI FAILURE NOTIFICATIONS
@@ -358,32 +365,36 @@ jobs:
             exit 0
           fi
           
-          PAYLOAD=$(cat <<EOF
-          {
-            "embeds": [{
-              "title": "❌ CI Pipeline Failed",
-              "description": "**Workflow:** ${{ github.event.workflow_run.name }}\n**Branch:** \`${{ github.event.workflow_run.head_branch }}\`\n**Commit:** [\`${{ github.event.workflow_run.head_sha }}\`](${{ github.event.repository.html_url }}/commit/${{ github.event.workflow_run.head_sha }})",
-              "url": "${{ github.event.workflow_run.html_url }}",
-              "color": 15548997,
-              "fields": [
-                {"name": "🔄 Run", "value": "#${{ github.event.workflow_run.run_number }}", "inline": true},
-                {"name": "📋 Event", "value": "${{ github.event.workflow_run.event }}", "inline": true}
-              ],
-              "author": {
-                "name": "${{ github.event.workflow_run.actor.login }}",
-                "icon_url": "${{ github.event.workflow_run.actor.avatar_url }}"
-              },
-              "footer": {
-                "text": "${BOT_NAME} • GitHub Actions",
-                "icon_url": "${BOT_ICON}"
-              },
-              "timestamp": "${{ github.event.workflow_run.updated_at }}"
-            }]
-          }
-          EOF
-          )
+          PAYLOAD=$(jq -n \
+            --arg workflow "${{ github.event.workflow_run.name }}" \
+            --arg branch "${{ github.event.workflow_run.head_branch }}" \
+            --arg sha "${{ github.event.workflow_run.head_sha }}" \
+            --arg sha_short "$(echo '${{ github.event.workflow_run.head_sha }}' | cut -c1-7)" \
+            --arg url "${{ github.event.workflow_run.html_url }}" \
+            --arg repo_url "${{ github.event.repository.html_url }}" \
+            --arg run_num "#${{ github.event.workflow_run.run_number }}" \
+            --arg event "${{ github.event.workflow_run.event }}" \
+            --arg author "${{ github.event.workflow_run.actor.login }}" \
+            --arg author_icon "${{ github.event.workflow_run.actor.avatar_url }}" \
+            --arg footer "$BOT_NAME • GitHub Actions" \
+            --arg footer_icon "$BOT_ICON" \
+            '{
+              embeds: [{
+                title: "❌ CI Pipeline Failed",
+                description: "**Workflow:** \($workflow)\n**Branch:** `\($branch)`\n**Commit:** [`\($sha_short)`](\($repo_url)/commit/\($sha))",
+                url: $url,
+                color: 15548997,
+                fields: [
+                  { name: "🔄 Run", value: $run_num, inline: true },
+                  { name: "📋 Event", value: $event, inline: true }
+                ],
+                author: { name: $author, icon_url: $author_icon },
+                footer: { text: $footer, icon_url: $footer_icon },
+                timestamp: (now | todate)
+              }]
+            }')
           
-          curl -H "Content-Type: application/json" -d "$PAYLOAD" "$DISCORD_WEBHOOK"
+          curl -s -H "Content-Type: application/json" -d "$PAYLOAD" "$DISCORD_WEBHOOK"
 
   # ============================================
   # STAR MILESTONE NOTIFICATIONS
@@ -404,7 +415,6 @@ jobs:
           
           STARS=${{ github.event.repository.stargazers_count }}
           
-          # Only notify on milestones
           NOTIFY=false
           if [ $((STARS % 100)) -eq 0 ] && [ $STARS -gt 0 ]; then
             NOTIFY=true
@@ -422,31 +432,32 @@ jobs:
             exit 0
           fi
           
-          PAYLOAD=$(cat <<EOF
-          {
-            "embeds": [{
-              "title": "⭐ Star Milestone Reached!",
-              "description": "${MSG}",
-              "url": "${{ github.event.repository.html_url }}",
-              "color": 8847876,
-              "fields": [
-                {"name": "🌟 Stars", "value": "${STARS}", "inline": true},
-                {"name": "🍴 Forks", "value": "${{ github.event.repository.forks_count }}", "inline": true},
-                {"name": "👀 Watchers", "value": "${{ github.event.repository.subscribers_count }}", "inline": true}
-              ],
-              "thumbnail": {
-                "url": "${BOT_ICON}"
-              },
-              "footer": {
-                "text": "${BOT_NAME} • GitHub",
-                "icon_url": "${BOT_ICON}"
-              }
-            }]
-          }
-          EOF
-          )
+          PAYLOAD=$(jq -n \
+            --arg msg "$MSG" \
+            --arg url "${{ github.event.repository.html_url }}" \
+            --argjson stars "$STARS" \
+            --arg forks "${{ github.event.repository.forks_count }}" \
+            --arg watchers "${{ github.event.repository.subscribers_count }}" \
+            --arg thumbnail "$BOT_ICON" \
+            --arg footer "$BOT_NAME • GitHub" \
+            --arg footer_icon "$BOT_ICON" \
+            '{
+              embeds: [{
+                title: "⭐ Star Milestone Reached!",
+                description: $msg,
+                url: $url,
+                color: 16766720,
+                fields: [
+                  { name: "🌟 Stars", value: ($stars | tostring), inline: true },
+                  { name: "🍴 Forks", value: $forks, inline: true },
+                  { name: "👀 Watchers", value: $watchers, inline: true }
+                ],
+                thumbnail: { url: $thumbnail },
+                footer: { text: $footer, icon_url: $footer_icon }
+              }]
+            }')
           
-          curl -H "Content-Type: application/json" -d "$PAYLOAD" "$DISCORD_WEBHOOK"
+          curl -s -H "Content-Type: application/json" -d "$PAYLOAD" "$DISCORD_WEBHOOK"
 
   # ============================================
   # FORK MILESTONE NOTIFICATIONS
@@ -467,30 +478,28 @@ jobs:
           
           FORKS=${{ github.event.repository.forks_count }}
           
-          # Only notify on milestones (25, 50, 100, etc.)
           if [ $((FORKS % 25)) -ne 0 ] || [ $FORKS -eq 0 ]; then
             echo "Not a fork milestone ($FORKS forks), skipping"
             exit 0
           fi
           
-          PAYLOAD=$(cat <<EOF
-          {
-            "embeds": [{
-              "title": "🍴 Fork Milestone!",
-              "description": "**${FORKS}** forks reached!\n\nForked by [${{ github.event.forkee.owner.login }}](${{ github.event.forkee.html_url }})",
-              "url": "${{ github.event.repository.html_url }}",
-              "color": 5793266,
-              "author": {
-                "name": "${{ github.event.forkee.owner.login }}",
-                "icon_url": "${{ github.event.forkee.owner.avatar_url }}"
-              },
-              "footer": {
-                "text": "${BOT_NAME} • GitHub",
-                "icon_url": "${BOT_ICON}"
-              }
-            }]
-          }
-          EOF
-          )
+          PAYLOAD=$(jq -n \
+            --argjson forks "$FORKS" \
+            --arg forker "${{ github.event.forkee.owner.login }}" \
+            --arg fork_url "${{ github.event.forkee.html_url }}" \
+            --arg repo_url "${{ github.event.repository.html_url }}" \
+            --arg forker_icon "${{ github.event.forkee.owner.avatar_url }}" \
+            --arg footer "$BOT_NAME • GitHub" \
+            --arg footer_icon "$BOT_ICON" \
+            '{
+              embeds: [{
+                title: "🍴 Fork Milestone!",
+                description: "**\($forks)** forks reached!\n\nForked by [\($forker)](\($fork_url))",
+                url: $repo_url,
+                color: 5793266,
+                author: { name: $forker, icon_url: $forker_icon },
+                footer: { text: $footer, icon_url: $footer_icon }
+              }]
+            }')
           
-          curl -H "Content-Type: application/json" -d "$PAYLOAD" "$DISCORD_WEBHOOK"
+          curl -s -H "Content-Type: application/json" -d "$PAYLOAD" "$DISCORD_WEBHOOK"
