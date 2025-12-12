@@ -40,7 +40,7 @@
     "nodemailer": "^7.0.11",
     "postcss": "^8.5.6",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "react-dom": "^19.2.1",
     "react-hook-form": "^7.67.0",
     "react-hot-toast": "^2.6.0",
     "react-router-dom": "^6.28.0",
@@ -58,7 +58,7 @@
   },
   "devDependencies": {
     "@types/react": "^18.3.18",
-    "@types/react-dom": "^18.3.5",
+    "@types/react-dom": "^19.2.3",
     "@typescript-eslint/eslint-plugin": "^8.48.0",
     "@typescript-eslint/parser": "^8.48.0",
     "eslint": "^9.39.1",
