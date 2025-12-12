@@ -1,6 +1,6 @@
 {
   "name": "astra-bot",
-  "version": "2.16.0",
+  "version": "2.19.1",
   "description": "Astra - All-in-One Discord Bot with Web Dashboard",
   "main": "dist/index.js",
   "type": "module",

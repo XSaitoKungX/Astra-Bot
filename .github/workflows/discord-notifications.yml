@@ -1,0 +1,496 @@
+# ===========================================
+# ASTRA BOT - Advanced Discord Notifications
+# ===========================================
+# Sends beautiful Discord webhook notifications for GitHub events.
+# Keeps your community updated with development progress.
+#
+# Required Secrets:
+#   DISCORD_WEBHOOK_URL - Your Discord webhook URL
+#   DISCORD_WEBHOOK_URL_RELEASES (optional) - Separate webhook for releases
+#
+# Features:
+#   - Push notifications with commit details
+#   - Pull Request status updates
+#   - Issue tracking notifications
+#   - Release announcements
+#   - CI/CD status reports
+#   - Star/Fork milestones
+
+name: Discord Notifications
+
+on:
+  push:
+    branches: [main, develop]
+  
+  pull_request:
+    types: [opened, closed, reopened, ready_for_review]
+  
+  issues:
+    types: [opened, closed, reopened]
+  
+  release:
+    types: [published, prereleased]
+  
+  workflow_run:
+    workflows: ["CI"]
+    types: [completed]
+  
+  watch:
+    types: [started]
+  
+  fork:
+
+env:
+  BOT_NAME: Astra Bot
+  BOT_ICON: https://raw.githubusercontent.com/XSaitoKungX/Astra-Bot/main/dashboard/public/android-chrome-192x192.png
+
+jobs:
+  # ============================================
+  # PUSH NOTIFICATIONS
+  # ============================================
+  push-notification:
+    name: Push Notification
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+    
+    steps:
+      - name: Send Push Notification
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: |
+          # Skip if no webhook configured
+          if [ -z "$DISCORD_WEBHOOK" ]; then
+            echo "⚠️ DISCORD_WEBHOOK_URL secret not set, skipping notification"
+            exit 0
+          fi
+          
+          # Get branch name
+          BRANCH="${GITHUB_REF#refs/heads/}"
+          
+          # Set color based on branch
+          if [ "$BRANCH" = "main" ]; then
+            COLOR=5763719  # Green
+            EMOJI="🚀"
+          else
+            COLOR=5793266  # Blue
+            EMOJI="🔧"
+          fi
+          
+          # Get commit count
+          COMMIT_COUNT=$(echo '${{ toJson(github.event.commits) }}' | jq 'length')
+          
+          # Build commit list (max 5)
+          COMMITS=""
+          COUNT=0
+          while IFS= read -r line; do
+            if [ $COUNT -ge 5 ]; then
+              COMMITS="${COMMITS}... and more\n"
+              break
+            fi
+            SHA=$(echo "$line" | jq -r '.id' | cut -c1-7)
+            MSG=$(echo "$line" | jq -r '.message' | head -1 | cut -c1-60 | sed 's/"/\\"/g')
+            URL="${{ github.event.repository.html_url }}/commit/$(echo "$line" | jq -r '.id')"
+            COMMITS="${COMMITS}[\\\`${SHA}\\\`](${URL}) ${MSG}\n"
+            COUNT=$((COUNT + 1))
+          done < <(echo '${{ toJson(github.event.commits) }}' | jq -c '.[]')
+          
+          # Create payload
+          PAYLOAD=$(cat <<EOF
+          {
+            "embeds": [{
+              "title": "${EMOJI} ${COMMIT_COUNT} new commit(s) to \`${BRANCH}\`",
+              "description": "${COMMITS}",
+              "url": "${{ github.event.compare }}",
+              "color": ${COLOR},
+              "author": {
+                "name": "${{ github.event.pusher.name }}",
+                "icon_url": "https://github.com/${{ github.event.pusher.name }}.png"
+              },
+              "footer": {
+                "text": "${BOT_NAME} • GitHub",
+                "icon_url": "${BOT_ICON}"
+              },
+              "timestamp": "${{ github.event.head_commit.timestamp }}"
+            }]
+          }
+          EOF
+          )
+          
+          # Send webhook
+          curl -H "Content-Type: application/json" \
+               -d "$PAYLOAD" \
+               "$DISCORD_WEBHOOK"
+
+  # ============================================
+  # PULL REQUEST NOTIFICATIONS
+  # ============================================
+  pr-notification:
+    name: PR Notification
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    
+    steps:
+      - name: Send PR Notification
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: |
+          if [ -z "$DISCORD_WEBHOOK" ]; then
+            echo "⚠️ DISCORD_WEBHOOK_URL secret not set, skipping"
+            exit 0
+          fi
+          
+          ACTION="${{ github.event.action }}"
+          MERGED="${{ github.event.pull_request.merged }}"
+          
+          # Determine title and color based on action
+          case "$ACTION" in
+            "opened")
+              TITLE="📬 New Pull Request"
+              COLOR=5793266
+              ;;
+            "closed")
+              if [ "$MERGED" = "true" ]; then
+                TITLE="🎉 Pull Request Merged"
+                COLOR=5763719
+              else
+                TITLE="❌ Pull Request Closed"
+                COLOR=15548997
+              fi
+              ;;
+            "reopened")
+              TITLE="🔄 Pull Request Reopened"
+              COLOR=16705372
+              ;;
+            "ready_for_review")
+              TITLE="👀 PR Ready for Review"
+              COLOR=5793266
+              ;;
+            *)
+              TITLE="📝 Pull Request Update"
+              COLOR=5793266
+              ;;
+          esac
+          
+          # Escape description
+          DESC=$(echo "${{ github.event.pull_request.body }}" | head -c 200 | sed 's/"/\\"/g' | tr '\n' ' ')
+          [ -z "$DESC" ] && DESC="No description provided."
+          
+          PAYLOAD=$(cat <<EOF
+          {
+            "embeds": [{
+              "title": "${TITLE}",
+              "description": "**[#${{ github.event.pull_request.number }}](${{ github.event.pull_request.html_url }}) ${{ github.event.pull_request.title }}**\n\n${DESC}",
+              "url": "${{ github.event.pull_request.html_url }}",
+              "color": ${COLOR},
+              "fields": [
+                {"name": "📊 Changes", "value": "+${{ github.event.pull_request.additions }} / -${{ github.event.pull_request.deletions }}", "inline": true},
+                {"name": "📁 Files", "value": "${{ github.event.pull_request.changed_files }}", "inline": true},
+                {"name": "🎯 Target", "value": "\`${{ github.event.pull_request.base.ref }}\`", "inline": true}
+              ],
+              "author": {
+                "name": "${{ github.event.pull_request.user.login }}",
+                "icon_url": "${{ github.event.pull_request.user.avatar_url }}"
+              },
+              "footer": {
+                "text": "${BOT_NAME} • GitHub",
+                "icon_url": "${BOT_ICON}"
+              },
+              "timestamp": "${{ github.event.pull_request.updated_at }}"
+            }]
+          }
+          EOF
+          )
+          
+          curl -H "Content-Type: application/json" -d "$PAYLOAD" "$DISCORD_WEBHOOK"
+
+  # ============================================
+  # ISSUE NOTIFICATIONS
+  # ============================================
+  issue-notification:
+    name: Issue Notification
+    runs-on: ubuntu-latest
+    if: github.event_name == 'issues'
+    
+    steps:
+      - name: Send Issue Notification
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: |
+          if [ -z "$DISCORD_WEBHOOK" ]; then
+            echo "⚠️ DISCORD_WEBHOOK_URL secret not set, skipping"
+            exit 0
+          fi
+          
+          ACTION="${{ github.event.action }}"
+          
+          case "$ACTION" in
+            "opened")
+              TITLE="🐛 New Issue"
+              COLOR=16705372
+              ;;
+            "closed")
+              TITLE="✅ Issue Closed"
+              COLOR=5763719
+              ;;
+            "reopened")
+              TITLE="🔄 Issue Reopened"
+              COLOR=16705372
+              ;;
+            *)
+              exit 0
+              ;;
+          esac
+          
+          # Get labels
+          LABELS=$(echo '${{ toJson(github.event.issue.labels) }}' | jq -r '.[].name' | tr '\n' ', ' | sed 's/, $//')
+          [ -z "$LABELS" ] && LABELS="None"
+          
+          DESC=$(echo "${{ github.event.issue.body }}" | head -c 200 | sed 's/"/\\"/g' | tr '\n' ' ')
+          [ -z "$DESC" ] && DESC="No description provided."
+          
+          PAYLOAD=$(cat <<EOF
+          {
+            "embeds": [{
+              "title": "${TITLE}",
+              "description": "**[#${{ github.event.issue.number }}](${{ github.event.issue.html_url }}) ${{ github.event.issue.title }}**\n\n${DESC}",
+              "url": "${{ github.event.issue.html_url }}",
+              "color": ${COLOR},
+              "fields": [
+                {"name": "🏷️ Labels", "value": "${LABELS}", "inline": true},
+                {"name": "💬 Comments", "value": "${{ github.event.issue.comments }}", "inline": true}
+              ],
+              "author": {
+                "name": "${{ github.event.issue.user.login }}",
+                "icon_url": "${{ github.event.issue.user.avatar_url }}"
+              },
+              "footer": {
+                "text": "${BOT_NAME} • GitHub",
+                "icon_url": "${BOT_ICON}"
+              },
+              "timestamp": "${{ github.event.issue.updated_at }}"
+            }]
+          }
+          EOF
+          )
+          
+          curl -H "Content-Type: application/json" -d "$PAYLOAD" "$DISCORD_WEBHOOK"
+
+  # ============================================
+  # RELEASE NOTIFICATIONS
+  # ============================================
+  release-notification:
+    name: Release Notification
+    runs-on: ubuntu-latest
+    if: github.event_name == 'release'
+    
+    steps:
+      - name: Send Release Notification
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL_RELEASES || secrets.DISCORD_WEBHOOK_URL }}
+        run: |
+          if [ -z "$DISCORD_WEBHOOK" ]; then
+            echo "⚠️ No webhook configured, skipping"
+            exit 0
+          fi
+          
+          PRERELEASE="${{ github.event.release.prerelease }}"
+          
+          if [ "$PRERELEASE" = "true" ]; then
+            TITLE="🧪 Pre-Release Published"
+            COLOR=16705372
+            TYPE="Pre-Release"
+          else
+            TITLE="🎉 New Release Published!"
+            COLOR=5763719
+            TYPE="Stable Release"
+          fi
+          
+          # Escape and truncate body
+          BODY=$(echo "${{ github.event.release.body }}" | head -c 500 | sed 's/"/\\"/g' | tr '\n' ' ')
+          [ -z "$BODY" ] && BODY="Check the release page for details."
+          
+          PAYLOAD=$(cat <<EOF
+          {
+            "content": "🚀 **New ${BOT_NAME} Release!**",
+            "embeds": [{
+              "title": "${TITLE}",
+              "description": "**${{ github.event.release.name }}**\n\n${BODY}",
+              "url": "${{ github.event.release.html_url }}",
+              "color": ${COLOR},
+              "fields": [
+                {"name": "📦 Version", "value": "\`${{ github.event.release.tag_name }}\`", "inline": true},
+                {"name": "📋 Type", "value": "${TYPE}", "inline": true},
+                {"name": "📥 Download", "value": "[View Release](${{ github.event.release.html_url }})", "inline": true}
+              ],
+              "author": {
+                "name": "${{ github.event.release.author.login }}",
+                "icon_url": "${{ github.event.release.author.avatar_url }}"
+              },
+              "thumbnail": {
+                "url": "${BOT_ICON}"
+              },
+              "footer": {
+                "text": "${BOT_NAME} • GitHub Releases",
+                "icon_url": "${BOT_ICON}"
+              },
+              "timestamp": "${{ github.event.release.published_at }}"
+            }]
+          }
+          EOF
+          )
+          
+          curl -H "Content-Type: application/json" -d "$PAYLOAD" "$DISCORD_WEBHOOK"
+
+  # ============================================
+  # CI FAILURE NOTIFICATIONS
+  # ============================================
+  ci-failure-notification:
+    name: CI Failure Notification
+    runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'failure'
+    
+    steps:
+      - name: Send CI Failure Notification
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: |
+          if [ -z "$DISCORD_WEBHOOK" ]; then
+            exit 0
+          fi
+          
+          PAYLOAD=$(cat <<EOF
+          {
+            "embeds": [{
+              "title": "❌ CI Pipeline Failed",
+              "description": "**Workflow:** ${{ github.event.workflow_run.name }}\n**Branch:** \`${{ github.event.workflow_run.head_branch }}\`\n**Commit:** [\`${{ github.event.workflow_run.head_sha }}\`](${{ github.event.repository.html_url }}/commit/${{ github.event.workflow_run.head_sha }})",
+              "url": "${{ github.event.workflow_run.html_url }}",
+              "color": 15548997,
+              "fields": [
+                {"name": "🔄 Run", "value": "#${{ github.event.workflow_run.run_number }}", "inline": true},
+                {"name": "📋 Event", "value": "${{ github.event.workflow_run.event }}", "inline": true}
+              ],
+              "author": {
+                "name": "${{ github.event.workflow_run.actor.login }}",
+                "icon_url": "${{ github.event.workflow_run.actor.avatar_url }}"
+              },
+              "footer": {
+                "text": "${BOT_NAME} • GitHub Actions",
+                "icon_url": "${BOT_ICON}"
+              },
+              "timestamp": "${{ github.event.workflow_run.updated_at }}"
+            }]
+          }
+          EOF
+          )
+          
+          curl -H "Content-Type: application/json" -d "$PAYLOAD" "$DISCORD_WEBHOOK"
+
+  # ============================================
+  # STAR MILESTONE NOTIFICATIONS
+  # ============================================
+  star-milestone:
+    name: Star Milestone
+    runs-on: ubuntu-latest
+    if: github.event_name == 'watch'
+    
+    steps:
+      - name: Check and Send Milestone
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: |
+          if [ -z "$DISCORD_WEBHOOK" ]; then
+            exit 0
+          fi
+          
+          STARS=${{ github.event.repository.stargazers_count }}
+          
+          # Only notify on milestones
+          NOTIFY=false
+          if [ $((STARS % 100)) -eq 0 ] && [ $STARS -gt 0 ]; then
+            NOTIFY=true
+            MSG="🌟 **${STARS} Stars!** Thank you for the amazing support!"
+          elif [ $((STARS % 50)) -eq 0 ] && [ $STARS -gt 0 ]; then
+            NOTIFY=true
+            MSG="⭐ **${STARS} Stars!** We're growing!"
+          elif [ $((STARS % 25)) -eq 0 ] && [ $STARS -gt 0 ]; then
+            NOTIFY=true
+            MSG="✨ **${STARS} Stars!** Thanks for the support!"
+          fi
+          
+          if [ "$NOTIFY" = "false" ]; then
+            echo "Not a milestone ($STARS stars), skipping"
+            exit 0
+          fi
+          
+          PAYLOAD=$(cat <<EOF
+          {
+            "embeds": [{
+              "title": "⭐ Star Milestone Reached!",
+              "description": "${MSG}",
+              "url": "${{ github.event.repository.html_url }}",
+              "color": 8847876,
+              "fields": [
+                {"name": "🌟 Stars", "value": "${STARS}", "inline": true},
+                {"name": "🍴 Forks", "value": "${{ github.event.repository.forks_count }}", "inline": true},
+                {"name": "👀 Watchers", "value": "${{ github.event.repository.subscribers_count }}", "inline": true}
+              ],
+              "thumbnail": {
+                "url": "${BOT_ICON}"
+              },
+              "footer": {
+                "text": "${BOT_NAME} • GitHub",
+                "icon_url": "${BOT_ICON}"
+              }
+            }]
+          }
+          EOF
+          )
+          
+          curl -H "Content-Type: application/json" -d "$PAYLOAD" "$DISCORD_WEBHOOK"
+
+  # ============================================
+  # FORK MILESTONE NOTIFICATIONS
+  # ============================================
+  fork-milestone:
+    name: Fork Milestone
+    runs-on: ubuntu-latest
+    if: github.event_name == 'fork'
+    
+    steps:
+      - name: Check and Send Fork Milestone
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: |
+          if [ -z "$DISCORD_WEBHOOK" ]; then
+            exit 0
+          fi
+          
+          FORKS=${{ github.event.repository.forks_count }}
+          
+          # Only notify on milestones (25, 50, 100, etc.)
+          if [ $((FORKS % 25)) -ne 0 ] || [ $FORKS -eq 0 ]; then
+            echo "Not a fork milestone ($FORKS forks), skipping"
+            exit 0
+          fi
+          
+          PAYLOAD=$(cat <<EOF
+          {
+            "embeds": [{
+              "title": "🍴 Fork Milestone!",
+              "description": "**${FORKS}** forks reached!\n\nForked by [${{ github.event.forkee.owner.login }}](${{ github.event.forkee.html_url }})",
+              "url": "${{ github.event.repository.html_url }}",
+              "color": 5793266,
+              "author": {
+                "name": "${{ github.event.forkee.owner.login }}",
+                "icon_url": "${{ github.event.forkee.owner.avatar_url }}"
+              },
+              "footer": {
+                "text": "${BOT_NAME} • GitHub",
+                "icon_url": "${BOT_ICON}"
+              }
+            }]
+          }
+          EOF
+          )
+          
+          curl -H "Content-Type: application/json" -d "$PAYLOAD" "$DISCORD_WEBHOOK"

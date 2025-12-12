@@ -12,7 +12,7 @@
 
 <br />
 
-![Version](https://img.shields.io/badge/version-2.19.0-8B5CF6?style=flat-square&logo=github)
+![Version](https://img.shields.io/badge/version-2.19.1-8B5CF6?style=flat-square&logo=github)
 ![Node](https://img.shields.io/badge/node-18+-339933?style=flat-square&logo=node.js&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/typescript-5.x-3178C6?style=flat-square&logo=typescript&logoColor=white)
 ![Discord.js](https://img.shields.io/badge/discord.js-v14-5865F2?style=flat-square&logo=discord&logoColor=white)
@@ -46,6 +46,7 @@
     - [Frontend](#frontend)
     - [Architecture](#architecture)
   - [📦 Recent Updates](#-recent-updates)
+    - [v2.19.1 — Stability \& GitHub Discord Notifications](#v2191--stability--github-discord-notifications)
     - [v2.19.0 — VotingPage Modernization](#v2190--votingpage-modernization)
     - [v2.18.0 — SEO Overhaul](#v2180--seo-overhaul)
     - [v2.17.0 — Review System](#v2170--review-system)
@@ -502,6 +503,21 @@ All commands use Discord's slash command system:
 <br />
 
 ## 📦 Recent Updates
+
+### v2.19.1 — Stability & GitHub Discord Notifications
+> Released: December 12, 2025
+
+<details>
+<summary><strong>What's new</strong></summary>
+
+- ✅ GitHub: Advanced Discord webhook notifications workflow (push, PR, issues, releases, CI failure, stars, forks)
+- ✅ GitHub: Reusable Discord notify composite action for consistent embeds
+- ✅ GitHub: Deploy notification workflow example (deploy-notify.yml)
+- ✅ Docs: Discord webhook setup guide at .github/DISCORD_WEBHOOKS.md
+- ✅ TempVoice: Fix unused-variable lint warnings in interaction handlers
+- ✅ Versions: Sync package versions across repo to match dashboard changelog
+
+</details>
 
 ### v2.19.0 — VotingPage Modernization
 > Released: December 11, 2025

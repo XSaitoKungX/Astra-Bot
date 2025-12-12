@@ -1,0 +1,227 @@
+# ===========================================
+# ASTRA BOT - Deployment Notifications
+# ===========================================
+# Example workflow for deployment notifications.
+# Customize based on your deployment pipeline.
+#
+# Triggers:
+#   - Manual dispatch with environment selection
+#   - After successful release publish
+#   - On push to main (optional auto-deploy)
+
+name: Deploy & Notify
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Deployment environment'
+        required: true
+        default: 'staging'
+        type: choice
+        options:
+          - staging
+          - production
+      version:
+        description: 'Version to deploy (leave empty for latest)'
+        required: false
+        type: string
+      notify:
+        description: 'Send Discord notification'
+        required: false
+        default: true
+        type: boolean
+
+  # Uncomment to auto-deploy on release
+  # release:
+  #   types: [published]
+
+jobs:
+  # ============================================
+  # DEPLOYMENT JOB
+  # ============================================
+  deploy:
+    name: Deploy to ${{ github.event.inputs.environment || 'production' }}
+    runs-on: ubuntu-latest
+    environment: ${{ github.event.inputs.environment || 'production' }}
+    
+    outputs:
+      version: ${{ steps.version.outputs.value }}
+      environment: ${{ steps.env.outputs.value }}
+      status: ${{ steps.deploy.outputs.status }}
+      url: ${{ steps.deploy.outputs.url }}
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Determine version
+        id: version
+        run: |
+          if [ -n "${{ github.event.inputs.version }}" ]; then
+            echo "value=${{ github.event.inputs.version }}" >> $GITHUB_OUTPUT
+          else
+            # Get latest tag or use commit SHA
+            TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
+            if [ -n "$TAG" ]; then
+              echo "value=$TAG" >> $GITHUB_OUTPUT
+            else
+              echo "value=${{ github.sha }}" >> $GITHUB_OUTPUT
+            fi
+          fi
+      
+      - name: Determine environment
+        id: env
+        run: |
+          ENV="${{ github.event.inputs.environment }}"
+          [ -z "$ENV" ] && ENV="production"
+          echo "value=$ENV" >> $GITHUB_OUTPUT
+      
+      # ========================================
+      # YOUR DEPLOYMENT STEPS HERE
+      # ========================================
+      # Example: Deploy to your hosting provider
+      # 
+      # - name: Deploy to Pterodactyl
+      #   run: |
+      #     curl -X POST "${{ secrets.PTERODACTYL_URL }}/api/client/servers/${{ secrets.SERVER_ID }}/power" \
+      #       -H "Authorization: Bearer ${{ secrets.PTERODACTYL_API_KEY }}" \
+      #       -H "Content-Type: application/json" \
+      #       -d '{"signal": "restart"}'
+      #
+      # - name: Deploy to VPS via SSH
+      #   uses: appleboy/ssh-action@master
+      #   with:
+      #     host: ${{ secrets.SSH_HOST }}
+      #     username: ${{ secrets.SSH_USER }}
+      #     key: ${{ secrets.SSH_KEY }}
+      #     script: |
+      #       cd /opt/astra-bot
+      #       git pull
+      #       npm ci
+      #       npm run build
+      #       pm2 restart astra
+      
+      - name: Simulate deployment
+        id: deploy
+        run: |
+          echo "🚀 Deploying version ${{ steps.version.outputs.value }} to ${{ steps.env.outputs.value }}..."
+          sleep 2
+          echo "✅ Deployment complete!"
+          
+          # Set outputs
+          echo "status=success" >> $GITHUB_OUTPUT
+          
+          # Set URL based on environment
+          if [ "${{ steps.env.outputs.value }}" = "production" ]; then
+            echo "url=https://astra.novaplex.xyz" >> $GITHUB_OUTPUT
+          else
+            echo "url=https://staging.astra.novaplex.xyz" >> $GITHUB_OUTPUT
+          fi
+
+  # ============================================
+  # DISCORD NOTIFICATION
+  # ============================================
+  notify:
+    name: Send Notification
+    runs-on: ubuntu-latest
+    needs: deploy
+    if: always() && (github.event.inputs.notify != 'false')
+    
+    steps:
+      - name: Checkout (for composite action)
+        uses: actions/checkout@v4
+      
+      - name: Determine notification details
+        id: notify
+        run: |
+          STATUS="${{ needs.deploy.outputs.status }}"
+          ENV="${{ needs.deploy.outputs.environment }}"
+          VERSION="${{ needs.deploy.outputs.version }}"
+          URL="${{ needs.deploy.outputs.url }}"
+          
+          if [ "$STATUS" = "success" ]; then
+            echo "title=🚀 Deployment Successful" >> $GITHUB_OUTPUT
+            echo "color=success" >> $GITHUB_OUTPUT
+            echo "description=**$VERSION** has been deployed to **$ENV**" >> $GITHUB_OUTPUT
+          else
+            echo "title=❌ Deployment Failed" >> $GITHUB_OUTPUT
+            echo "color=error" >> $GITHUB_OUTPUT
+            echo "description=Deployment of **$VERSION** to **$ENV** failed. Check the workflow logs." >> $GITHUB_OUTPUT
+          fi
+          
+          echo "env=$ENV" >> $GITHUB_OUTPUT
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "url=$URL" >> $GITHUB_OUTPUT
+      
+      - name: Send Discord Notification
+        uses: ./.github/actions/discord-notify
+        with:
+          webhook_url: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          title: ${{ steps.notify.outputs.title }}
+          description: ${{ steps.notify.outputs.description }}
+          color: ${{ steps.notify.outputs.color }}
+          url: ${{ needs.deploy.outputs.url }}
+          author_name: ${{ github.actor }}
+          author_icon: https://github.com/${{ github.actor }}.png
+          thumbnail: https://raw.githubusercontent.com/XSaitoKungX/Astra-Bot/main/dashboard/public/android-chrome-192x192.png
+          fields: |
+            [
+              {"name": "📦 Version", "value": "`${{ steps.notify.outputs.version }}`", "inline": true},
+              {"name": "🌍 Environment", "value": "${{ steps.notify.outputs.env }}", "inline": true},
+              {"name": "🔗 URL", "value": "[${{ steps.notify.outputs.url }}](${{ steps.notify.outputs.url }})", "inline": true}
+            ]
+          mention_everyone: ${{ needs.deploy.outputs.status == 'success' && steps.notify.outputs.env == 'production' }}
+
+  # ============================================
+  # SUMMARY
+  # ============================================
+  summary:
+    name: Create Summary
+    runs-on: ubuntu-latest
+    needs: [deploy, notify]
+    if: always()
+    
+    steps:
+      - name: Generate Summary
+        run: |
+          STATUS="${{ needs.deploy.outputs.status }}"
+          
+          if [ "$STATUS" = "success" ]; then
+            ICON="✅"
+            STATUS_TEXT="Successful"
+          else
+            ICON="❌"
+            STATUS_TEXT="Failed"
+          fi
+          
+          cat >> $GITHUB_STEP_SUMMARY << EOF
+          # $ICON Deployment $STATUS_TEXT
+          
+          | Property | Value |
+          |----------|-------|
+          | **Version** | \`${{ needs.deploy.outputs.version }}\` |
+          | **Environment** | ${{ needs.deploy.outputs.environment }} |
+          | **Status** | $STATUS_TEXT |
+          | **URL** | ${{ needs.deploy.outputs.url }} |
+          | **Triggered by** | @${{ github.actor }} |
+          | **Commit** | \`${{ github.sha }}\` |
+          
+          ## Next Steps
+          EOF
+          
+          if [ "$STATUS" = "success" ]; then
+            cat >> $GITHUB_STEP_SUMMARY << EOF
+          - ✅ Deployment complete
+          - 🔔 Discord notification sent
+          - 🌐 [View Live Site](${{ needs.deploy.outputs.url }})
+          EOF
+          else
+            cat >> $GITHUB_STEP_SUMMARY << EOF
+          - ❌ Check the deployment logs above for errors
+          - 🔄 Re-run the workflow after fixing issues
+          - 💬 Contact the team if you need help
+          EOF
+          fi

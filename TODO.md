@@ -1,7 +1,7 @@
 # 🌟 Astra Bot - Development Roadmap
 
 > **Last Updated:** 11. December 2025  
-> **Version:** 2.19.0  
+> **Version:** 2.19.1  
 > **Status:** Active Development  
 > **Repository:** [github.com/XSaitoKungX/Astra-Bot](https://github.com/XSaitoKungX/Astra-Bot)
 
@@ -45,6 +45,14 @@
 ---
 
 ## 🎯 Recent Updates
+
+### Stability & GitHub Discord Notifications (v2.19.1)
+- ✅ GitHub: Advanced Discord webhook notifications workflow (push, PR, issues, releases, CI failure, stars, forks)
+- ✅ GitHub: Reusable Discord notify composite action for consistent embeds
+- ✅ GitHub: Deploy notification workflow example (deploy-notify.yml)
+- ✅ Docs: Discord webhook setup guide at .github/DISCORD_WEBHOOKS.md
+- ✅ TempVoice: Fix unused-variable lint warnings in interaction handlers
+- ✅ Versions: Sync package versions across repo to match dashboard changelog
 
 ### VotingPage Modernization & Bot List Integration (v2.19.0)
 - ✅ VotingPage: Complete redesign with Lucide React icons (no emojis)
@@ -553,7 +561,7 @@
 - [x] Live panel preview
 - [x] Global settings (log channel, DM notifications)
 
-### � Verification System
+### 🔐 Verification System
 - [x] Verification: 5 methods (Button, Reaction, Captcha, Dropdown, Agree Rules)
 - [x] Verification: Captcha with difficulty levels (Easy, Medium, Hard)
 - [x] Verification: Custom embed builder for verification message
@@ -595,7 +603,7 @@
 - [x] Admin middleware with Discord ID auth
 - [x] Admin routes (/api/admin/*)
 
-### �🔧 API Enhancements
+### 🔧 API Enhancements
 - [x] Verification API endpoints
 - [x] Auto Roles API endpoints
 - [x] Admin API endpoints
@@ -776,7 +784,7 @@
 
 ---
 
-## � Quick Start
+## 🚀 Quick Start
 
 ### Prerequisites
 - Node.js 18+

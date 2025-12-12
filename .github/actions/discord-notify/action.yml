@@ -1,0 +1,182 @@
+# ===========================================
+# ASTRA BOT - Reusable Discord Notification Action
+# ===========================================
+# A composite action for sending consistent Discord webhook notifications.
+#
+# Usage:
+#   - uses: ./.github/actions/discord-notify
+#     with:
+#       webhook_url: ${{ secrets.DISCORD_WEBHOOK_URL }}
+#       title: "🚀 Deployment Complete"
+#       description: "Version 2.19.0 deployed successfully!"
+#       color: "success"
+
+name: Discord Notify
+description: Send a Discord webhook notification with customizable embed
+
+inputs:
+  webhook_url:
+    description: Discord webhook URL
+    required: true
+  
+  title:
+    description: Embed title
+    required: true
+  
+  description:
+    description: Embed description
+    required: false
+    default: ""
+  
+  color:
+    description: "Color preset: success, error, warning, info, primary"
+    required: false
+    default: "info"
+  
+  url:
+    description: URL the title links to
+    required: false
+    default: ""
+  
+  author_name:
+    description: Author name
+    required: false
+    default: ""
+  
+  author_icon:
+    description: Author icon URL
+    required: false
+    default: ""
+  
+  thumbnail:
+    description: Thumbnail URL
+    required: false
+    default: ""
+  
+  footer:
+    description: Footer text
+    required: false
+    default: "Astra Bot • GitHub"
+  
+  fields:
+    description: "JSON array of fields: [{name, value, inline}]"
+    required: false
+    default: "[]"
+  
+  content:
+    description: Message content (outside embed)
+    required: false
+    default: ""
+  
+  mention_everyone:
+    description: Include @everyone mention
+    required: false
+    default: "false"
+
+runs:
+  using: composite
+  steps:
+    - name: Send Discord Notification
+      shell: bash
+      env:
+        WEBHOOK_URL: ${{ inputs.webhook_url }}
+        TITLE: ${{ inputs.title }}
+        DESCRIPTION: ${{ inputs.description }}
+        COLOR_PRESET: ${{ inputs.color }}
+        URL: ${{ inputs.url }}
+        AUTHOR_NAME: ${{ inputs.author_name }}
+        AUTHOR_ICON: ${{ inputs.author_icon }}
+        THUMBNAIL: ${{ inputs.thumbnail }}
+        FOOTER: ${{ inputs.footer }}
+        FIELDS: ${{ inputs.fields }}
+        CONTENT: ${{ inputs.content }}
+        MENTION_EVERYONE: ${{ inputs.mention_everyone }}
+      run: |
+        # Color presets
+        case "$COLOR_PRESET" in
+          "success") COLOR=5763719 ;;   # Green
+          "error")   COLOR=15548997 ;;  # Red
+          "warning") COLOR=16705372 ;;  # Yellow
+          "info")    COLOR=5793266 ;;   # Blue
+          "primary") COLOR=8847876 ;;   # Purple
+          *)         COLOR=5793266 ;;   # Default blue
+        esac
+        
+        BOT_ICON="https://raw.githubusercontent.com/XSaitoKungX/Astra-Bot/main/dashboard/public/android-chrome-192x192.png"
+        
+        # Build content with optional @everyone
+        FULL_CONTENT="$CONTENT"
+        if [ "$MENTION_EVERYONE" = "true" ]; then
+          FULL_CONTENT="@everyone $CONTENT"
+        fi
+        
+        # Escape description for JSON
+        SAFE_DESC=$(echo "$DESCRIPTION" | sed 's/"/\\"/g' | tr '\n' ' ')
+        
+        # Build author object if provided
+        AUTHOR_OBJ=""
+        if [ -n "$AUTHOR_NAME" ]; then
+          if [ -n "$AUTHOR_ICON" ]; then
+            AUTHOR_OBJ="\"author\": {\"name\": \"$AUTHOR_NAME\", \"icon_url\": \"$AUTHOR_ICON\"},"
+          else
+            AUTHOR_OBJ="\"author\": {\"name\": \"$AUTHOR_NAME\"},"
+          fi
+        fi
+        
+        # Build thumbnail object if provided
+        THUMB_OBJ=""
+        if [ -n "$THUMBNAIL" ]; then
+          THUMB_OBJ="\"thumbnail\": {\"url\": \"$THUMBNAIL\"},"
+        fi
+        
+        # Build URL field if provided
+        URL_OBJ=""
+        if [ -n "$URL" ]; then
+          URL_OBJ="\"url\": \"$URL\","
+        fi
+        
+        # Build content field if provided
+        CONTENT_OBJ=""
+        if [ -n "$FULL_CONTENT" ]; then
+          CONTENT_OBJ="\"content\": \"$FULL_CONTENT\","
+        fi
+        
+        # Create payload
+        PAYLOAD=$(cat <<EOF
+        {
+          ${CONTENT_OBJ}
+          "embeds": [{
+            "title": "$TITLE",
+            "description": "$SAFE_DESC",
+            ${URL_OBJ}
+            "color": $COLOR,
+            ${AUTHOR_OBJ}
+            ${THUMB_OBJ}
+            "fields": $FIELDS,
+            "footer": {
+              "text": "$FOOTER",
+              "icon_url": "$BOT_ICON"
+            },
+            "timestamp": "$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          }]
+        }
+        EOF
+        )
+        
+        # Remove empty fields array if not provided
+        if [ "$FIELDS" = "[]" ]; then
+          PAYLOAD=$(echo "$PAYLOAD" | sed 's/"fields": \[\],//g')
+        fi
+        
+        # Send webhook
+        HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" \
+          -H "Content-Type: application/json" \
+          -d "$PAYLOAD" \
+          "$WEBHOOK_URL")
+        
+        if [ "$HTTP_CODE" -ge 200 ] && [ "$HTTP_CODE" -lt 300 ]; then
+          echo "✅ Discord notification sent successfully (HTTP $HTTP_CODE)"
+        else
+          echo "⚠️ Discord notification failed (HTTP $HTTP_CODE)"
+          exit 1
+        fi
