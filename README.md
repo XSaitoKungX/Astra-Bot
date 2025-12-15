@@ -12,7 +12,7 @@
 
 <br />
 
-![Version](https://img.shields.io/badge/version-2.19.1-8B5CF6?style=flat-square&logo=github)
+![Version](https://img.shields.io/badge/version-2.21.0-8B5CF6?style=flat-square&logo=github)
 ![Node](https://img.shields.io/badge/node-18+-339933?style=flat-square&logo=node.js&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/typescript-5.x-3178C6?style=flat-square&logo=typescript&logoColor=white)
 ![Discord.js](https://img.shields.io/badge/discord.js-v14-5865F2?style=flat-square&logo=discord&logoColor=white)
@@ -39,17 +39,21 @@
     - [1. Invite Astra](#1-invite-astra)
     - [2. Configure via Dashboard](#2-configure-via-dashboard)
     - [3. Start Using Commands](#3-start-using-commands)
-  - [🖥️ Dashboard Preview](#️-dashboard-preview)
+  - [🖥️ Dashboard](#️-dashboard)
+    - [Landing Page](#landing-page)
+    - [Theme System](#theme-system)
+    - [Dashboard Pages](#dashboard-pages)
+    - [Guild Management](#guild-management)
   - [💻 Command Examples](#-command-examples)
   - [🛠️ Tech Stack](#️-tech-stack)
     - [Backend](#backend)
     - [Frontend](#frontend)
     - [Architecture](#architecture)
   - [📦 Recent Updates](#-recent-updates)
+    - [v2.21.0 — AI Chatbot \& Version Release System](#v2210--ai-chatbot--version-release-system)
+    - [v2.20.0 — Major Dependency Update \& Tailwind CSS 4.x Migration](#v2200--major-dependency-update--tailwind-css-4x-migration)
     - [v2.19.1 — Stability \& GitHub Discord Notifications](#v2191--stability--github-discord-notifications)
     - [v2.19.0 — VotingPage Modernization](#v2190--votingpage-modernization)
-    - [v2.18.0 — SEO Overhaul](#v2180--seo-overhaul)
-    - [v2.17.0 — Review System](#v2170--review-system)
   - [🏠 Self-Hosting](#-self-hosting)
   - [🤝 Contributing](#-contributing)
   - [💬 Support](#-support)
@@ -332,21 +336,97 @@ All commands use Discord's slash command system:
 
 <br />
 
-## 🖥️ Dashboard Preview
+## 🖥️ Dashboard
+
+Astra comes with a **full-featured web dashboard** — no commands needed for configuration. Manage everything from your browser with a beautiful, responsive interface.
+
+**Live Dashboard:** [astra.novaplex.xyz](https://astra.novaplex.xyz)
+
+<br />
+
+### Landing Page
+
+<details>
+<summary><b>View Screenshots</b></summary>
+
+<img src="https://github.com/user-attachments/assets/62ea2102-0e8a-4fde-b9bc-d59541c6f528" alt="Landing Page Hero" width="100%" />
+<img src="https://github.com/user-attachments/assets/acd084dd-89f1-43ef-b49f-7024f1cc9523" alt="Landing Page Features" width="100%" />
+<img src="https://github.com/user-attachments/assets/01fa8947-ba7e-4ea4-ab62-01351e0a26b0" alt="Landing Page Commands" width="100%" />
+<img src="https://github.com/user-attachments/assets/70c91bc2-1eaf-44e9-a145-af71e0c6abe0" alt="Landing Page Stats" width="100%" />
+<img src="https://github.com/user-attachments/assets/a61486be-4cc1-43e9-9c61-86fbbd43174b" alt="Landing Page Reviews" width="100%" />
+<img src="https://github.com/user-attachments/assets/5aef1794-6f37-4558-ab08-08672afaff63" alt="Landing Page Footer" width="100%" />
+
+</details>
+
+<br />
+
+### Theme System
+
+Choose from **30+ built-in themes** or create your own custom theme. Themes apply across the entire dashboard.
+
+<details>
+<summary><b>View Theme Examples</b></summary>
+
+| Theme | Preview |
+|-------|---------|
+| **Midnight** | <img src="https://github.com/user-attachments/assets/5f7e2a0a-0f80-40b6-95a1-e55006976b47" alt="Midnight Theme" width="600" /> |
+| **Abyss** | <img src="https://github.com/user-attachments/assets/462248c4-8997-4814-a2dc-22a80579f233" alt="Abyss Theme" width="600" /> |
+| **Obsidian** | <img src="https://github.com/user-attachments/assets/60fa2a98-8d64-4a58-ad14-6f8568919bf2" alt="Obsidian Theme" width="600" /> |
+| **Sakura** | <img src="https://github.com/user-attachments/assets/3eb59a6e-38d6-42e1-91fa-80df0382bdc3" alt="Sakura Theme" width="600" /> |
+| **Cream** | <img src="https://github.com/user-attachments/assets/9464eed9-519b-4032-9fad-00a0c84f4002" alt="Cream Theme" width="600" /> |
+| **Lavender** | <img src="https://github.com/user-attachments/assets/8671f132-7d3e-4bb8-85aa-b31da9e42e69" alt="Lavender Theme" width="600" /> |
+| **Matrix** | <img src="https://github.com/user-attachments/assets/7ff52416-4e89-4d38-8463-fb0ce8983aa3" alt="Matrix Theme" width="600" /> |
+| **Autumn** | <img src="https://github.com/user-attachments/assets/2e216fef-4050-485b-a28a-d6f376fb9f6b" alt="Autumn Theme" width="600" /> |
+
+*...and 22+ more themes including seasonal themes (Christmas, Halloween, Valentine's Day) + custom theme creator!*
+
+</details>
+
+<br />
+
+### Dashboard Pages
+
+<details>
+<summary><b>View Screenshots</b></summary>
+
+| Page | Preview |
+|------|---------|
+| **Guild Selector** | <img src="https://github.com/user-attachments/assets/cff93e44-2cfd-4d8b-8a82-530d7c0c26de" alt="Guild Selector" width="600" /> |
+| **Changelog** | <img src="https://github.com/user-attachments/assets/8907d652-b48a-4a88-b129-1d6e0429c5e9" alt="Changelog" width="600" /> |
+| **Version Details** | <img src="https://github.com/user-attachments/assets/e4580e07-5ed5-46f1-ba6e-d8e2a55c3e00" alt="Version Details" width="600" /> |
+
+</details>
+
+<br />
+
+### Guild Management
+
+<details>
+<summary><b>View Screenshots</b></summary>
+
+| Feature | Preview |
+|---------|---------|
+| **Server Overview** | <img src="https://github.com/user-attachments/assets/55b33604-9355-4c27-870d-b141d9f925ab" alt="Server Overview" width="600" /> |
+| **Leaderboard** | <img src="https://github.com/user-attachments/assets/8f718ecc-5520-4912-a2f2-48ebd3b48947" alt="Leaderboard" width="600" /> |
+| **Astra AI Chatbot** | <img src="https://github.com/user-attachments/assets/2ff7b19b-e830-4068-a47a-d29ba1acc824" alt="AI Chatbot" width="600" /> |
+| **Level Card Designer** | <img src="https://github.com/user-attachments/assets/940fa4d8-283d-4156-8b6d-77f13c445487" alt="Level Card" width="600" /> |
+| **Voting & Bot Lists** | <img src="https://github.com/user-attachments/assets/18a12798-07ba-40ec-9878-bb93fcb25c87" alt="Voting" width="600" /> |
+| **Guild Members** | <img src="https://github.com/user-attachments/assets/6c2b2735-d55a-4395-898a-7b00563060ce" alt="Guild Members" width="600" /> |
+| **Embed Creator** | <img src="https://github.com/user-attachments/assets/31c555f2-0c9a-4165-ba21-51054d1b316f" alt="Embed Creator" width="600" /> |
+| **Global Profile** | <img src="https://github.com/user-attachments/assets/1e858339-438b-4519-9fc3-e8c3a4aacb26" alt="Global Profile" width="600" /> |
+| **Guild Profile** | <img src="https://github.com/user-attachments/assets/84d92976-e32f-48ac-87f5-038fcd602d8d" alt="Guild Profile" width="600" /> |
+
+</details>
+
+<br />
 
 <div align="center">
 
-| Feature | Description |
-|---------|-------------|
-| **🎨 30+ Themes** | Dark, Light, Dracula, Nord, and more |
-| **📊 Real-time Stats** | Live server analytics |
-| **⚙️ Full Configuration** | Every setting, no commands needed |
-| **📱 Mobile Friendly** | Works on any device |
-| **🔔 Notifications** | Push, email, and Discord DM |
+*✨ The Astra Dashboard has many more features to discover — moderation logs, ticket management, welcome messages, auto-mod settings, music controls, economy shop, giveaways, and much more!*
+
+**[Open Dashboard →](https://astra.novaplex.xyz)**
 
 </div>
-
-**Live Dashboard:** [astra.novaplex.xyz](https://astra.novaplex.xyz)
 
 <br />
 
@@ -504,18 +584,62 @@ All commands use Discord's slash command system:
 
 ## 📦 Recent Updates
 
-### v2.19.1 — Stability & GitHub Discord Notifications
-> Released: December 12, 2025
+### v2.21.0 — AI Chatbot & Version Release System
+> Released: December 15, 2025
 
 <details>
 <summary><strong>What's new</strong></summary>
 
-- ✅ GitHub: Advanced Discord webhook notifications workflow (push, PR, issues, releases, CI failure, stars, forks)
-- ✅ GitHub: Reusable Discord notify composite action for consistent embeds
-- ✅ GitHub: Deploy notification workflow example (deploy-notify.yml)
-- ✅ Docs: Discord webhook setup guide at .github/DISCORD_WEBHOOKS.md
-- ✅ TempVoice: Fix unused-variable lint warnings in interaction handlers
-- ✅ Versions: Sync package versions across repo to match dashboard changelog
+**Added:**
+- 🤖 Astra AI chatbot with Google Gemini integration
+- 💬 Auto-reply when mentioning Astra or using trigger words
+- ℹ️ Astra info embed when triggered without a question
+- 🎨 Dashboard AI chat with Markdown rendering
+- 📦 Version release announcement system
+- 🔧 `/release create`, `announce`, `preview`, `delete` commands
+- 📋 `/changelog channel`, `latest`, `history` commands
+- ✨ Autocomplete for version selection
+
+**Fixed:**
+- Bot/User avatars in dashboard AI chat
+- Ephemeral deprecation warning (use MessageFlags.Ephemeral)
+- Changelog field truncation for Discord 1024 char limit
+- Deploy commands hanging issue
+- Notification model export for API
+
+</details>
+
+### v2.20.0 — Major Dependency Update & Tailwind CSS 4.x Migration
+> Released: December 15, 2025
+
+<details>
+<summary><strong>What's new</strong></summary>
+
+**Updated:**
+- React to v19, React Router to v7, Tailwind CSS to v4
+- Vite to v7, Mongoose to v9, Express to v5, Zod to v4
+- 60+ packages to latest versions
+
+**Changed:**
+- Full migration to Tailwind CSS 4.x syntax
+- New @theme directive for custom styles
+
+**Added:**
+- New CommandsPage, MembersPage, GuildSelectPage, ReviewsManagerPage
+
+</details>
+
+### v2.19.1 — Stability & GitHub Discord Notifications
+> Released: December 12, 2025
+
+<details>
+<summary>View Changes</summary>
+
+- ✅ GitHub: Advanced Discord webhook notifications workflow
+- ✅ GitHub: Reusable Discord notify composite action
+- ✅ Docs: Discord webhook setup guide
+- ✅ TempVoice: Fix unused-variable lint warnings
+- ✅ Versions: Sync package versions across repo
 
 </details>
 
@@ -528,56 +652,11 @@ All commands use Discord's slash command system:
 **Added:**
 - New "Bot Setup" tab with copy-ready templates
 - Leaderboard period filter (All Time / Monthly / Weekly)
-- Stats summary (voters, votes, coins, best streak)
 - Webhook secret validation for all bot lists
 
 **Improved:**
 - All emojis replaced with Lucide React icons
 - Modern medal icons for top 3 voters
-- Platform cards show cooldown duration
-- Trusted Servers marquee faster and smoother
-
-**Fixed:**
-- Platform breakdown icon rendering
-- Discord Bot List webhook Authorization header
-- WidgetBot login popup error
-
-</details>
-
-### v2.18.0 — SEO Overhaul
-> Released: December 10, 2025
-
-<details>
-<summary>View Changes</summary>
-
-**Added:**
-- 30+ meta tags for SEO
-- 4 JSON-LD schemas
-- sitemap.xml and robots.txt
-- Modern loading screen
-
-**Improved:**
-- Bento Grid dashboard layout
-- Open Graph and Twitter Cards
-- Accessibility improvements
-
-</details>
-
-### v2.17.0 — Review System
-> Released: December 9, 2025
-
-<details>
-<summary>View Changes</summary>
-
-**Added:**
-- User review system with ratings
-- 7 selectable tags for reviews
-- Changelog preview section
-- Commands page with search
-
-**Improved:**
-- FAQ section with icons
-- Server selection filtering
 
 </details>
 
