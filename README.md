@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://astra.novaplex.xyz/Astra_Banner.png" alt="Astra Bot Banner" width="100%" />
+<img src="./dashboard/public/Astra_Banner.png" alt="Astra Bot Banner" width="100%" />
 
 # ✨ Astra Bot
 
