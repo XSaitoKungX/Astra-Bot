@@ -1,0 +1,1290 @@
+// ===========================================
+// ASTRA BOT - PostgreSQL Schema
+// Migration from MongoDB to PostgreSQL + Redis
+// ===========================================
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ============================================
+// CORE ENTITIES
+// ============================================
+
+model User {
+  id            String   @id @default(cuid())
+  discordId     String   @unique
+  username      String
+  globalName    String?
+  discriminator String   @default("0")
+  avatar        String?
+  banner        String?
+  accentColor   Int?
+  
+  // OAuth (encrypted at rest)
+  accessToken    String?
+  refreshToken   String?
+  tokenExpiresAt DateTime?
+  
+  // Preferences as JSONB (flexible, rarely queried)
+  preferences   Json     @default("{}")
+  
+  // Premium status
+  premiumActive    Boolean  @default(false)
+  premiumTier      Int      @default(0)
+  premiumSince     DateTime?
+  premiumExpiresAt DateTime?
+  
+  // Flags
+  isBotOwner    Boolean  @default(false)
+  isStaff       Boolean  @default(false)
+  isBetaTester  Boolean  @default(false)
+  isBanned      Boolean  @default(false)
+  banReason     String?
+  
+  // Stats
+  totalMessages Int      @default(0)
+  totalCommands Int      @default(0)
+  firstSeen     DateTime @default(now())
+  lastSeen      DateTime @default(now())
+  
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  
+  // Relations
+  levels        UserLevel[]
+  economies     UserEconomy[]
+  votes         UserVote[]
+  badges        UserBadge[]
+  reminders     Reminder[]
+  birthday      Birthday?
+  aiConversations AIConversation[]
+  
+  @@index([discordId])
+  @@index([lastSeen])
+  @@index([premiumActive])
+}
+
+model Guild {
+  id        String   @id @default(cuid())
+  guildId   String   @unique
+  name      String
+  icon      String?
+  ownerId   String
+  memberCount Int    @default(0)
+  
+  // Module configs as JSONB (complex nested structures)
+  moderationConfig Json @default("{}")
+  levelingConfig   Json @default("{}")
+  economyConfig    Json @default("{}")
+  welcomeConfig    Json @default("{}")
+  loggingConfig    Json @default("{}")
+  ticketConfig     Json @default("{}")
+  automodConfig    Json @default("{}")
+  musicConfig      Json @default("{}")
+  gamesConfig      Json @default("{}")
+  votingConfig     Json @default("{}")
+  verifyConfig     Json @default("{}")
+  tempVoiceConfig  Json @default("{}")
+  starboardConfig  Json @default("{}")
+  birthdayConfig   Json @default("{}")
+  aiConfig         Json @default("{}")
+  
+  // Simple flags (frequently queried)
+  premium          Boolean @default(false)
+  premiumUntil     DateTime?
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  // Relations
+  levels          UserLevel[]
+  economies       UserEconomy[]
+  moderationLogs  ModerationLog[]
+  warnings        Warning[]
+  tickets         Ticket[]
+  giveaways       Giveaway[]
+  customCommands  CustomCommand[]
+  reactionRoles   ReactionRole[]
+  selfRoles       SelfRole[]
+  starboardPosts  StarboardPost[]
+  analytics       GuildAnalytics?
+  tempVoiceChannels TempVoiceChannel[]
+  
+  @@index([guildId])
+}
+
+// ============================================
+// USER DATA (Per-Guild)
+// ============================================
+
+model UserLevel {
+  id        String   @id @default(cuid())
+  
+  discordId String
+  
+  guildId   String
+  guild     Guild    @relation(fields: [guildId], references: [guildId], onDelete: Cascade)
+  
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  
+  xp           Int      @default(0)
+  level        Int      @default(0)
+  totalXp      Int      @default(0)
+  messages     Int      @default(0)
+  voiceMinutes Int      @default(0)
+  
+  weeklyXp     Int      @default(0)
+  monthlyXp    Int      @default(0)
+  lastWeeklyReset  DateTime @default(now())
+  lastMonthlyReset DateTime @default(now())
+  
+  dailyStreak    Int    @default(0)
+  longestStreak  Int    @default(0)
+  lastDailyActivity DateTime?
+  
+  lastXpGain      DateTime @default(now())
+  lastVoiceXpGain DateTime?
+  
+  // Card customization as JSONB
+  cardConfig Json @default("{}")
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  @@unique([guildId, discordId])
+  @@index([guildId, totalXp(sort: Desc)])
+  @@index([guildId, level(sort: Desc)])
+  @@index([guildId, weeklyXp(sort: Desc)])
+  @@index([guildId, monthlyXp(sort: Desc)])
+}
+
+model UserEconomy {
+  id        String   @id @default(cuid())
+  
+  discordId String
+  
+  guildId   String
+  guild     Guild    @relation(fields: [guildId], references: [guildId], onDelete: Cascade)
+  
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  
+  balance      Int      @default(0)
+  bank         Int      @default(0)
+  bankLimit    Int      @default(10000)
+  
+  totalEarned  Int      @default(0)
+  totalSpent   Int      @default(0)
+  
+  // Inventory as JSONB (flexible structure)
+  inventory    Json     @default("[]")
+  
+  // Cooldowns moved to Redis - but track last times for stats
+  dailyStreak  Int      @default(0)
+  lastDaily    DateTime?
+  lastWork     DateTime?
+  lastRob      DateTime?
+  
+  // Stats
+  timesWorked  Int      @default(0)
+  timesRobbed  Int      @default(0)
+  robSuccesses Int      @default(0)
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  @@unique([guildId, discordId])
+  @@index([guildId, balance(sort: Desc)])
+}
+
+model UserVote {
+  id        String   @id @default(cuid())
+  
+  discordId String
+  
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  
+  platform  String   // topgg, discordbotlist, etc.
+  
+  isWeekend   Boolean @default(false)
+  multiplier  Float   @default(1.0)
+  
+  rewardCoins Int     @default(0)
+  rewardXp    Int     @default(0)
+  
+  votedAt   DateTime @default(now())
+  
+  // Vote reminder tracking
+  reminderSent        Boolean   @default(false)
+  reminderScheduledFor DateTime?
+  
+  @@index([discordId, platform])
+  @@index([discordId])
+  @@index([votedAt])
+  @@index([reminderSent, reminderScheduledFor])
+}
+
+// ============================================
+// MODERATION
+// ============================================
+
+model ModerationLog {
+  id        String   @id @default(cuid())
+  
+  guildId   String
+  guild     Guild    @relation(fields: [guildId], references: [guildId], onDelete: Cascade)
+  
+  caseId    Int
+  
+  targetId    String   // Discord user ID
+  targetTag   String?  // username#discriminator at time of action
+  moderatorId String
+  moderatorTag String?
+  
+  action    String   // ban, kick, warn, mute, timeout, unban, unmute
+  reason    String?
+  duration  Int?     // seconds
+  
+  expiresAt DateTime?
+  active    Boolean  @default(true)
+  
+  // Evidence/notes as JSONB
+  metadata  Json     @default("{}")
+  
+  createdAt DateTime @default(now())
+  
+  @@unique([guildId, caseId])
+  @@index([guildId, targetId])
+  @@index([guildId, moderatorId])
+  @@index([guildId, action])
+  @@index([guildId, createdAt(sort: Desc)])
+}
+
+model Warning {
+  id        String   @id @default(cuid())
+  
+  guildId   String
+  guild     Guild    @relation(fields: [guildId], references: [guildId], onDelete: Cascade)
+  
+  discordId   String   // Discord user ID
+  moderatorId String
+  
+  reason    String
+  severity  Int      @default(1) // 1-5
+  
+  active    Boolean  @default(true)
+  expiresAt DateTime?
+  
+  createdAt DateTime @default(now())
+  
+  @@index([guildId, discordId])
+  @@index([guildId, active])
+}
+
+// ============================================
+// TICKETS
+// ============================================
+
+model Ticket {
+  id        String   @id @default(cuid())
+  
+  guildId   String
+  guild     Guild    @relation(fields: [guildId], references: [guildId], onDelete: Cascade)
+  
+  channelId String   @unique
+  discordId String   // Ticket creator
+  
+  panelId   String?
+  panelName String?
+  subject   String?
+  
+  status    String   @default("open") // open, claimed, closed
+  priority  String   @default("normal") // low, normal, high, urgent
+  
+  claimedBy String?
+  closedBy  String?
+  closedAt  DateTime?
+  closeReason String?
+  
+  // Participants (added users)
+  participants String[] @default([])
+  
+  // Message count for stats
+  messageCount Int    @default(0)
+  
+  // Transcript stored as JSONB or external URL
+  transcript    Json?
+  transcriptUrl String?
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  @@index([guildId, status])
+  @@index([guildId, discordId])
+  @@index([guildId, createdAt(sort: Desc)])
+}
+
+// ============================================
+// ENGAGEMENT
+// ============================================
+
+model Giveaway {
+  id        String   @id @default(cuid())
+  
+  guildId   String
+  guild     Guild    @relation(fields: [guildId], references: [guildId], onDelete: Cascade)
+  
+  channelId String
+  messageId String   @unique
+  hostId    String
+  
+  prize       String
+  description String?
+  winnerCount Int      @default(1)
+  
+  // Requirements as JSONB
+  requirements Json @default("{}")
+  
+  // Bonus entries config as JSONB
+  bonusEntries Json @default("{}")
+  
+  // Participants stored in Redis during active, moved here on end
+  participants String[] @default([])
+  winnerIds    String[] @default([])
+  
+  endsAt    DateTime
+  endedAt   DateTime?
+  ended     Boolean  @default(false)
+  
+  createdAt DateTime @default(now())
+  
+  @@index([guildId])
+  @@index([ended, endsAt])
+  @@index([messageId])
+}
+
+model CustomCommand {
+  id        String   @id @default(cuid())
+  
+  guildId   String
+  guild     Guild    @relation(fields: [guildId], references: [guildId], onDelete: Cascade)
+  
+  name        String
+  description String?
+  aliases     String[] @default([])
+  
+  // Response config as JSONB (message, embed, etc.)
+  response  Json
+  
+  // Restrictions
+  allowedRoles   String[] @default([])
+  allowedChannels String[] @default([])
+  cooldown       Int      @default(0)
+  
+  enabled   Boolean  @default(true)
+  uses      Int      @default(0)
+  
+  createdBy String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  @@unique([guildId, name])
+  @@index([guildId])
+}
+
+model ReactionRole {
+  id        String   @id @default(cuid())
+  
+  guildId   String
+  guild     Guild    @relation(fields: [guildId], references: [guildId], onDelete: Cascade)
+  
+  channelId String
+  messageId String   @unique
+  
+  // Role mappings as JSONB: { "emoji": "roleId", ... }
+  roles     Json
+  
+  type      String   @default("normal") // normal, unique, verify, drop
+  
+  // Restrictions
+  requiredRole  String?
+  blacklistRoles String[] @default([])
+  
+  createdAt DateTime @default(now())
+  
+  @@index([guildId])
+  @@index([messageId])
+}
+
+model SelfRole {
+  id        String   @id @default(cuid())
+  
+  guildId   String
+  guild     Guild    @relation(fields: [guildId], references: [guildId], onDelete: Cascade)
+  
+  name      String
+  description String?
+  
+  // Panel config as JSONB (embed, style, roles)
+  config    Json
+  
+  // Deployment info
+  messageId String?
+  channelId String?
+  
+  // Limits
+  minRoles  Int      @default(0)
+  maxRoles  Int      @default(25)
+  
+  enabled   Boolean  @default(true)
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  @@unique([guildId, name])
+  @@index([guildId])
+}
+
+model StarboardPost {
+  id        String   @id @default(cuid())
+  
+  guildId   String
+  guild     Guild    @relation(fields: [guildId], references: [guildId], onDelete: Cascade)
+  
+  originalMessageId  String   @unique
+  originalChannelId  String
+  starboardMessageId String   @unique
+  starboardChannelId String
+  
+  authorId  String
+  content   String?
+  attachments String[] @default([])
+  
+  stars     Int      @default(0)
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  @@index([guildId])
+  @@index([guildId, stars(sort: Desc)])
+}
+
+// ============================================
+// MISC USER DATA
+// ============================================
+
+model Birthday {
+  id        String   @id @default(cuid())
+  
+  discordId String   @unique
+  
+  userId    String?  @unique
+  user      User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  
+  day       Int
+  month     Int
+  year      Int?
+  timezone  String   @default("UTC")
+  
+  // Last announced to prevent duplicates
+  lastAnnounced DateTime?
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  @@index([month, day])
+}
+
+model Reminder {
+  id        String   @id @default(cuid())
+  
+  discordId String
+  
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  
+  channelId String?
+  guildId   String?
+  
+  message   String
+  remindAt  DateTime
+  
+  // Repeat settings
+  recurring Boolean  @default(false)
+  interval  Int?     // seconds between repeats
+  
+  sent      Boolean  @default(false)
+  sentAt    DateTime?
+  
+  createdAt DateTime @default(now())
+  
+  @@index([remindAt, sent])
+  @@index([discordId])
+}
+
+model UserBadge {
+  id        String   @id @default(cuid())
+  
+  discordId String
+  
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  
+  badgeId   String
+  name      String
+  description String?
+  icon      String?
+  rarity    String   @default("common") // common, uncommon, rare, epic, legendary
+  
+  earnedAt  DateTime @default(now())
+  
+  @@unique([discordId, badgeId])
+  @@index([discordId])
+}
+
+model AFK {
+  id        String   @id @default(cuid())
+  
+  guildId   String
+  discordId String
+  
+  message   String   @default("AFK")
+  
+  // Track mentions while AFK
+  mentions  Json     @default("[]")
+  
+  startedAt DateTime @default(now())
+  
+  @@unique([guildId, discordId])
+  @@index([guildId])
+}
+
+// ============================================
+// AI CONVERSATIONS
+// ============================================
+
+model AIConversation {
+  id        String   @id @default(cuid())
+  
+  discordId String
+  
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  
+  guildId   String?
+  channelId String?
+  
+  // Conversation history as JSONB
+  messages  Json     @default("[]")
+  
+  // Token usage tracking
+  totalTokens Int    @default(0)
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  @@index([discordId])
+  @@index([guildId, channelId])
+}
+
+// ============================================
+// ANALYTICS
+// ============================================
+
+model GuildAnalytics {
+  id        String   @id @default(cuid())
+  
+  guildId   String   @unique
+  guild     Guild    @relation(fields: [guildId], references: [guildId], onDelete: Cascade)
+  
+  // Cumulative counters
+  messagesTotal     Int @default(0)
+  commandsTotal     Int @default(0)
+  voiceMinutesTotal Int @default(0)
+  
+  // Heatmap data as JSONB (7x24 grid)
+  activityHeatmap  Json @default("[]")
+  
+  // Historical snapshots as JSONB array
+  growthSnapshots  Json @default("[]")
+  
+  // Channel stats as JSONB
+  channelStats     Json @default("{}")
+  
+  // Command stats as JSONB
+  commandStats     Json @default("{}")
+  
+  // Milestones as JSONB array
+  milestones       Json @default("[]")
+  
+  // Settings
+  settings         Json @default("{}")
+  
+  lastUpdated DateTime @default(now())
+  
+  @@index([guildId])
+}
+
+// ============================================
+// TEMP VOICE
+// ============================================
+
+model TempVoiceChannel {
+  id        String   @id @default(cuid())
+  
+  guildId   String
+  guild     Guild    @relation(fields: [guildId], references: [guildId], onDelete: Cascade)
+  
+  channelId String   @unique
+  ownerId   String
+  creatorChannelId String
+  
+  // Settings as JSONB
+  settings  Json     @default("{}")
+  
+  // Banned/permitted users
+  banned    String[] @default([])
+  permitted String[] @default([])
+  
+  createdAt DateTime @default(now())
+  
+  @@index([guildId])
+  @@index([ownerId])
+  @@index([channelId])
+}
+
+// ============================================
+// API & AUTH
+// ============================================
+
+model ApiKey {
+  id        String   @id @default(cuid())
+  
+  key       String   @unique
+  name      String
+  
+  discordId String?  // Owner
+  guildId   String?  // Scope
+  
+  scopes    String[] @default([])
+  permissions Json   @default("{}")
+  
+  rateLimit Int      @default(100) // requests per minute
+  expiresAt DateTime?
+  
+  lastUsed  DateTime?
+  uses      Int      @default(0)
+  
+  active    Boolean  @default(true)
+  
+  createdAt DateTime @default(now())
+  
+  @@index([key])
+  @@index([discordId])
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  
+  sessionId String   @unique
+  discordId String
+  
+  // Session data as JSONB
+  data      Json     @default("{}")
+  
+  expiresAt DateTime
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  @@index([sessionId])
+  @@index([discordId])
+  @@index([expiresAt])
+}
+
+// ============================================
+// SAVED EMBEDS
+// ============================================
+
+model SavedEmbed {
+  id        String   @id @default(cuid())
+  
+  guildId   String
+  name      String
+  
+  // Embed data as JSONB
+  embed     Json
+  
+  createdBy String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  @@unique([guildId, name])
+  @@index([guildId])
+}
+
+// ============================================
+// GAMES
+// ============================================
+
+model GameStats {
+  id        String   @id @default(cuid())
+  
+  discordId String
+  guildId   String?
+  
+  gameType  String   // trivia, wordle, hangman, rpg, etc.
+  
+  // Stats as JSONB (game-specific)
+  stats     Json     @default("{}")
+  
+  // Common stats
+  gamesPlayed Int    @default(0)
+  gamesWon    Int    @default(0)
+  highScore   Int    @default(0)
+  totalScore  Int    @default(0)
+  
+  lastPlayed DateTime @default(now())
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  
+  @@unique([discordId, guildId, gameType])
+  @@index([discordId])
+  @@index([guildId, gameType])
+  @@index([gameType, highScore(sort: Desc)])
+}
+
+// ============================================
+// ANALYTICS EVENTS (High volume - 2.4K docs)
+// ============================================
+
+model AnalyticsEvent {
+  id        String   @id @default(cuid())
+  
+  guildId   String
+  eventType String   // message, command, voice_join, member_join, etc.
+  
+  // Event data
+  data      Json     @default("{}")
+  
+  // Metadata
+  channelId String?
+  userId    String?
+  
+  timestamp DateTime @default(now())
+  
+  @@index([guildId, eventType])
+  @@index([guildId, timestamp])
+  @@index([eventType, timestamp])
+}
+
+// ============================================
+// GAME CONFIGS
+// ============================================
+
+model GameConfig {
+  id        String   @id @default(cuid())
+  
+  guildId   String   @unique
+  
+  // Game-specific configs as JSONB
+  trivia    Json     @default("{}")
+  wordGame  Json     @default("{}")
+  rpg       Json     @default("{}")
+  pets      Json     @default("{}")
+  
+  // General settings
+  enabled   Boolean  @default(true)
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  @@index([guildId])
+}
+
+// ============================================
+// NOTIFICATIONS
+// ============================================
+
+model Notification {
+  id        String   @id @default(cuid())
+  
+  discordId String
+  guildId   String?
+  
+  type      String   // level_up, achievement, reminder, etc.
+  title     String
+  message   String
+  
+  data      Json     @default("{}")
+  
+  read      Boolean  @default(false)
+  readAt    DateTime?
+  dismissed Boolean  @default(false)
+  dismissedAt DateTime?
+  
+  expiresAt DateTime?
+  
+  createdAt DateTime @default(now())
+  
+  @@index([discordId, read])
+  @@index([discordId, type])
+  @@index([discordId, dismissed])
+}
+
+model NotificationSettings {
+  id        String   @id @default(cuid())
+  
+  discordId String   @unique
+  
+  // Per-type settings
+  settings  Json     @default("{}")
+  
+  // Global toggles
+  enabled   Boolean  @default(true)
+  dmEnabled Boolean  @default(true)
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// ============================================
+// REVIEWS
+// ============================================
+
+model Review {
+  id        String   @id @default(cuid())
+  
+  discordId String
+  username  String?
+  avatar    String?
+  
+  rating    Int      // 1-5
+  content   String?
+  comment   String?  // Alias for content
+  guildName String?
+  tags      String[] @default([])
+  
+  // Review metadata
+  helpful   Int      @default(0)
+  reported  Boolean  @default(false)
+  approved  Boolean  @default(true)
+  status    String   @default("pending") // pending, approved, rejected
+  isPublic  Boolean  @default(true)
+  verified  Boolean  @default(false)
+  featured  Boolean  @default(false)
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  @@index([discordId])
+  @@index([rating])
+  @@index([status, isPublic])
+}
+
+// ============================================
+// RPG CHARACTERS
+// ============================================
+
+model RPGCharacter {
+  id        String   @id @default(cuid())
+  
+  discordId String
+  guildId   String
+  
+  name      String
+  class     String   @default("warrior")
+  title     String?
+  
+  // Stats
+  level     Int      @default(1)
+  xp        Int      @default(0)
+  xpToNextLevel Int  @default(100)
+  health    Int      @default(100)
+  maxHealth Int      @default(100)
+  mana      Int      @default(50)
+  maxMana   Int      @default(50)
+  attack    Int      @default(10)
+  defense   Int      @default(10)
+  speed     Int      @default(10)
+  gold      Int      @default(0)
+  
+  // Location
+  currentLocation String @default("town")
+  
+  // Equipment & Inventory as JSONB
+  equipment Json     @default("{}")
+  inventory Json     @default("[]")
+  skills    Json     @default("[]")
+  
+  // Stats tracking as JSONB
+  stats     Json     @default("{}")
+  
+  // Progress
+  questsCompleted Int @default(0)
+  monstersKilled  Int @default(0)
+  deaths          Int @default(0)
+  
+  lastAdventure DateTime?
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  @@unique([discordId, guildId])
+  @@index([guildId, level(sort: Desc)])
+}
+
+// ============================================
+// TEMP VOICE CONFIGS
+// ============================================
+
+model TempVoiceConfig {
+  id        String   @id @default(cuid())
+  
+  guildId   String   @unique
+  
+  enabled   Boolean  @default(false)
+  
+  // Creator channels
+  creatorChannels Json @default("[]")
+  
+  // Default settings
+  defaults  Json     @default("{}")
+  
+  // Limits
+  maxChannels Int    @default(50)
+  
+  // Interface settings
+  interface Json     @default("{}")
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// ============================================
+// TEMP VOICE USER STATS
+// ============================================
+
+model TempVoiceUserStats {
+  id        String   @id @default(cuid())
+  
+  guildId   String
+  discordId String
+  
+  // Stats
+  channelsCreated Int @default(0)
+  totalTimeOwner  Int @default(0) // seconds
+  totalTimeInChannels Int @default(0)
+  
+  // Trust score
+  trustScore Int    @default(50)
+  
+  // Saved templates
+  templates Json    @default("[]")
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  @@unique([guildId, discordId])
+  @@index([guildId, trustScore(sort: Desc)])
+}
+
+// ============================================
+// TEMP VOICE TEMPLATES
+// ============================================
+
+model TempVoiceTemplate {
+  id        String   @id @default(cuid())
+  
+  guildId   String
+  discordId String
+  
+  name      String
+  isDefault Boolean  @default(false)
+  
+  settings  Json     @default("{}")
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  @@unique([guildId, discordId, name])
+  @@index([guildId, discordId])
+}
+
+// ============================================
+// TRIVIA STATS
+// ============================================
+
+model TriviaStats {
+  id        String   @id @default(cuid())
+  
+  discordId String
+  guildId   String?
+  
+  // Stats
+  gamesPlayed    Int @default(0)
+  questionsAnswered Int @default(0)
+  correctAnswers Int @default(0)
+  totalPoints    Int @default(0)
+  
+  // Streaks
+  currentStreak  Int @default(0)
+  longestStreak  Int @default(0)
+  
+  // Category stats as JSONB
+  categoryStats  Json @default("{}")
+  
+  lastPlayed DateTime?
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  @@unique([discordId, guildId])
+  @@index([guildId, totalPoints(sort: Desc)])
+}
+
+// ============================================
+// USER ACHIEVEMENTS
+// ============================================
+
+model UserAchievements {
+  id        String   @id @default(cuid())
+  
+  discordId String
+  guildId   String?
+  
+  // Achievements as JSONB array
+  achievements Json  @default("[]")
+  
+  // Progress tracking
+  progress  Json     @default("{}")
+  
+  // Stats
+  totalUnlocked Int  @default(0)
+  totalPoints   Int  @default(0)
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  @@unique([discordId, guildId])
+  @@index([discordId])
+}
+
+// ============================================
+// VERIFICATION CONFIG
+// ============================================
+
+model VerificationConfig {
+  id        String   @id @default(cuid())
+  
+  guildId   String   @unique
+  
+  enabled   Boolean  @default(false)
+  
+  // Roles
+  verifiedRole   String?
+  unverifiedRole String?
+  
+  // Channel
+  channelId String?
+  logChannelId String?
+  
+  // Settings
+  type      String   @default("button") // button, captcha, reaction
+  message   String?
+  
+  // Additional config
+  config    Json     @default("{}")
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// ============================================
+// WORD GAMES
+// ============================================
+
+model WordGame {
+  id        String   @id @default(cuid())
+  
+  discordId String
+  guildId   String
+  channelId String
+  
+  gameType  String   // wordle, hangman, scramble, anagram
+  word      String
+  displayWord String @default("")
+  
+  // Game state
+  guesses       Json   @default("[]")
+  wrongGuesses  Json   @default("[]")
+  wordleGuesses Json   @default("[]")
+  status        String @default("active") // active, won, lost, abandoned
+  
+  // Attempts
+  maxAttempts   Int    @default(6)
+  attemptsLeft  Int    @default(6)
+  hintsUsed     Int    @default(0)
+  hangmanStage  Int    @default(0)
+  
+  // Timing
+  startedAt DateTime @default(now())
+  endedAt   DateTime?
+  timeTaken Float?
+  
+  @@index([discordId, guildId, gameType, status])
+  @@index([guildId, status])
+  @@index([channelId])
+}
+
+// ============================================
+// WORD GAME STATS
+// ============================================
+
+model WordGameStats {
+  id        String   @id @default(cuid())
+  
+  discordId String
+  guildId   String?
+  
+  // Stats per game type as JSONB
+  wordle    Json     @default("{}")
+  hangman   Json     @default("{}")
+  
+  // Overall stats
+  gamesPlayed   Int    @default(0)
+  gamesWon      Int    @default(0)
+  totalPoints   Int    @default(0)
+  
+  currentStreak Int  @default(0)
+  longestStreak Int  @default(0)
+  
+  lastPlayed DateTime?
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  @@unique([discordId, guildId])
+  @@index([guildId, gamesWon(sort: Desc)])
+}
+
+// ============================================
+// VERSION TRACKING
+// ============================================
+
+model Version {
+  id        String   @id @default(cuid())
+  
+  version   String   @unique
+  title     String?
+  description String?
+  changelog String?
+  changes   Json     @default("[]")
+  
+  // Announcement tracking
+  announced Boolean  @default(false)
+  announcedAt DateTime?
+  announcedGuilds String[] @default([])
+  failedGuilds    String[] @default([])
+  
+  // Migration info
+  migrated  Boolean  @default(false)
+  migratedAt DateTime?
+  
+  releaseDate DateTime @default(now())
+  createdAt   DateTime @default(now())
+}
+
+// ============================================
+// PETS
+// ============================================
+
+model Pet {
+  id        String   @id @default(cuid())
+  
+  ownerId   String   // Discord user ID
+  guildId   String
+  
+  petId     String   @unique // Unique pet identifier
+  speciesId String
+  name      String
+  
+  level     Int      @default(1)
+  xp        Int      @default(0)
+  
+  happiness Int      @default(50)
+  energy    Int      @default(100)
+  hunger    Int      @default(50)
+  
+  isActive  Boolean  @default(false)
+  
+  stats     Json     @default("{}")
+  
+  lastFed   DateTime?
+  lastPlayed DateTime?
+  obtainedAt DateTime @default(now())
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  @@index([ownerId, guildId])
+  @@index([guildId, level(sort: Desc)])
+}
+
+model PetCollection {
+  id        String   @id @default(cuid())
+  
+  discordId String
+  guildId   String
+  
+  activePetId String?
+  
+  totalPetsAdopted Int @default(0)
+  totalPetsReleased Int @default(0)
+  
+  stats     Json     @default("{}")
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  @@unique([discordId, guildId])
+  @@index([guildId])
+}
+
+// ============================================
+// WEBHOOKS
+// ============================================
+
+model Webhook {
+  id        String   @id @default(cuid())
+  
+  name      String
+  url       String
+  secret    String
+  
+  odiscordId String?  // Owner user ID
+  guildId   String?  // Scope to specific guild
+  
+  events    String[] @default([])
+  filters   Json     @default("{}")
+  config    Json     @default("{}")
+  
+  status    String   @default("active") // active, paused, disabled, failing
+  stats     Json     @default("{}")
+  
+  recentDeliveries Json @default("[]")
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  @@index([odiscordId])
+  @@index([guildId])
+  @@index([status])
+}
