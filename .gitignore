@@ -15,8 +15,6 @@ astra-git-crypt-key
 # ============ Dependencies ============
 node_modules/
 dashboard/node_modules/
-package-lock.json
-dashboard/package-lock.json
 .pnp
 .pnp.js
 
