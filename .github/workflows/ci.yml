@@ -109,6 +109,11 @@ jobs:
       - name: Install dashboard dependencies
         run: cd dashboard && npm ci
       
+      - name: Generate Prisma Client
+        env:
+          DATABASE_URL: postgresql://placeholder:placeholder@localhost:5432/placeholder
+        run: npx prisma generate
+      
       - name: Build bot
         run: npm run build:bot
       
