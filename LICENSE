@@ -1,16 +1,27 @@
-MIT License
+Proprietary License
 
 Copyright (c) 2024-2025 XSaitoKungX
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+All Rights Reserved.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+This software and associated documentation files (the "Software") are proprietary
+and confidential. Portions of this codebase are encrypted using git-crypt.
+
+UNAUTHORIZED COPYING, MODIFICATION, DISTRIBUTION, OR USE OF THIS SOFTWARE,
+VIA ANY MEDIUM, IS STRICTLY PROHIBITED WITHOUT EXPLICIT WRITTEN PERMISSION
+FROM THE COPYRIGHT HOLDER.
+
+The Software is provided for viewing purposes only. No license is granted for:
+- Commercial use
+- Modification
+- Distribution
+- Private use
+- Patent use
+
+For licensing inquiries, collaboration, or self-hosting permissions,
+please contact the author via:
+- Discord: https://discord.gg/KD84DmNA89
+- GitHub: https://github.com/XSaitoKungX
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,

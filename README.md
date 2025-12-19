@@ -12,11 +12,12 @@
 
 <br />
 
-![Version](https://img.shields.io/badge/version-2.21.0-8B5CF6?style=flat-square&logo=github)
-![Node](https://img.shields.io/badge/node-18+-339933?style=flat-square&logo=node.js&logoColor=white)
+![Version](https://img.shields.io/badge/version-3.0.0--beta-8B5CF6?style=flat-square&logo=github)
+![Node](https://img.shields.io/badge/node-20+-339933?style=flat-square&logo=node.js&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/typescript-5.x-3178C6?style=flat-square&logo=typescript&logoColor=white)
 ![Discord.js](https://img.shields.io/badge/discord.js-v14-5865F2?style=flat-square&logo=discord&logoColor=white)
-![License](https://img.shields.io/badge/license-MIT-green?style=flat-square)
+![Prisma](https://img.shields.io/badge/prisma-7.x-2D3748?style=flat-square&logo=prisma&logoColor=white)
+![License](https://img.shields.io/badge/license-Proprietary-red?style=flat-square)
 
 <br />
 
@@ -50,10 +51,9 @@
     - [Frontend](#frontend)
     - [Architecture](#architecture)
   - [📦 Recent Updates](#-recent-updates)
+    - [v3.0.0-beta — MongoDB → PostgreSQL + Prisma Migration](#v300-beta--mongodb--postgresql--prisma-migration)
     - [v2.21.0 — AI Chatbot \& Version Release System](#v2210--ai-chatbot--version-release-system)
     - [v2.20.0 — Major Dependency Update \& Tailwind CSS 4.x Migration](#v2200--major-dependency-update--tailwind-css-4x-migration)
-    - [v2.19.1 — Stability \& GitHub Discord Notifications](#v2191--stability--github-discord-notifications)
-    - [v2.19.0 — VotingPage Modernization](#v2190--votingpage-modernization)
   - [🏠 Self-Hosting](#-self-hosting)
   - [🤝 Contributing](#-contributing)
   - [💬 Support](#-support)
@@ -535,7 +535,8 @@ Choose from **30+ built-in themes** or create your own custom theme. Themes appl
 | **TypeScript** | Type-safe development |
 | **Discord.js v14** | Discord API wrapper |
 | **Express.js** | REST API server |
-| **MongoDB** | Database |
+| **PostgreSQL** | Primary database (Supabase) |
+| **Prisma 7.x** | Type-safe ORM |
 | **Redis** | Caching & sessions |
 | **Lavalink v4** | Music streaming |
 
@@ -575,14 +576,52 @@ Choose from **30+ built-in themes** or create your own custom theme. Themes appl
         ┌─────────────────┼─────────────────┐
         ▼                 ▼                 ▼
 ┌───────────────┐ ┌───────────────┐ ┌───────────────┐
-│   MongoDB     │ │    Redis      │ │   Lavalink    │
-│   Database    │ │    Cache      │ │    Music      │
+│  PostgreSQL   │ │    Redis      │ │   Lavalink    │
+│  (Supabase)   │ │    Cache      │ │    Music      │
+│  + Prisma ORM │ │   Sessions    │ │   Streaming   │
 └───────────────┘ └───────────────┘ └───────────────┘
 ```
 
 <br />
 
 ## 📦 Recent Updates
+
+### v3.0.0-beta — MongoDB → PostgreSQL + Prisma Migration
+> Released: December 19, 2025
+
+<details>
+<summary><strong>What's new</strong></summary>
+
+**Major Changes:**
+- 🗄️ Complete database migration from MongoDB to Supabase PostgreSQL
+- 🔷 Prisma 7.x ORM with @prisma/adapter-pg integration
+- 📊 All 43 collections migrated with 99.93% success rate (~7,400+ records)
+- 🏗️ Comprehensive Prisma schema with 40+ models
+
+**Added:**
+- Database: Supabase PostgreSQL as primary database
+- Database: Prisma 7.x ORM with type-safe queries
+- Migration: Complete data migration script with batch processing
+- Migration: Automated MongoDB export analysis and mapping
+- Version System: Pre-release tag support (beta, alpha, rc) in Version Manager
+
+**Improved:**
+- Data Integrity: 99.93% migration success rate (only 5 failed out of 7,400+ records)
+- Performance: PostgreSQL performance optimizations and indexes
+- Code Quality: All database queries migrated to Prisma
+- Dashboard: Updated all TypeScript interfaces for PostgreSQL compatibility
+
+**Changed:**
+- Database: src/database/index.ts now uses PostgreSQL + Redis only
+- API: Session store migrated from MongoStore to Redis
+- Bot: All commands and systems now use Prisma
+
+**Fixed:**
+- Dashboard: Fixed discordId field inconsistencies across 4 pages (22 instances)
+- TypeScript: Added parameter type annotations for strict type checking
+- CI/CD: Added prisma generate step to GitHub Actions workflow
+
+</details>
 
 ### v2.21.0 — AI Chatbot & Version Release System
 > Released: December 15, 2025
@@ -629,36 +668,6 @@ Choose from **30+ built-in themes** or create your own custom theme. Themes appl
 
 </details>
 
-### v2.19.1 — Stability & GitHub Discord Notifications
-> Released: December 12, 2025
-
-<details>
-<summary>View Changes</summary>
-
-- ✅ GitHub: Advanced Discord webhook notifications workflow
-- ✅ GitHub: Reusable Discord notify composite action
-- ✅ Docs: Discord webhook setup guide
-- ✅ TempVoice: Fix unused-variable lint warnings
-- ✅ Versions: Sync package versions across repo
-
-</details>
-
-### v2.19.0 — VotingPage Modernization
-> Released: December 11, 2025
-
-<details>
-<summary>View Changes</summary>
-
-**Added:**
-- New "Bot Setup" tab with copy-ready templates
-- Leaderboard period filter (All Time / Monthly / Weekly)
-- Webhook secret validation for all bot lists
-
-**Improved:**
-- All emojis replaced with Lucide React icons
-- Modern medal icons for top 3 voters
-
-</details>
 
 <br />
 
@@ -668,85 +677,17 @@ Choose from **30+ built-in themes** or create your own custom theme. Themes appl
 
 ## 🏠 Self-Hosting
 
-<details>
-<summary><b>Prerequisites</b></summary>
+**Note:** This project uses git-crypt for sensitive file encryption. Self-hosting requires access to decryption keys.
 
-- Node.js 18+
-- MongoDB 6+
-- Redis (optional, falls back to memory)
-- Lavalink v4 (for music)
-- Discord Bot Token
-- Discord OAuth2 Application
-
-</details>
-
-<details>
-<summary><b>Installation</b></summary>
-
-```bash
-# Clone repository
-git clone https://github.com/XSaitoKungX/Astra-Bot.git
-cd Astra-Bot
-
-# Install dependencies
-npm install
-
-# Configure environment
-cp .env.example .env
-# Edit .env with your credentials
-
-# Start development
-npm run dev:all
-```
-
-</details>
-
-<details>
-<summary><b>Environment Variables</b></summary>
-
-```env
-# Discord
-DISCORD_TOKEN=your_bot_token
-DISCORD_CLIENT_ID=your_client_id
-DISCORD_CLIENT_SECRET=your_client_secret
-
-# Database
-MONGODB_URI=mongodb://localhost:27017/astra
-REDIS_URL=redis://localhost:6379
-
-# Server
-PORT=3001
-DASHBOARD_URL=https://your-domain.com
-
-# Music (Lavalink)
-LAVALINK_HOST=your-lavalink-server.com
-LAVALINK_PORT=443
-LAVALINK_PASSWORD=your_password
-LAVALINK_SECURE=true
-```
-
-</details>
-
-<details>
-<summary><b>Available Scripts</b></summary>
-
-| Command | Description |
-|---------|-------------|
-| `npm run dev` | Start bot + API (development) |
-| `npm run dev:all` | Start bot + API + dashboard |
-| `npm run build` | Build for production |
-| `npm run start` | Start production server |
-| `npm run deploy:commands` | Deploy slash commands |
-| `npm run typecheck` | TypeScript type checking |
-| `npm run lint` | ESLint code linting |
-
-</details>
+For self-hosting inquiries or collaboration, please contact via [Discord](https://discord.gg/KD84DmNA89).
 
 <br />
 
 ## 🤝 Contributing
 
-While the source code is encrypted, contributions are welcome:
+**Note:** Parts of this codebase are encrypted using git-crypt for security purposes.
+
+Contributions are still welcome:
 
 | Type | How to Contribute |
 |------|-------------------|
