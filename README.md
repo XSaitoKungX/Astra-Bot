@@ -12,7 +12,7 @@
 
 <br />
 
-![Version](https://img.shields.io/badge/version-3.0.0--beta-8B5CF6?style=flat-square&logo=github)
+![Version](https://img.shields.io/badge/version-3.0.2--beta-8B5CF6?style=flat-square&logo=github)
 ![Node](https://img.shields.io/badge/node-20+-339933?style=flat-square&logo=node.js&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/typescript-5.x-3178C6?style=flat-square&logo=typescript&logoColor=white)
 ![Discord.js](https://img.shields.io/badge/discord.js-v14-5865F2?style=flat-square&logo=discord&logoColor=white)
@@ -51,6 +51,8 @@
     - [Frontend](#frontend)
     - [Architecture](#architecture)
   - [📦 Recent Updates](#-recent-updates)
+    - [v3.0.2-beta — Landing Page Enhancement \& API Fixes](#v302-beta--landing-page-enhancement--api-fixes)
+    - [v3.0.1-beta — Dashboard Settings Persistence Fix](#v301-beta--dashboard-settings-persistence-fix)
     - [v3.0.0-beta — MongoDB → PostgreSQL + Prisma Migration](#v300-beta--mongodb--postgresql--prisma-migration)
     - [v2.21.0 — AI Chatbot \& Version Release System](#v2210--ai-chatbot--version-release-system)
     - [v2.20.0 — Major Dependency Update \& Tailwind CSS 4.x Migration](#v2200--major-dependency-update--tailwind-css-4x-migration)
@@ -585,6 +587,62 @@ Choose from **30+ built-in themes** or create your own custom theme. Themes appl
 <br />
 
 ## 📦 Recent Updates
+
+### v3.0.2-beta — Landing Page Enhancement & API Fixes
+> Released: December 22, 2025
+
+<details>
+<summary><strong>What's new</strong></summary>
+
+**Fixed:**
+- API: Admin routes path duplication (/api/admin/admin/version → /api/admin/version)
+- Dashboard: User avatar not displaying in Dashboard nav button
+- Landing: Server icons not loading (now uses full CDN URLs from API)
+- Landing: Review avatars not displaying (Discord CDN URL construction)
+- Landing: TypeScript errors in useQuery for commands data
+
+**Added:**
+- Landing: Server banners in Trusted By section
+- Landing: Server descriptions and boost levels
+- Landing: Verified/Partnered badges for servers
+- Landing: Guild name display in review cards
+- Landing: Verified badge for reviews
+- Landing: View All Commands button in Commands section
+- Landing: Expanded footer with Product, Resources, Legal sections
+- Landing: Links to Privacy, Terms, Imprint pages
+
+**Improved:**
+- Landing: ThemeSwitcher with click-based dropdown and categories
+- Landing: Theme names visible in selector
+- Landing: Nav items include AnimePage, StatusPage links
+- Landing: GitHub Stars link in navigation
+- Landing: Review cards with better layout and fallback avatars
+- Landing: Server cards expanded to 280px with more info
+
+</details>
+
+### v3.0.1-beta — Dashboard Settings Persistence Fix
+> Released: December 21, 2025
+
+<details>
+<summary><strong>What's new</strong></summary>
+
+**Fixed:**
+- API: Field name transformation (xxxConfig → xxx) for dashboard compatibility
+- API: guilds.ts validModules list (tickets→ticket, added all modules)
+- API: voting.ts, ai.ts, autoroles.ts, embeds.ts field name corrections
+- Dashboard: LoggingSettingsPage api.post → api.patch for module updates
+- Dashboard: TicketsSettingsPage /modules/tickets → /modules/ticket
+
+**Added:**
+- Prisma: ModerationSuggestion and SentimentData models
+- Bot: AI Moderation system with toxicity detection
+- Bot: Sentiment analysis service
+- Bot: Translation system with /translate command
+- Dashboard: i18n support (German, English, Spanish, French)
+- Dashboard: Language selector component
+
+</details>
 
 ### v3.0.0-beta — MongoDB → PostgreSQL + Prisma Migration
 > Released: December 19, 2025
