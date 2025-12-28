@@ -1,12 +1,12 @@
 # Astra Bot Dashboard - robots.txt
-# https://astra.novaplex.xyz
+# https://astra-bot.app
 
 # Allow all crawlers
 User-agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: https://astra.novaplex.xyz/sitemap.xml
+Sitemap: https://astra-bot.app/sitemap.xml
 
 # Crawl-delay (be nice to servers)
 Crawl-delay: 1
@@ -27,15 +27,17 @@ Disallow: /auth/
 Disallow: /callback
 
 # Block dashboard internal routes (require auth)
-Disallow: /dashboard/*/settings
-Disallow: /dashboard/*/moderation
-Disallow: /dashboard/*/leveling
-Disallow: /dashboard/*/economy
+Disallow: /dashboard/*/
 
-# Allow main pages
+# Allow main public pages
 Allow: /
-Allow: /dashboard
+Allow: /dashboard$
 Allow: /invite
 Allow: /support
 Allow: /docs
 Allow: /commands
+Allow: /features
+Allow: /about
+Allow: /privacy
+Allow: /terms
+Allow: /status

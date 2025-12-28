@@ -12,7 +12,7 @@
 
 <br />
 
-![Version](https://img.shields.io/badge/version-3.0.2--beta-8B5CF6?style=flat-square&logo=github)
+![Version](https://img.shields.io/badge/version-4.0.0--beta-8B5CF6?style=flat-square&logo=github)
 ![Node](https://img.shields.io/badge/node-20+-339933?style=flat-square&logo=node.js&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/typescript-5.x-3178C6?style=flat-square&logo=typescript&logoColor=white)
 ![Discord.js](https://img.shields.io/badge/discord.js-v14-5865F2?style=flat-square&logo=discord&logoColor=white)
@@ -51,6 +51,7 @@
     - [Frontend](#frontend)
     - [Architecture](#architecture)
   - [📦 Recent Updates](#-recent-updates)
+    - [v4.0.0-beta — Complete Dashboard Redesign \& Prisma Migration](#v400-beta--complete-dashboard-redesign--prisma-migration)
     - [v3.0.2-beta — Landing Page Enhancement \& API Fixes](#v302-beta--landing-page-enhancement--api-fixes)
     - [v3.0.1-beta — Dashboard Settings Persistence Fix](#v301-beta--dashboard-settings-persistence-fix)
     - [v3.0.0-beta — MongoDB → PostgreSQL + Prisma Migration](#v300-beta--mongodb--postgresql--prisma-migration)
@@ -587,6 +588,58 @@ Choose from **30+ built-in themes** or create your own custom theme. Themes appl
 <br />
 
 ## 📦 Recent Updates
+
+### v4.0.0-beta — Complete Dashboard Redesign & Prisma Migration
+> Released: December 28, 2025
+
+<details>
+<summary><strong>What's new</strong></summary>
+
+**� Dashboard - Complete Redesign:**
+- Complete UI/UX overhaul of all 40+ dashboard pages
+- Modern, responsive design with improved accessibility
+- Enhanced navigation and user experience
+- New components: Cookie Consent, Cloudflare Turnstile, Seasonal Effects Toggle
+- Improved error handling and loading states across all pages
+- Better mobile responsiveness
+
+**�️ Database - Prisma/PostgreSQL Migration:**
+- Complete migration from MongoDB to PostgreSQL with Prisma ORM
+- All API routes refactored to use Prisma queries
+- BigInt support for large economy values (up to 100 Billion)
+- Improved data serialization with `serializeBigInt` helper
+- New database migrations and schema updates
+
+**� API & Routes - Major Improvements:**
+- All economy routes fixed and optimized
+- New tickets API routes with transcript support
+- Improved error handling and validation
+- Fixed parameter order issues in repository calls
+- Better TypeScript type safety across all endpoints
+
+**🎮 Economy System Enhancements:**
+- Bank capacity increased to 100 Billion
+- Full gambling system: Slots, Coinflip, Dice
+- Work command with 15+ job scenarios
+- Crime system with success/fail mechanics
+- Proper number formatting (K, M, B, T suffixes)
+
+**🤖 Custom Commands System:**
+- Complete custom command system with slash command registration
+- Dashboard management interface
+- Cooldowns and permission restrictions
+
+**� Ticket System:**
+- New ticket transcript page
+- Improved ticket management
+
+**🐛 Bug Fixes:**
+- Fixed 500 errors in work/crime endpoints
+- Fixed Invalid time value errors in cooldowns
+- Fixed BigInt serialization in API responses
+- Fixed various TypeScript errors across codebase
+
+</details>
 
 ### v3.0.2-beta — Landing Page Enhancement & API Fixes
 > Released: December 22, 2025

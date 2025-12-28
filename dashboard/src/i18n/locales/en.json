@@ -7,26 +7,30 @@
     "anime": "Anime",
     "status": "Status",
     "login": "Login",
-    "dashboard": "Dashboard"
+    "dashboard": "Dashboard",
+    "add": "Add Bot"
   },
+  "brand": "Astra",
   "hero": {
-    "badge": "100% Free Forever",
-    "title1": "The Ultimate",
-    "title2": "Discord Bot",
+    "badge": "Next-Gen Discord Bot",
+    "title1": "Elevate Your",
+    "type1": "Discord Server",
+    "type2": "Community",
+    "type3": "Experience",
     "description": "Moderation, Leveling, Economy, Music, Fun, Anime, Tickets & more. Everything you need in one powerful bot.",
-    "addToDiscord": "Add to Discord",
-    "openDashboard": "Open Dashboard",
+    "addBot": "Add to Discord",
+    "dashboard": "Dashboard",
     "stats": {
       "servers": "Servers",
       "users": "Users",
       "commands": "Commands",
       "uptime": "Uptime"
-    },
-    "online": "Online"
+    }
   },
   "features": {
-    "title": "Powerful Features",
-    "subtitle": "Everything you need to manage, engage, and grow your Discord community",
+    "badge": "Features",
+    "title": "Everything You Need",
+    "subtitle": "Powerful features to manage and grow your community",
     "moderation": {
       "title": "Advanced Moderation",
       "description": "Auto-mod, warnings, bans, mutes, and comprehensive logging"
@@ -77,27 +81,22 @@
     }
   },
   "commands": {
+    "badge": "Commands",
     "title": "Powerful Commands",
-    "subtitle": "Slash commands for every need",
+    "subtitle": "Browse our extensive command library",
     "viewAll": "View All Commands",
     "count": "{{count}}+ Commands"
   },
   "servers": {
-    "title": "Trusted by Amazing Communities",
-    "subtitle": "Join thousands of servers already using Astra",
-    "trustedBy": "Trusted By",
-    "trustedByTitle": "Powering Communities Worldwide",
-    "stats": {
-      "activeServers": "Active Servers",
-      "totalUsers": "Total Users",
-      "uptime": "Uptime",
-      "support": "24/7 Support"
-    }
+    "badge": "Trusted By",
+    "title": "Growing Communities",
+    "subtitle": "Join thousands of servers using Astra"
   },
   "reviews": {
-    "badge": "User Reviews",
-    "title": "Loved by Communities",
-    "subtitle": "See what server owners and users say about Astra"
+    "badge": "Reviews",
+    "title": "Loved by Users",
+    "subtitle": "See what our community says",
+    "write": "Write a Review"
   },
   "whyAstra": {
     "title": "Why Astra?",
@@ -129,11 +128,11 @@
     }
   },
   "cta": {
-    "title": "Ready to Transform Your Server?",
-    "subtitle": "Join thousands of communities already using Astra",
-    "addToDiscord": "Add to Discord",
-    "joinCommunity": "Join Community",
-    "freeForever": "Free forever • No credit card required"
+    "title": "Ready to Get Started?",
+    "subtitle": "Add Astra to your server today",
+    "add": "Add to Discord",
+    "community": "Join Community",
+    "free": "Free forever • No credit card required"
   },
   "common": {
     "scroll": "Scroll down",
@@ -142,28 +141,114 @@
     "success": "Success"
   },
   "footer": {
+    "tagline": "The ultimate Discord bot for your community.",
     "product": "Product",
-    "features": "Features",
-    "commands": "Commands",
-    "changelog": "Changelog",
-    "status": "Status",
-    "discord": "Discord",
-    "github": "GitHub",
-    "docs": "Documentation",
-    "support": "Support",
+    "resources": "Resources",
     "legal": "Legal",
-    "privacy": "Privacy Policy",
-    "terms": "Terms of Service",
-    "imprint": "Imprint",
-    "copyright": "© {{year}} Astra Bot. All rights reserved.",
-    "madeWith": "Made with ❤️ by"
+    "rights": "All rights reserved.",
+    "madeWith": "Made with love for Discord communities"
   },
   "theme": {
-    "settings": "Theme Settings",
-    "personalize": "Personalize your dashboard",
-    "dark": "Dark",
-    "light": "Light",
-    "color": "Colorful",
-    "season": "Seasonal"
+    "choose": "Choose Theme"
+  },
+  "demo": {
+    "badge": "Live Demo",
+    "title": "See Astra in Action",
+    "description": "Try out our features interactively",
+    "music": "Music",
+    "mod": "Moderation",
+    "level": "Leveling",
+    "f1": "High-quality music playback",
+    "f2": "Instant moderation",
+    "f3": "Engaging leveling system"
+  },
+  "howItWorks": {
+    "badge": "Getting Started",
+    "title": "Ready in 3 Steps",
+    "subtitle": "Set up Astra in under a minute",
+    "step1": {
+      "title": "Add Astra",
+      "desc": "Click the invite button and select your server"
+    },
+    "step2": {
+      "title": "Configure",
+      "desc": "Use the dashboard to customize everything"
+    },
+    "step3": {
+      "title": "Launch",
+      "desc": "Start using 75+ commands instantly"
+    }
+  },
+  "dashboard": {
+    "badge": "Dashboard",
+    "title": "Powerful Web Dashboard",
+    "subtitle": "Configure everything from your browser",
+    "overview": "Server Overview",
+    "overviewDesc": "Complete server statistics at a glance",
+    "leaderboard": "Leaderboard",
+    "leaderboardDesc": "Track top members and activity",
+    "ai": "AI Chatbot",
+    "aiDesc": "Intelligent assistant powered by AI",
+    "rankCard": "Rank Card Designer",
+    "rankCardDesc": "Create beautiful custom rank cards",
+    "embed": "Embed Creator",
+    "embedDesc": "Design stunning embeds visually",
+    "guilds": "Server Selector",
+    "guildsDesc": "Manage all your servers easily",
+    "open": "Open Dashboard"
+  },
+  "compare": {
+    "badge": "Comparison",
+    "title": "Why Choose Astra?",
+    "subtitle": "See how we compare to other bots",
+    "feature": "Feature",
+    "otherBots": "Other Bots",
+    "astra": "Astra",
+    "music": "Music System",
+    "premium": "Premium",
+    "free": "Free",
+    "levelRoles": "Level Roles",
+    "limited": "Limited",
+    "unlimited": "Unlimited",
+    "commands": "Commands",
+    "dashboard": "Dashboard",
+    "basic": "Basic",
+    "full": "Full-Featured",
+    "themes": "Themes",
+    "price": "Price"
+  },
+  "stats": {
+    "badge": "Performance",
+    "title": "Built for Reliability",
+    "subtitle": "Enterprise-grade infrastructure",
+    "uptime": "Uptime",
+    "latency": "Latency",
+    "support": "Support",
+    "commands": "Commands",
+    "servers": "Servers",
+    "users": "Users"
+  },
+  "tech": {
+    "badge": "Tech Stack",
+    "title": "Modern Technology",
+    "subtitle": "Built with the latest and greatest"
+  },
+  "faq": {
+    "badge": "FAQ",
+    "title": "Questions?",
+    "subtitle": "Find answers here",
+    "q1": "How do I add Astra?",
+    "a1": "Click Add to Discord and select your server.",
+    "q2": "Is Astra free?",
+    "a2": "Yes! All features are free.",
+    "q3": "How to set up moderation?",
+    "a3": "Use /settings or the dashboard.",
+    "q4": "Can I customize leveling?",
+    "a4": "Yes! XP rates, rewards, rank cards.",
+    "q5": "Music sources?",
+    "a5": "YouTube, Spotify, SoundCloud.",
+    "q6": "Is there a web dashboard?",
+    "a6": "Yes! Access it at astra.novaplex.xyz",
+    "support": "Join Support Server"
   }
 }
