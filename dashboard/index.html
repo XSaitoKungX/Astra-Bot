@@ -10,6 +10,22 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
     <!-- ============================================ -->
+    <!-- Content Security Policy -->
+    <!-- ============================================ -->
+    <meta http-equiv="Content-Security-Policy" content="
+      default-src 'self';
+      script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://static.cloudflareinsights.com https://challenges.cloudflare.com https://www.googletagmanager.com https://www.google-analytics.com;
+      style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+      font-src 'self' https://fonts.gstatic.com data:;
+      img-src 'self' data: blob: https: http:;
+      connect-src 'self' https://api.astra-bot.app https://astra-bot.app https://discord.com https://cdn.discordapp.com https://challenges.cloudflare.com https://www.google-analytics.com https://static.cloudflareinsights.com wss:;
+      frame-src 'self' https://challenges.cloudflare.com https://discord.com;
+      object-src 'none';
+      base-uri 'self';
+      form-action 'self' https://discord.com;
+    " />
+    
+    <!-- ============================================ -->
     <!-- Favicon & App Icons (Complete Set) -->
     <!-- ============================================ -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
@@ -58,11 +74,34 @@
     <meta name="MobileOptimized" content="320" />
     
     <!-- Canonical, Sitemap & Alternate URLs -->
-    <link rel="canonical" href="https://astra.novaplex.xyz/" />
-    <link rel="sitemap" type="application/xml" href="https://astra.novaplex.xyz/sitemap.xml" />
-    <link rel="alternate" hreflang="en" href="https://astra.novaplex.xyz/" />
-    <link rel="alternate" hreflang="de" href="https://astra.novaplex.xyz/?lang=de" />
-    <link rel="alternate" hreflang="x-default" href="https://astra.novaplex.xyz/" />
+    <link rel="canonical" href="https://astra-bot.app/" />
+    <link rel="sitemap" type="application/xml" href="https://astra-bot.app/sitemap.xml" />
+    <link rel="alternate" hreflang="en" href="https://astra-bot.app/" />
+    <link rel="alternate" hreflang="de" href="https://astra-bot.app/?lang=de" />
+    <link rel="alternate" hreflang="x-default" href="https://astra-bot.app/" />
+    
+    <!-- ============================================ -->
+    <!-- Performance Optimizations (LCP, Preload) -->
+    <!-- ============================================ -->
+    <!-- DNS Prefetch for external resources -->
+    <link rel="dns-prefetch" href="https://cdn.discordapp.com" />
+    <link rel="dns-prefetch" href="https://discord.com" />
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+    <link rel="dns-prefetch" href="https://static.cloudflareinsights.com" />
+    <link rel="dns-prefetch" href="https://challenges.cloudflare.com" />
+    
+    <!-- Preconnect for critical resources -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://cdn.discordapp.com" crossorigin />
+    
+    <!-- Preload critical assets (LCP optimization) -->
+    <link rel="preload" href="/src/images/astra.png" as="image" type="image/png" />
+    <link rel="preload" href="/src/index.css" as="style" />
+    
+    <!-- Resource hints for faster navigation -->
+    <link rel="prefetch" href="/api/bot/stats/public" as="fetch" crossorigin />
     
     <!-- ============================================ -->
     <!-- Theme & PWA (Progressive Web App) -->
@@ -83,11 +122,11 @@
     <!-- ============================================ -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Astra Bot" />
-    <meta property="og:url" content="https://astra.novaplex.xyz/" />
+    <meta property="og:url" content="https://astra-bot.app/" />
     <meta property="og:title" content="Astra - All-in-One Discord Bot" />
     <meta property="og:description" content="Your all-in-one Discord companion for moderation, leveling, economy, music, anime, and entertainment. Free & easy to use!" />
-    <meta property="og:image" content="https://astra.novaplex.xyz/Astra_Banner.png" />
-    <meta property="og:image:secure_url" content="https://astra.novaplex.xyz/Astra_Banner.png" />
+    <meta property="og:image" content="https://astra-bot.app/Astra_Banner.png" />
+    <meta property="og:image:secure_url" content="https://astra-bot.app/Astra_Banner.png" />
     <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -95,11 +134,11 @@
     <meta property="og:locale" content="en_US" />
     <meta property="og:locale:alternate" content="de_DE" />
     <meta property="og:determiner" content="the" />
-    <meta property="og:updated_time" content="2025-12-09T00:00:00+01:00" />
+    <meta property="og:updated_time" content="2025-12-24T00:00:00+01:00" />
     
     <!-- Article/Profile Tags (for link previews) -->
     <meta property="article:author" content="https://github.com/XSaitoKungX" />
-    <meta property="article:publisher" content="https://novaplex.xyz" />
+    <meta property="article:publisher" content="https://astra-bot.app" />
     <meta property="profile:username" content="AstraBot" />
     
     <!-- ============================================ -->
@@ -110,17 +149,17 @@
     <meta name="twitter:creator" content="@XSaitoKungX" />
     <meta name="twitter:title" content="Astra - All-in-One Discord Bot" />
     <meta name="twitter:description" content="Your all-in-one Discord companion for moderation, leveling, economy, music, anime, and entertainment. Free & easy to use!" />
-    <meta name="twitter:image" content="https://astra.novaplex.xyz/Astra_Banner.png" />
+    <meta name="twitter:image" content="https://astra-bot.app/Astra_Banner.png" />
     <meta name="twitter:image:alt" content="Astra Bot - Beautiful anime-style Discord bot" />
-    <meta name="twitter:domain" content="astra.novaplex.xyz" />
-    <meta name="twitter:url" content="https://astra.novaplex.xyz/" />
+    <meta name="twitter:domain" content="astra-bot.app" />
+    <meta name="twitter:url" content="https://astra-bot.app/" />
     <meta name="twitter:dnt" content="on" />
     <meta name="twitter:widgets:csp" content="on" />
     
     <!-- ============================================ -->
     <!-- Discord Embed (oEmbed + Theme) -->
     <!-- ============================================ -->
-    <link type="application/json+oembed" href="https://astra.novaplex.xyz/oembed.json" title="Astra Bot" />
+    <link type="application/json+oembed" href="https://astra-bot.app/oembed.json" title="Astra Bot" />
     <meta name="theme-color" content="#8B5CF6" data-react-helmet="true" />
     
     <!-- ============================================ -->
@@ -314,11 +353,11 @@
       {
         "@context": "https://schema.org",
         "@type": "WebApplication",
-        "@id": "https://astra.novaplex.xyz/#webapp",
+        "@id": "https://astra-bot.app/#webapp",
         "name": "Astra Bot Dashboard",
         "alternateName": ["Astra", "Astra Discord Bot", "AstraBot"],
         "description": "All-in-one Discord bot management dashboard for moderation, leveling, economy, music, giveaways, tickets, and more. Free to use!",
-        "url": "https://astra.novaplex.xyz",
+        "url": "https://astra-bot.app",
         "applicationCategory": ["UtilityApplication", "SocialNetworkingApplication"],
         "applicationSubCategory": "Discord Bot Dashboard",
         "operatingSystem": "Any",
@@ -326,7 +365,7 @@
         "permissions": "Discord OAuth2",
         "softwareVersion": "2.17.0",
         "datePublished": "2024-03-15",
-        "dateModified": "2025-12-09",
+        "dateModified": "2025-12-24",
         "inLanguage": "en",
         "isAccessibleForFree": true,
         "offers": {
@@ -337,9 +376,9 @@
         },
         "author": {
           "@type": "Organization",
-          "name": "Novaplex",
-          "url": "https://novaplex.xyz",
-          "logo": "https://astra.novaplex.xyz/logo.png"
+          "name": "Astra Bot",
+          "url": "https://astra-bot.app",
+          "logo": "https://astra-bot.app/astra-avatar.png"
         },
         "creator": {
           "@type": "Person",
@@ -368,8 +407,8 @@
           "Custom Commands",
           "Role Management"
         ],
-        "screenshot": "https://astra.novaplex.xyz/Astra_Banner.png",
-        "image": "https://astra.novaplex.xyz/Astra_Banner.png"
+        "screenshot": "https://astra-bot.app/Astra_Banner.png",
+        "image": "https://astra-bot.app/Astra_Banner.png"
       }
     </script>
     
@@ -378,10 +417,10 @@
       {
         "@context": "https://schema.org",
         "@type": "Organization",
-        "@id": "https://novaplex.xyz/#organization",
-        "name": "Novaplex",
-        "url": "https://novaplex.xyz",
-        "logo": "https://astra.novaplex.xyz/logo.png",
+        "@id": "https://astra-bot.app/#organization",
+        "name": "Astra Bot",
+        "url": "https://astra-bot.app",
+        "logo": "https://astra-bot.app/astra-avatar.png",
         "sameAs": [
           "https://github.com/XSaitoKungX",
           "https://discord.gg/KD84DmNA89",
@@ -405,13 +444,13 @@
             "@type": "ListItem",
             "position": 1,
             "name": "Home",
-            "item": "https://astra.novaplex.xyz/"
+            "item": "https://astra-bot.app/"
           },
           {
             "@type": "ListItem",
             "position": 2,
             "name": "Dashboard",
-            "item": "https://astra.novaplex.xyz/dashboard"
+            "item": "https://astra-bot.app/dashboard"
           }
         ]
       }

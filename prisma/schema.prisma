@@ -177,21 +177,36 @@ model UserEconomy {
   userId    String?
   user      User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
   
-  balance      Int      @default(0)
-  bank         Int      @default(0)
-  bankLimit    Int      @default(10000)
+  balance      BigInt   @default(0)
+  bank         BigInt   @default(0)
+  bankLimit    BigInt   @default(100000000000)
   
-  totalEarned  Int      @default(0)
-  totalSpent   Int      @default(0)
+  totalEarned  BigInt   @default(0)
+  totalSpent   BigInt   @default(0)
+  totalWon     BigInt   @default(0)
+  totalLost    BigInt   @default(0)
+  totalGambled BigInt   @default(0)
   
-  // Inventory as JSONB (flexible structure)
+  // Inventory and transactions as JSONB (flexible structure)
   inventory    Json     @default("[]")
+  transactions Json     @default("[]")
+  activeBoosts Json     @default("[]")
   
-  // Cooldowns moved to Redis - but track last times for stats
-  dailyStreak  Int      @default(0)
-  lastDaily    DateTime?
-  lastWork     DateTime?
-  lastRob      DateTime?
+  // Cooldowns - track last times for stats and UI
+  dailyStreak        Int       @default(0)
+  longestDailyStreak Int       @default(0)
+  lastDaily          DateTime?
+  lastWork           DateTime?
+  lastRob            DateTime?
+  lastGamble         DateTime?
+  lastCrime          DateTime?
+  
+  // Gambling stats as JSONB
+  gamblingStats Json @default("{\"totalGames\":0,\"wins\":0,\"losses\":0,\"biggestWin\":0,\"biggestLoss\":0,\"currentWinStreak\":0,\"longestWinStreak\":0}")
+  
+  // Jail system
+  inJail        Boolean   @default(false)
+  jailExpiresAt DateTime?
   
   // Stats
   timesWorked  Int      @default(0)
@@ -819,11 +834,15 @@ model GameConfig {
   
   guildId   String   @unique
   
+  // Channel restrictions
+  gameChannels String[] @default([])
+  
   // Game-specific configs as JSONB
   trivia    Json     @default("{}")
   wordGame  Json     @default("{}")
   rpg       Json     @default("{}")
   pets      Json     @default("{}")
+  achievements Json  @default("{}")
   
   // General settings
   enabled   Boolean  @default(true)
@@ -988,6 +1007,21 @@ model TempVoiceConfig {
   
   // Interface settings
   interface Json     @default("{}")
+  
+  // Waiting room settings
+  waitingRoom Json   @default("{}")
+  
+  // Activity settings
+  activity Json      @default("{}")
+  
+  // Blacklist
+  blacklist Json     @default("{}")
+  
+  // Whitelist
+  whitelist Json     @default("{}")
+  
+  // Logging
+  logging Json       @default("{}")
   
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -1367,4 +1401,80 @@ model Webhook {
   @@index([odiscordId])
   @@index([guildId])
   @@index([status])
+}
+
+// ============================================
+// MUSIC HISTORY
+// ============================================
+
+model MusicHistory {
+  id        String   @id @default(cuid())
+  
+  guildId   String
+  discordId String
+  
+  // Track info
+  title     String
+  author    String
+  uri       String
+  thumbnail String?
+  duration  Int      @default(0)
+  source    String   @default("youtube")
+  
+  // Play info
+  playedAt  DateTime @default(now())
+  
+  @@index([guildId, playedAt(sort: Desc)])
+  @@index([discordId, playedAt(sort: Desc)])
+}
+
+// ============================================
+// MUSIC PLAYLISTS
+// ============================================
+
+model MusicPlaylist {
+  id        String   @id @default(cuid())
+  
+  guildId   String?
+  discordId String
+  
+  name      String
+  description String?
+  isPublic  Boolean  @default(false)
+  
+  // Tracks stored as JSON array
+  tracks    Json     @default("[]")
+  
+  playCount Int      @default(0)
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  @@unique([discordId, name])
+  @@index([discordId])
+  @@index([guildId])
+  @@index([isPublic])
+}
+
+// ============================================
+// MUSIC FAVORITES
+// ============================================
+
+model MusicFavorite {
+  id        String   @id @default(cuid())
+  
+  discordId String
+  
+  // Track info
+  title     String
+  author    String
+  uri       String   @unique
+  thumbnail String?
+  duration  Int      @default(0)
+  source    String   @default("youtube")
+  
+  addedAt   DateTime @default(now())
+  
+  @@unique([discordId, uri])
+  @@index([discordId, addedAt(sort: Desc)])
 }

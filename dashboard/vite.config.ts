@@ -124,6 +124,7 @@ export default defineConfig(({ mode }) => {
       
       // Rollup options
       rollupOptions: {
+        external: [],
         output: {
           // Consistent chunk naming
           chunkFileNames: isProd ? 'assets/[name]-[hash].js' : 'assets/[name].js',
@@ -208,6 +209,7 @@ export default defineConfig(({ mode }) => {
       include: [
         'react',
         'react-dom',
+        'react/jsx-runtime',
         'react-router-dom',
         'framer-motion',
         'lucide-react',
@@ -215,8 +217,14 @@ export default defineConfig(({ mode }) => {
         '@tanstack/react-query',
         'axios',
         'react-hot-toast',
+        'react-markdown',
+        'remark-gfm',
+        'react-syntax-highlighter',
       ],
       exclude: [],
+      esbuildOptions: {
+        jsx: 'automatic',
+      },
     },
     
     // ============================================

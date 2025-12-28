@@ -1,12 +1,12 @@
 {
   "type": "link",
-  "version": "1.0",
+  "version": "3.0.2-beta",
   "title": "Astra - All-in-One Discord Bot",
   "author_name": "Astra Bot",
-  "author_url": "https://astra.novaplex.xyz",
-  "provider_name": "Novaplex",
-  "provider_url": "https://novaplex.xyz",
-  "thumbnail_url": "https://astra.novaplex.xyz/Astra_Banner.png",
+  "author_url": "https://astra-bot.app",
+  "provider_name": "Astra Bot",
+  "provider_url": "https://astra-bot.app",
+  "thumbnail_url": "https://astra-bot.app/Astra_Banner.png",
   "thumbnail_width": 1200,
   "thumbnail_height": 630
 }

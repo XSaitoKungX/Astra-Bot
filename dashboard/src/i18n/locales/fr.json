@@ -7,26 +7,30 @@
     "anime": "Anime",
     "status": "Statut",
     "login": "Connexion",
-    "dashboard": "Tableau de bord"
+    "dashboard": "Tableau de bord",
+    "add": "Ajouter le Bot"
   },
+  "brand": "Astra",
   "hero": {
-    "badge": "100% Gratuit pour Toujours",
-    "title1": "Le Bot Discord",
-    "title2": "Ultime",
+    "badge": "Bot Discord Nouvelle Génération",
+    "title1": "Élevez Votre",
+    "type1": "Serveur Discord",
+    "type2": "Communauté",
+    "type3": "Expérience",
     "description": "Modération, Leveling, Économie, Musique, Fun, Anime, Tickets & plus. Tout ce dont vous avez besoin dans un bot puissant.",
-    "addToDiscord": "Ajouter à Discord",
-    "openDashboard": "Ouvrir le Tableau de bord",
+    "addBot": "Ajouter à Discord",
+    "dashboard": "Tableau de bord",
     "stats": {
       "servers": "Serveurs",
       "users": "Utilisateurs",
       "commands": "Commandes",
       "uptime": "Disponibilité"
-    },
-    "online": "En ligne"
+    }
   },
   "features": {
-    "title": "Fonctionnalités Puissantes",
-    "subtitle": "Tout ce dont vous avez besoin pour gérer, engager et développer votre communauté Discord",
+    "badge": "Fonctionnalités",
+    "title": "Tout ce Dont Vous Avez Besoin",
+    "subtitle": "Fonctionnalités puissantes pour gérer et développer votre communauté",
     "moderation": {
       "title": "Modération Avancée",
       "description": "Auto-mod, avertissements, bannissements, mutes et journalisation complète"
@@ -77,27 +81,22 @@
     }
   },
   "commands": {
+    "badge": "Commandes",
     "title": "Commandes Puissantes",
-    "subtitle": "Commandes slash pour tous les besoins",
+    "subtitle": "Parcourez notre vaste bibliothèque de commandes",
     "viewAll": "Voir Toutes les Commandes",
     "count": "{{count}}+ Commandes"
   },
   "servers": {
-    "title": "Approuvé par des Communautés Incroyables",
-    "subtitle": "Rejoignez des milliers de serveurs utilisant déjà Astra",
-    "trustedBy": "Approuvé par",
-    "trustedByTitle": "Alimentant des Communautés dans le Monde Entier",
-    "stats": {
-      "activeServers": "Serveurs Actifs",
-      "totalUsers": "Utilisateurs Totaux",
-      "uptime": "Disponibilité",
-      "support": "Support 24/7"
-    }
+    "badge": "Approuvé par",
+    "title": "Communautés en Croissance",
+    "subtitle": "Rejoignez des milliers de serveurs utilisant Astra"
   },
   "reviews": {
-    "badge": "Avis des Utilisateurs",
-    "title": "Aimé par les Communautés",
-    "subtitle": "Découvrez ce que les propriétaires de serveurs et les utilisateurs disent d'Astra"
+    "badge": "Avis",
+    "title": "Aimé par les Utilisateurs",
+    "subtitle": "Découvrez ce que dit notre communauté",
+    "write": "Écrire un Avis"
   },
   "whyAstra": {
     "title": "Pourquoi Astra?",
@@ -129,11 +128,11 @@
     }
   },
   "cta": {
-    "title": "Prêt à Transformer Votre Serveur?",
-    "subtitle": "Rejoignez des milliers de communautés utilisant déjà Astra",
-    "addToDiscord": "Ajouter à Discord",
-    "joinCommunity": "Rejoindre la Communauté",
-    "freeForever": "Gratuit pour toujours • Aucune carte de crédit requise"
+    "title": "Prêt à Commencer?",
+    "subtitle": "Ajoutez Astra à votre serveur aujourd'hui",
+    "add": "Ajouter à Discord",
+    "community": "Rejoindre la Communauté",
+    "free": "Gratuit pour toujours • Aucune carte de crédit requise"
   },
   "common": {
     "scroll": "Défiler vers le bas",
@@ -142,28 +141,114 @@
     "success": "Succès"
   },
   "footer": {
+    "tagline": "Le bot Discord ultime pour votre communauté.",
     "product": "Produit",
-    "features": "Fonctionnalités",
-    "commands": "Commandes",
-    "changelog": "Journal des modifications",
-    "status": "Statut",
-    "discord": "Discord",
-    "github": "GitHub",
-    "docs": "Documentation",
-    "support": "Support",
+    "resources": "Ressources",
     "legal": "Légal",
-    "privacy": "Politique de confidentialité",
-    "terms": "Conditions d'utilisation",
-    "imprint": "Mentions légales",
-    "copyright": "© {{year}} Astra Bot. Tous droits réservés.",
-    "madeWith": "Fait avec ❤️ par"
+    "rights": "Tous droits réservés.",
+    "madeWith": "Fait avec amour pour les communautés Discord"
   },
   "theme": {
-    "settings": "Paramètres du Thème",
-    "personalize": "Personnalisez votre tableau de bord",
-    "dark": "Sombre",
-    "light": "Clair",
-    "color": "Coloré",
-    "season": "Saisonnier"
+    "choose": "Choisir le Thème"
+  },
+  "demo": {
+    "badge": "Démo en Direct",
+    "title": "Voyez Astra en Action",
+    "description": "Essayez nos fonctionnalités de manière interactive",
+    "music": "Musique",
+    "mod": "Modération",
+    "level": "Niveau",
+    "f1": "Lecture musicale de haute qualité",
+    "f2": "Modération instantanée",
+    "f3": "Système de niveau engageant"
+  },
+  "howItWorks": {
+    "badge": "Premiers Pas",
+    "title": "Prêt en 3 Étapes",
+    "subtitle": "Configurez Astra en moins d'une minute",
+    "step1": {
+      "title": "Ajouter Astra",
+      "desc": "Cliquez sur le bouton d'invitation et sélectionnez votre serveur"
+    },
+    "step2": {
+      "title": "Configurer",
+      "desc": "Utilisez le tableau de bord pour tout personnaliser"
+    },
+    "step3": {
+      "title": "Lancer",
+      "desc": "Commencez à utiliser 75+ commandes instantanément"
+    }
+  },
+  "dashboard": {
+    "badge": "Tableau de bord",
+    "title": "Tableau de Bord Web Puissant",
+    "subtitle": "Configurez tout depuis votre navigateur",
+    "overview": "Aperçu du Serveur",
+    "overviewDesc": "Statistiques complètes du serveur en un coup d'œil",
+    "leaderboard": "Classement",
+    "leaderboardDesc": "Suivez les meilleurs membres et l'activité",
+    "ai": "Chatbot IA",
+    "aiDesc": "Assistant intelligent alimenté par l'IA",
+    "rankCard": "Concepteur de Cartes de Rang",
+    "rankCardDesc": "Créez de belles cartes de rang personnalisées",
+    "embed": "Créateur d'Embeds",
+    "embedDesc": "Concevez des embeds époustouflants visuellement",
+    "guilds": "Sélecteur de Serveurs",
+    "guildsDesc": "Gérez tous vos serveurs facilement",
+    "open": "Ouvrir le Tableau de Bord"
+  },
+  "compare": {
+    "badge": "Comparaison",
+    "title": "Pourquoi Choisir Astra?",
+    "subtitle": "Voyez comment nous nous comparons aux autres bots",
+    "feature": "Fonctionnalité",
+    "otherBots": "Autres Bots",
+    "astra": "Astra",
+    "music": "Système Musical",
+    "premium": "Premium",
+    "free": "Gratuit",
+    "levelRoles": "Rôles de Niveau",
+    "limited": "Limité",
+    "unlimited": "Illimité",
+    "commands": "Commandes",
+    "dashboard": "Tableau de bord",
+    "basic": "Basique",
+    "full": "Complet",
+    "themes": "Thèmes",
+    "price": "Prix"
+  },
+  "stats": {
+    "badge": "Performance",
+    "title": "Conçu pour la Fiabilité",
+    "subtitle": "Infrastructure de niveau entreprise",
+    "uptime": "Disponibilité",
+    "latency": "Latence",
+    "support": "Support",
+    "commands": "Commandes",
+    "servers": "Serveurs",
+    "users": "Utilisateurs"
+  },
+  "tech": {
+    "badge": "Stack Technologique",
+    "title": "Technologie Moderne",
+    "subtitle": "Construit avec les dernières technologies"
+  },
+  "faq": {
+    "badge": "FAQ",
+    "title": "Des Questions?",
+    "subtitle": "Trouvez des réponses ici",
+    "q1": "Comment ajouter Astra?",
+    "a1": "Cliquez sur Ajouter à Discord et sélectionnez votre serveur.",
+    "q2": "Astra est-il gratuit?",
+    "a2": "Oui! Toutes les fonctionnalités sont gratuites.",
+    "q3": "Comment configurer la modération?",
+    "a3": "Utilisez /settings ou le tableau de bord.",
+    "q4": "Puis-je personnaliser le niveau?",
+    "a4": "Oui! Taux d'XP, récompenses, cartes de rang.",
+    "q5": "Sources musicales?",
+    "a5": "YouTube, Spotify, SoundCloud.",
+    "q6": "Y a-t-il un tableau de bord web?",
+    "a6": "Oui! Accédez-y sur astra.novaplex.xyz",
+    "support": "Rejoindre le Serveur de Support"
   }
 }
