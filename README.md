@@ -12,7 +12,7 @@
 
 <br />
 
-![Version](https://img.shields.io/badge/version-3.1.0--beta-8B5CF6?style=flat-square&logo=github)
+![Version](https://img.shields.io/badge/version-4.0.0--beta-8B5CF6?style=flat-square&logo=github)
 ![Node](https://img.shields.io/badge/node-20+-339933?style=flat-square&logo=node.js&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/typescript-5.x-3178C6?style=flat-square&logo=typescript&logoColor=white)
 ![Discord.js](https://img.shields.io/badge/discord.js-v14-5865F2?style=flat-square&logo=discord&logoColor=white)
@@ -51,7 +51,7 @@
     - [Frontend](#frontend)
     - [Architecture](#architecture)
   - [📦 Recent Updates](#-recent-updates)
-    - [v3.1.0-beta — Economy System Overhaul \& BigInt Migration](#v310-beta--economy-system-overhaul--bigint-migration)
+    - [v4.0.0-beta — Complete Dashboard Redesign \& Prisma Migration](#v400-beta--complete-dashboard-redesign--prisma-migration)
     - [v3.0.2-beta — Landing Page Enhancement \& API Fixes](#v302-beta--landing-page-enhancement--api-fixes)
     - [v3.0.1-beta — Dashboard Settings Persistence Fix](#v301-beta--dashboard-settings-persistence-fix)
     - [v3.0.0-beta — MongoDB → PostgreSQL + Prisma Migration](#v300-beta--mongodb--postgresql--prisma-migration)
@@ -589,49 +589,55 @@ Choose from **30+ built-in themes** or create your own custom theme. Themes appl
 
 ## 📦 Recent Updates
 
-### v3.1.0-beta — Economy System Overhaul & BigInt Migration
+### v4.0.0-beta — Complete Dashboard Redesign & Prisma Migration
 > Released: December 28, 2025
 
 <details>
 <summary><strong>What's new</strong></summary>
 
-**🎮 Economy System - Complete Overhaul:**
-- 💰 Bank capacity increased to 100 Billion (100,000,000,000)
-- 🎰 Full gambling system: Slots, Coinflip, Dice with dashboard integration
-- 💼 Work command with 15+ job scenarios
-- 🔫 Crime system with success/fail mechanics and fines
-- 💸 Transfer/Pay system for user-to-user transactions
-- 📊 Economy statistics and leaderboards on dashboard
-- 🏦 Bank deposit/withdraw with capacity tracking
-- 📈 Gambling stats tracking (wins, losses, streaks)
+**🎨 Dashboard - Complete Redesign:**
+- Complete UI/UX overhaul of all 40+ dashboard pages
+- Modern, responsive design with improved accessibility
+- Enhanced navigation and user experience
+- New components: Cookie Consent, Cloudflare Turnstile, Seasonal Effects Toggle
+- Improved error handling and loading states across all pages
+- Better mobile responsiveness
 
-**🔧 Technical - BigInt Migration:**
-- All economy values now use BigInt for large number support
-- New `BigIntUtils` utility for safe BigInt operations
-- `serializeBigInt` helper for API JSON responses
-- Fixed all BigInt arithmetic in economy routes
+**🗄️ Database - Prisma/PostgreSQL Migration:**
+- Complete migration from MongoDB to PostgreSQL with Prisma ORM
+- All API routes refactored to use Prisma queries
+- BigInt support for large economy values (up to 100 Billion)
+- Improved data serialization with `serializeBigInt` helper
+- New database migrations and schema updates
+
+**🔌 API & Routes - Major Improvements:**
+- All economy routes fixed and optimized
+- New tickets API routes with transcript support
+- Improved error handling and validation
+- Fixed parameter order issues in repository calls
+- Better TypeScript type safety across all endpoints
+
+**🎮 Economy System Enhancements:**
+- Bank capacity increased to 100 Billion
+- Full gambling system: Slots, Coinflip, Dice
+- Work command with 15+ job scenarios
+- Crime system with success/fail mechanics
 - Proper number formatting (K, M, B, T suffixes)
 
-**🎫 Ticket System:**
-- New ticket transcript page with full conversation history
-- Improved ticket management in dashboard
-
-**🤖 Custom Commands:**
+**🤖 Custom Commands System:**
 - Complete custom command system with slash command registration
-- Dashboard management for custom commands
+- Dashboard management interface
 - Cooldowns and permission restrictions
 
-**🎨 Dashboard Improvements:**
-- Economy page with gambling games, work, crime buttons
-- Real-time cooldown timers
-- Improved date validation to prevent crashes
-- Better error handling for API responses
+**🎫 Ticket System:**
+- New ticket transcript page
+- Improved ticket management
 
 **🐛 Bug Fixes:**
-- Fixed parameter order in economyRepository calls
-- Fixed Invalid time value errors in cooldown display
 - Fixed 500 errors in work/crime endpoints
-- Fixed BigInt serialization in all API responses
+- Fixed Invalid time value errors in cooldowns
+- Fixed BigInt serialization in API responses
+- Fixed various TypeScript errors across codebase
 
 </details>
 
