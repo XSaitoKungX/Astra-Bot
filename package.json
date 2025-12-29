@@ -94,7 +94,7 @@
     "@types/json2csv": "^5.0.7",
     "@types/jsonwebtoken": "^9.0.10",
     "@types/ms": "^2.1.0",
-    "@types/node": "^25.0.2",
+    "@types/node": "^25.0.3",
     "@types/passport": "^1.0.17",
     "@types/passport-discord": "^0.1.15",
     "@types/pdfkit": "^0.17.4",
@@ -108,6 +108,6 @@
     "prisma": "^7.2.0",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.49.0"
+    "typescript-eslint": "^8.50.1"
   }
 }
