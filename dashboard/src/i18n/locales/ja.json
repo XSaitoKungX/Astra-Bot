@@ -1,0 +1,254 @@
+{
+  "nav": {
+    "features": "機能",
+    "commands": "コマンド",
+    "servers": "サーバー",
+    "reviews": "レビュー",
+    "anime": "アニメ",
+    "status": "ステータス",
+    "login": "ログイン",
+    "dashboard": "ダッシュボード",
+    "add": "Botを追加"
+  },
+  "brand": "Astra",
+  "hero": {
+    "badge": "次世代Discord Bot",
+    "title1": "あなたの",
+    "type1": "Discordサーバー",
+    "type2": "コミュニティ",
+    "type3": "体験",
+    "description": "モデレーション、レベリング、経済、音楽、お楽しみ、アニメ、チケットなど。必要なすべてが一つの強力なBotに。",
+    "addBot": "Discordに追加",
+    "dashboard": "ダッシュボード",
+    "stats": {
+      "servers": "サーバー",
+      "users": "ユーザー",
+      "commands": "コマンド",
+      "uptime": "稼働時間"
+    }
+  },
+  "features": {
+    "badge": "機能",
+    "title": "必要なすべて",
+    "subtitle": "コミュニティを管理・成長させる強力な機能",
+    "moderation": {
+      "title": "高度なモデレーション",
+      "description": "自動モデレーション、警告、BAN、ミュート、包括的なログ"
+    },
+    "leveling": {
+      "title": "レベルシステム",
+      "description": "XP報酬、カスタムランクカード、ロール報酬、リーダーボード"
+    },
+    "economy": {
+      "title": "経済システム",
+      "description": "仮想通貨、ショップ、ギャンブル、デイリー報酬、取引"
+    },
+    "music": {
+      "title": "音楽プレイヤー",
+      "description": "YouTube、Spotify、SoundCloudからの高品質再生"
+    },
+    "tickets": {
+      "title": "チケットシステム",
+      "description": "カテゴリ、トランスクリプト、スタッフロール付きサポートチケット"
+    },
+    "fun": {
+      "title": "お楽しみ＆ゲーム",
+      "description": "ミニゲーム、ミーム、トリビア、エンターテイメントコマンド"
+    },
+    "tempvoice": {
+      "title": "一時ボイス",
+      "description": "完全制御可能な一時ボイスチャンネルを作成"
+    },
+    "giveaways": {
+      "title": "ギブアウェイ",
+      "description": "要件と複数当選者でギブアウェイを開催"
+    },
+    "analytics": {
+      "title": "アナリティクス",
+      "description": "サーバーの成長、アクティビティ、メンバーエンゲージメントを追跡"
+    },
+    "notifications": {
+      "title": "通知",
+      "description": "YouTube、Twitch、ソーシャルメディア通知"
+    },
+    "welcomer": {
+      "title": "ウェルカムメッセージ",
+      "description": "新メンバー向けのカスタマイズ可能なウェルカムカードとメッセージ"
+    },
+    "automod": {
+      "title": "自動モデレーション",
+      "description": "スパム保護、リンクフィルタリング、ワードブラックリスト"
+    }
+  },
+  "commands": {
+    "badge": "コマンド",
+    "title": "強力なコマンド",
+    "subtitle": "豊富なコマンドライブラリを閲覧",
+    "viewAll": "すべてのコマンドを見る",
+    "count": "{{count}}以上のコマンド"
+  },
+  "servers": {
+    "badge": "信頼",
+    "title": "成長するコミュニティ",
+    "subtitle": "Astraを使用する数千のサーバーに参加"
+  },
+  "reviews": {
+    "badge": "レビュー",
+    "title": "ユーザーに愛されています",
+    "subtitle": "コミュニティの声をご覧ください",
+    "write": "レビューを書く"
+  },
+  "whyAstra": {
+    "title": "なぜAstra？",
+    "subtitle": "コミュニティのために構築",
+    "description": "AstraがあなたのDiscordサーバーに最適な選択である理由を発見",
+    "free": {
+      "title": "100%無料",
+      "description": "すべての機能が無料で利用可能。プレミアムティアや課金壁なし。"
+    },
+    "reliable": {
+      "title": "99.9%稼働率",
+      "description": "最小限のダウンタイムで堅実な信頼性。"
+    },
+    "fast": {
+      "title": "超高速",
+      "description": "コマンドへの即座の応答のための最適化されたパフォーマンス。"
+    },
+    "support": {
+      "title": "24時間サポート",
+      "description": "いつでも助ける準備ができているアクティブなサポートチーム。"
+    },
+    "secure": {
+      "title": "安全＆セキュア",
+      "description": "あなたのデータは暗号化され保護されています。"
+    },
+    "easy": {
+      "title": "使いやすい",
+      "description": "直感的なコマンドと美しいダッシュボード。"
+    }
+  },
+  "cta": {
+    "title": "始める準備はできましたか？",
+    "subtitle": "今日Astraをサーバーに追加",
+    "add": "Discordに追加",
+    "community": "コミュニティに参加",
+    "free": "永久無料・クレジットカード不要"
+  },
+  "common": {
+    "scroll": "下にスクロール",
+    "loading": "読み込み中...",
+    "error": "エラー",
+    "success": "成功"
+  },
+  "footer": {
+    "tagline": "あなたのコミュニティのための究極のDiscord Bot。",
+    "product": "製品",
+    "resources": "リソース",
+    "legal": "法的情報",
+    "rights": "全著作権所有。",
+    "madeWith": "Discordコミュニティへの愛を込めて作成"
+  },
+  "theme": {
+    "choose": "テーマを選択"
+  },
+  "demo": {
+    "badge": "ライブデモ",
+    "title": "Astraの動作を見る",
+    "description": "機能をインタラクティブに試す",
+    "music": "音楽",
+    "mod": "モデレーション",
+    "level": "レベリング",
+    "f1": "高品質な音楽再生",
+    "f2": "即座のモデレーション",
+    "f3": "魅力的なレベルシステム"
+  },
+  "howItWorks": {
+    "badge": "始め方",
+    "title": "3ステップで準備完了",
+    "subtitle": "1分以内にAstraをセットアップ",
+    "step1": {
+      "title": "Astraを追加",
+      "desc": "招待ボタンをクリックしてサーバーを選択"
+    },
+    "step2": {
+      "title": "設定",
+      "desc": "ダッシュボードですべてをカスタマイズ"
+    },
+    "step3": {
+      "title": "開始",
+      "desc": "75以上のコマンドを即座に使用開始"
+    }
+  },
+  "dashboard": {
+    "badge": "ダッシュボード",
+    "title": "強力なWebダッシュボード",
+    "subtitle": "ブラウザからすべてを設定",
+    "overview": "サーバー概要",
+    "overviewDesc": "サーバー統計を一目で確認",
+    "leaderboard": "リーダーボード",
+    "leaderboardDesc": "トップメンバーとアクティビティを追跡",
+    "ai": "AIチャットボット",
+    "aiDesc": "AI搭載のインテリジェントアシスタント",
+    "rankCard": "ランクカードデザイナー",
+    "rankCardDesc": "美しいカスタムランクカードを作成",
+    "embed": "埋め込みクリエイター",
+    "embedDesc": "視覚的に素晴らしい埋め込みをデザイン",
+    "guilds": "サーバー選択",
+    "guildsDesc": "すべてのサーバーを簡単に管理",
+    "open": "ダッシュボードを開く"
+  },
+  "compare": {
+    "badge": "比較",
+    "title": "なぜAstraを選ぶ？",
+    "subtitle": "他のBotとの比較をご覧ください",
+    "feature": "機能",
+    "otherBots": "他のBot",
+    "astra": "Astra",
+    "music": "音楽システム",
+    "premium": "プレミアム",
+    "free": "無料",
+    "levelRoles": "レベルロール",
+    "limited": "制限あり",
+    "unlimited": "無制限",
+    "commands": "コマンド",
+    "dashboard": "ダッシュボード",
+    "basic": "基本",
+    "full": "フル機能",
+    "themes": "テーマ",
+    "price": "価格"
+  },
+  "stats": {
+    "badge": "パフォーマンス",
+    "title": "信頼性のために構築",
+    "subtitle": "エンタープライズグレードのインフラ",
+    "uptime": "稼働率",
+    "latency": "レイテンシ",
+    "support": "サポート",
+    "commands": "コマンド",
+    "servers": "サーバー",
+    "users": "ユーザー"
+  },
+  "tech": {
+    "badge": "技術スタック",
+    "title": "最新技術",
+    "subtitle": "最新・最高の技術で構築"
+  },
+  "faq": {
+    "badge": "FAQ",
+    "title": "質問？",
+    "subtitle": "ここで回答を見つける",
+    "q1": "Astraの追加方法は？",
+    "a1": "Discordに追加をクリックしてサーバーを選択。",
+    "q2": "Astraは無料？",
+    "a2": "はい！すべての機能が無料です。",
+    "q3": "モデレーションの設定方法は？",
+    "a3": "/settingsまたはダッシュボードを使用。",
+    "q4": "レベリングをカスタマイズできる？",
+    "a4": "はい！XPレート、報酬、ランクカード。",
+    "q5": "音楽ソースは？",
+    "a5": "YouTube、Spotify、SoundCloud。",
+    "q6": "Webダッシュボードはある？",
+    "a6": "はい！astra.novaplex.xyzでアクセス",
+    "support": "サポートサーバーに参加"
+  }
+}

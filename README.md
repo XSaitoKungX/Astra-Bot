@@ -7,12 +7,13 @@
 ### The All-in-One Discord Bot That Actually Works
 
 [![Add to Discord](https://img.shields.io/badge/Add%20to%20Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.com/api/oauth2/authorize?client_id=1207805728530763796&permissions=1642787765494&scope=bot%20applications.commands)
-[![Dashboard](https://img.shields.io/badge/Open%20Dashboard-8B5CF6?style=for-the-badge&logo=react&logoColor=white)](https://astra.novaplex.xyz)
+[![Dashboard](https://img.shields.io/badge/Open%20Dashboard-8B5CF6?style=for-the-badge&logo=react&logoColor=white)](https://astra-bot.app)
+[![Documentation](https://img.shields.io/badge/Documentation-22C55E?style=for-the-badge&logo=readthedocs&logoColor=white)](https://astra-bot.app/docs)
 [![Support](https://img.shields.io/badge/Join%20Support-57F287?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/KD84DmNA89)
 
 <br />
 
-![Version](https://img.shields.io/badge/version-4.0.0--beta-8B5CF6?style=flat-square&logo=github)
+![Version](https://img.shields.io/badge/version-4.0.0-8B5CF6?style=flat-square&logo=github)
 ![Node](https://img.shields.io/badge/node-20+-339933?style=flat-square&logo=node.js&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/typescript-5.x-3178C6?style=flat-square&logo=typescript&logoColor=white)
 ![Discord.js](https://img.shields.io/badge/discord.js-v14-5865F2?style=flat-square&logo=discord&logoColor=white)
@@ -51,7 +52,7 @@
     - [Frontend](#frontend)
     - [Architecture](#architecture)
   - [📦 Recent Updates](#-recent-updates)
-    - [v4.0.0-beta — Complete Dashboard Redesign \& Prisma Migration](#v400-beta--complete-dashboard-redesign--prisma-migration)
+    - [v4.0.0 — Multi-Language Support \& Dashboard Fixes](#v400--multi-language-support--dashboard-fixes)
     - [v3.0.2-beta — Landing Page Enhancement \& API Fixes](#v302-beta--landing-page-enhancement--api-fixes)
     - [v3.0.1-beta — Dashboard Settings Persistence Fix](#v301-beta--dashboard-settings-persistence-fix)
     - [v3.0.0-beta — MongoDB → PostgreSQL + Prisma Migration](#v300-beta--mongodb--postgresql--prisma-migration)
@@ -324,7 +325,7 @@ Click the button below to add Astra to your server:
 Open the dashboard and select your server:
 
 ```
-https://astra.novaplex.xyz/dashboard
+https://astra-bot.app/dashboard
 ```
 
 ### 3. Start Using Commands
@@ -343,7 +344,7 @@ All commands use Discord's slash command system:
 
 Astra comes with a **full-featured web dashboard** — no commands needed for configuration. Manage everything from your browser with a beautiful, responsive interface.
 
-**Live Dashboard:** [astra.novaplex.xyz](https://astra.novaplex.xyz)
+**Live Dashboard:** [astra-bot.app](https://astra-bot.app)
 
 <br />
 
@@ -589,55 +590,36 @@ Choose from **30+ built-in themes** or create your own custom theme. Themes appl
 
 ## 📦 Recent Updates
 
-### v4.0.0-beta — Complete Dashboard Redesign & Prisma Migration
+### v4.0.0 — Multi-Language Support & Dashboard Fixes
 > Released: January 5, 2026
 
 <details>
 <summary><strong>What's new</strong></summary>
 
-**🎨 Dashboard - Complete Redesign:**
-- Complete UI/UX overhaul of all 40+ dashboard pages
-- Modern, responsive design with improved accessibility
-- Enhanced navigation and user experience
-- New components: Cookie Consent, Cloudflare Turnstile, Seasonal Effects Toggle
-- Improved error handling and loading states across all pages
-- Better mobile responsiveness
+**🌐 Multi-Language Support:**
+- Complete i18n framework integration with i18next
+- Dashboard language selector with 10 languages: English, German, French, Spanish, Portuguese, Italian, Polish, Russian, Japanese, Korean
+- Dynamic language switching with localStorage persistence
+- Country flag icons for all supported languages
+- Comprehensive translation files for landing page and dashboard
 
-**🗄️ Database - Prisma/PostgreSQL Migration:**
-- Complete migration from MongoDB to PostgreSQL with Prisma ORM
-- All API routes refactored to use Prisma queries
-- BigInt support for large economy values (up to 100 Billion)
-- Improved data serialization with `serializeBigInt` helper
-- New database migrations and schema updates
-
-**🔌 API & Routes - Major Improvements:**
-- All economy routes fixed and optimized
-- New tickets API routes with transcript support
-- Improved error handling and validation
-- Fixed parameter order issues in repository calls
-- Better TypeScript type safety across all endpoints
-
-**🎮 Economy System Enhancements:**
-- Bank capacity increased to 100 Billion
-- Full gambling system: Slots, Coinflip, Dice
-- Work command with 15+ job scenarios
-- Crime system with success/fail mechanics
-- Proper number formatting (K, M, B, T suffixes)
-
-**🤖 Custom Commands System:**
-- Complete custom command system with slash command registration
-- Dashboard management interface
-- Cooldowns and permission restrictions
-
-**🎫 Ticket System:**
-- New ticket transcript page
-- Improved ticket management
+**🔧 Dashboard Fixes:**
+- Fixed server info display in DashboardLayout navbar (server icon, member count)
+- Corrected API endpoint for guild metadata (`/guilds/:id/info`)
+- Fixed Content Security Policy (CSP) configuration for API requests
+- Optimized `connect-src` directive for better browser compatibility
+- Added WebSocket protocol support (`ws:`, `wss:`)
 
 **🐛 Bug Fixes:**
-- Fixed 500 errors in work/crime endpoints
-- Fixed Invalid time value errors in cooldowns
-- Fixed BigInt serialization in API responses
-- Fixed various TypeScript errors across codebase
+- Resolved 503 Service Unavailable error for `/api/bot/stats/public` endpoint
+- Fixed browser-specific API request blocking issues
+- Corrected environment variable configuration for production deployment
+- Temporarily disabled prefetch for debugging purposes
+
+**📝 Documentation:**
+- Updated deployment guide with correct domain configuration
+- Added Cloudflare setup instructions
+- Improved troubleshooting section
 
 </details>
 
@@ -782,7 +764,7 @@ Choose from **30+ built-in themes** or create your own custom theme. Themes appl
 
 <br />
 
-📜 **Full Changelog:** [astra.novaplex.xyz/changelog](https://astra.novaplex.xyz/changelog)
+📜 **Full Changelog:** [astra-bot.app/changelog](https://astra-bot.app/changelog)
 
 <br />
 
@@ -815,10 +797,10 @@ Contributions are still welcome:
 
 | Resource | Link |
 |----------|------|
-| 📚 **Documentation** | [astra.novaplex.xyz/docs](https://astra.novaplex.xyz/docs) |
+| 📚 **Documentation** | [astra-bot.app/docs](https://astra-bot.app/docs) |
 | 💬 **Discord Server** | [discord.gg/KD84DmNA89](https://discord.gg/KD84DmNA89) |
 | 🐛 **Bug Reports** | [GitHub Issues](https://github.com/XSaitoKungX/Astra-Bot/issues) |
-| 📊 **Status Page** | [astra.novaplex.xyz/status](https://astra.novaplex.xyz/status) |
+| 📊 **Status Page** | [astra-bot.app/status](https://astra-bot.app/status) |
 
 </div>
 

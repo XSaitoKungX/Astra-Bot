@@ -1,0 +1,254 @@
+{
+  "nav": {
+    "features": "Funkcje",
+    "commands": "Komendy",
+    "servers": "Serwery",
+    "reviews": "Opinie",
+    "anime": "Anime",
+    "status": "Status",
+    "login": "Zaloguj się",
+    "dashboard": "Panel",
+    "add": "Dodaj Bota"
+  },
+  "brand": "Astra",
+  "hero": {
+    "badge": "Bot Discord Nowej Generacji",
+    "title1": "Ulepsz Swój",
+    "type1": "Serwer Discord",
+    "type2": "Społeczność",
+    "type3": "Doświadczenie",
+    "description": "Moderacja, Poziomy, Ekonomia, Muzyka, Zabawa, Anime, Tickety i więcej. Wszystko czego potrzebujesz w jednym potężnym bocie.",
+    "addBot": "Dodaj do Discorda",
+    "dashboard": "Panel",
+    "stats": {
+      "servers": "Serwery",
+      "users": "Użytkownicy",
+      "commands": "Komendy",
+      "uptime": "Czas działania"
+    }
+  },
+  "features": {
+    "badge": "Funkcje",
+    "title": "Wszystko Czego Potrzebujesz",
+    "subtitle": "Potężne funkcje do zarządzania i rozwijania społeczności",
+    "moderation": {
+      "title": "Zaawansowana Moderacja",
+      "description": "Auto-mod, ostrzeżenia, bany, wyciszenia i pełne logowanie"
+    },
+    "leveling": {
+      "title": "System Poziomów",
+      "description": "Nagrody XP, niestandardowe karty rang, nagrody za role i rankingi"
+    },
+    "economy": {
+      "title": "System Ekonomii",
+      "description": "Wirtualna waluta, sklep, hazard, dzienne nagrody i handel"
+    },
+    "music": {
+      "title": "Odtwarzacz Muzyki",
+      "description": "Wysokiej jakości odtwarzanie z YouTube, Spotify i SoundCloud"
+    },
+    "tickets": {
+      "title": "System Ticketów",
+      "description": "Tickety wsparcia z kategoriami, transkrypcjami i rolami staff"
+    },
+    "fun": {
+      "title": "Zabawa i Gry",
+      "description": "Mini-gry, memy, trivia i komendy rozrywkowe"
+    },
+    "tempvoice": {
+      "title": "Tymczasowy Głos",
+      "description": "Twórz tymczasowe kanały głosowe z pełną kontrolą"
+    },
+    "giveaways": {
+      "title": "Giveaway",
+      "description": "Organizuj giveaway z wymaganiami i wieloma zwycięzcami"
+    },
+    "analytics": {
+      "title": "Analityka",
+      "description": "Śledź wzrost serwera, aktywność i zaangażowanie członków"
+    },
+    "notifications": {
+      "title": "Powiadomienia",
+      "description": "Powiadomienia YouTube, Twitch i mediów społecznościowych"
+    },
+    "welcomer": {
+      "title": "Wiadomości Powitalne",
+      "description": "Konfigurowalne karty i wiadomości powitalne dla nowych członków"
+    },
+    "automod": {
+      "title": "Auto Moderacja",
+      "description": "Ochrona przed spamem, filtrowanie linków i czarne listy słów"
+    }
+  },
+  "commands": {
+    "badge": "Komendy",
+    "title": "Potężne Komendy",
+    "subtitle": "Przeglądaj naszą obszerną bibliotekę komend",
+    "viewAll": "Zobacz Wszystkie Komendy",
+    "count": "{{count}}+ Komend"
+  },
+  "servers": {
+    "badge": "Zaufany przez",
+    "title": "Rosnące Społeczności",
+    "subtitle": "Dołącz do tysięcy serwerów używających Astra"
+  },
+  "reviews": {
+    "badge": "Opinie",
+    "title": "Kochany przez Użytkowników",
+    "subtitle": "Zobacz co mówi nasza społeczność",
+    "write": "Napisz Opinię"
+  },
+  "whyAstra": {
+    "title": "Dlaczego Astra?",
+    "subtitle": "Stworzony dla Społeczności",
+    "description": "Odkryj co sprawia, że Astra jest idealnym wyborem dla twojego serwera Discord",
+    "free": {
+      "title": "100% Darmowy",
+      "description": "Wszystkie funkcje dostępne bez opłat. Bez poziomów premium czy paywalli."
+    },
+    "reliable": {
+      "title": "99.9% Uptime",
+      "description": "Solidna niezawodność z minimalnym czasem przestoju."
+    },
+    "fast": {
+      "title": "Błyskawiczny",
+      "description": "Zoptymalizowana wydajność dla natychmiastowych odpowiedzi na komendy."
+    },
+    "support": {
+      "title": "Wsparcie 24/7",
+      "description": "Aktywny zespół wsparcia gotowy pomóc w każdej chwili."
+    },
+    "secure": {
+      "title": "Bezpieczny i Chroniony",
+      "description": "Twoje dane są szyfrowane i chronione."
+    },
+    "easy": {
+      "title": "Łatwy w Użyciu",
+      "description": "Intuicyjne komendy i piękny panel."
+    }
+  },
+  "cta": {
+    "title": "Gotowy do Startu?",
+    "subtitle": "Dodaj Astra do swojego serwera już dziś",
+    "add": "Dodaj do Discorda",
+    "community": "Dołącz do Społeczności",
+    "free": "Na zawsze darmowy • Bez karty kredytowej"
+  },
+  "common": {
+    "scroll": "Przewiń w dół",
+    "loading": "Ładowanie...",
+    "error": "Błąd",
+    "success": "Sukces"
+  },
+  "footer": {
+    "tagline": "Najlepszy bot Discord dla twojej społeczności.",
+    "product": "Produkt",
+    "resources": "Zasoby",
+    "legal": "Prawne",
+    "rights": "Wszelkie prawa zastrzeżone.",
+    "madeWith": "Stworzone z miłością dla społeczności Discord"
+  },
+  "theme": {
+    "choose": "Wybierz Motyw"
+  },
+  "demo": {
+    "badge": "Demo na Żywo",
+    "title": "Zobacz Astra w Akcji",
+    "description": "Wypróbuj nasze funkcje interaktywnie",
+    "music": "Muzyka",
+    "mod": "Moderacja",
+    "level": "Poziomy",
+    "f1": "Wysokiej jakości odtwarzanie muzyki",
+    "f2": "Natychmiastowa moderacja",
+    "f3": "Angażujący system poziomów"
+  },
+  "howItWorks": {
+    "badge": "Pierwsze Kroki",
+    "title": "Gotowy w 3 Krokach",
+    "subtitle": "Skonfiguruj Astra w mniej niż minutę",
+    "step1": {
+      "title": "Dodaj Astra",
+      "desc": "Kliknij przycisk zaproszenia i wybierz swój serwer"
+    },
+    "step2": {
+      "title": "Skonfiguruj",
+      "desc": "Użyj panelu do dostosowania wszystkiego"
+    },
+    "step3": {
+      "title": "Uruchom",
+      "desc": "Zacznij używać 75+ komend natychmiast"
+    }
+  },
+  "dashboard": {
+    "badge": "Panel",
+    "title": "Potężny Panel Web",
+    "subtitle": "Konfiguruj wszystko z przeglądarki",
+    "overview": "Przegląd Serwera",
+    "overviewDesc": "Pełne statystyki serwera na pierwszy rzut oka",
+    "leaderboard": "Ranking",
+    "leaderboardDesc": "Śledź najlepszych członków i aktywność",
+    "ai": "Chatbot AI",
+    "aiDesc": "Inteligentny asystent napędzany przez AI",
+    "rankCard": "Projektant Kart Rang",
+    "rankCardDesc": "Twórz piękne niestandardowe karty rang",
+    "embed": "Kreator Embedów",
+    "embedDesc": "Projektuj oszałamiające embedy wizualnie",
+    "guilds": "Wybór Serwerów",
+    "guildsDesc": "Zarządzaj wszystkimi serwerami łatwo",
+    "open": "Otwórz Panel"
+  },
+  "compare": {
+    "badge": "Porównanie",
+    "title": "Dlaczego Wybrać Astra?",
+    "subtitle": "Zobacz jak wypadamy w porównaniu z innymi botami",
+    "feature": "Funkcja",
+    "otherBots": "Inne Boty",
+    "astra": "Astra",
+    "music": "System Muzyki",
+    "premium": "Premium",
+    "free": "Darmowy",
+    "levelRoles": "Role Poziomów",
+    "limited": "Ograniczony",
+    "unlimited": "Nieograniczony",
+    "commands": "Komendy",
+    "dashboard": "Panel",
+    "basic": "Podstawowy",
+    "full": "Pełny",
+    "themes": "Motywy",
+    "price": "Cena"
+  },
+  "stats": {
+    "badge": "Wydajność",
+    "title": "Zbudowany dla Niezawodności",
+    "subtitle": "Infrastruktura klasy enterprise",
+    "uptime": "Uptime",
+    "latency": "Opóźnienie",
+    "support": "Wsparcie",
+    "commands": "Komendy",
+    "servers": "Serwery",
+    "users": "Użytkownicy"
+  },
+  "tech": {
+    "badge": "Stack Technologiczny",
+    "title": "Nowoczesna Technologia",
+    "subtitle": "Zbudowany z najnowszymi technologiami"
+  },
+  "faq": {
+    "badge": "FAQ",
+    "title": "Pytania?",
+    "subtitle": "Znajdź odpowiedzi tutaj",
+    "q1": "Jak dodać Astra?",
+    "a1": "Kliknij Dodaj do Discorda i wybierz swój serwer.",
+    "q2": "Czy Astra jest darmowy?",
+    "a2": "Tak! Wszystkie funkcje są darmowe.",
+    "q3": "Jak skonfigurować moderację?",
+    "a3": "Użyj /settings lub panelu.",
+    "q4": "Czy mogę dostosować poziomy?",
+    "a4": "Tak! Stawki XP, nagrody, karty rang.",
+    "q5": "Źródła muzyki?",
+    "a5": "YouTube, Spotify, SoundCloud.",
+    "q6": "Czy jest panel web?",
+    "a6": "Tak! Dostęp na astra.novaplex.xyz",
+    "support": "Dołącz do Serwera Wsparcia"
+  }
+}
