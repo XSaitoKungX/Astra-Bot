@@ -184,12 +184,6 @@ export default defineConfig(({ mode }) => {
               return 'vendor-syntax-langs';
             }
             
-            // i18n
-            if (id.includes('node_modules/i18next') ||
-                id.includes('node_modules/react-i18next')) {
-              return 'vendor-i18n';
-            }
-            
             // Form handling
             if (id.includes('node_modules/react-hook-form') ||
                 id.includes('node_modules/zod') ||
