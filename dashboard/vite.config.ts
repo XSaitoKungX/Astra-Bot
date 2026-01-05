@@ -133,10 +133,12 @@ export default defineConfig(({ mode }) => {
           
           // Manual chunk splitting for optimal caching and smaller bundles
           manualChunks: (id) => {
-            // Core React - rarely changes, cache long
+            // Core React - MUST be first, loaded before everything else
             if (id.includes('node_modules/react/') || 
                 id.includes('node_modules/react-dom/') ||
-                id.includes('node_modules/scheduler/')) {
+                id.includes('node_modules/react-is/') ||
+                id.includes('node_modules/scheduler/') ||
+                id.includes('node_modules/prop-types/')) {
               return 'vendor-react';
             }
             
