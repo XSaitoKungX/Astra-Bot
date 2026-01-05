@@ -22,7 +22,7 @@ We take the security of Astra Bot seriously. If you believe you have found a sec
 
 ### ✅ Please DO
 
-1. **Email us directly** at: `markungphim@gmail.com`
+1. **Email us directly** at: `support@novaplex.xyz`
 2. **Include the following information:**
    - Type of vulnerability (e.g., SQL injection, XSS, authentication bypass)
    - Full paths of source file(s) related to the vulnerability
@@ -44,12 +44,11 @@ We take the security of Astra Bot seriously. If you believe you have found a sec
 We appreciate your efforts to responsibly disclose your findings. While we don't currently offer a bug bounty program, we will:
 
 - Acknowledge your contribution in our release notes (if desired)
-- Add you to our [CONTRIBUTORS.md](CONTRIBUTORS.md) as a security researcher
 - Provide a letter of acknowledgment for your portfolio
 
-## Security Best Practices for Self-Hosting
+## Security Best Practices
 
-If you're self-hosting Astra Bot, please follow these security guidelines:
+Please follow these security guidelines when deploying Astra Bot:
 
 ### Environment Variables
 
@@ -116,7 +115,7 @@ Astra Bot includes several built-in security features:
 
 ## Contact
 
-- **Security Email:** markungphim@gmail.com
+- **Security Email:** support@novaplex.xyz
 - **Discord:** [Support Server](https://discord.gg/KD84DmNA89)
 - **GitHub:** [@XSaitoKungX](https://github.com/XSaitoKungX)
 

@@ -1,10 +1,12 @@
 # 🚀 Astra Bot - Deployment Guide
 
-## Production Setup für Pelican Panel
+> **Note:** This is an internal deployment guide for the Astra Bot production environment.
+
+## Production Setup
 
 ### Server-Informationen
-- **IP:** `65.109.81.53:49154`
-- **Domain:** `https://astra.novaplex.xyz`
+- **Domain:** `https://astra-bot.app`
+- **API Domain:** `https://astra-bot.app/api`
 - **Entry Point:** `dist/index.js`
 
 ---
@@ -12,16 +14,17 @@
 ## 📋 Voraussetzungen
 
 - Node.js 20+
-- MongoDB (Atlas oder selbst gehostet)
-- Nginx Reverse Proxy (bereits konfiguriert)
+- PostgreSQL (Supabase)
+- Redis (Cache & Sessions)
+- Lavalink (Music Streaming)
+- Nginx Reverse Proxy
 
 ---
 
-## 🔧 Installation auf dem Panel
+## 🔧 Installation
 
-### 1. Repository klonen/hochladen
+### 1. Repository Setup
 ```bash
-git clone <repo-url>
 cd Astra-Bot
 ```
 
