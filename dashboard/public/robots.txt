@@ -1,93 +1,16 @@
 # Astra Bot - robots.txt
 # https://astra-bot.app
-# Best Free Discord Bot for Moderation, Leveling, Economy & Music
 
-# Allow all crawlers
 User-agent: *
 Allow: /
-Crawl-delay: 1
-
-# Sitemap location
-Sitemap: https://astra-bot.app/sitemap.xml
-
-# Google specific - no delay for faster indexing
-User-agent: Googlebot
-Allow: /
-Crawl-delay: 0
-
-User-agent: Googlebot-Image
-Allow: /
-
-# Bing specific
-User-agent: Bingbot
-Allow: /
-Crawl-delay: 1
-
-User-agent: msnbot
-Allow: /
-Crawl-delay: 1
-
-# Other search engines
-User-agent: DuckDuckBot
-Allow: /
-
-User-agent: Slurp
-Allow: /
-
-User-agent: Yandex
-Allow: /
-
-# Social media crawlers - important for link previews
-User-agent: facebookexternalhit
-Allow: /
-
-User-agent: Twitterbot
-Allow: /
-
-User-agent: LinkedInBot
-Allow: /
-
-User-agent: Discordbot
-Allow: /
-
-# Block API endpoints from indexing
-User-agent: *
 Disallow: /api/
 Disallow: /auth/
 Disallow: /callback
 Disallow: /oauth/
-
-# Block dashboard internal routes (require auth)
 Disallow: /dashboard/*/settings
 Disallow: /dashboard/*/moderation
 Disallow: /dashboard/*/economy
 Disallow: /dashboard/*/leveling
 Disallow: /dashboard/admin/
 
-# Allow main public pages
-Allow: /
-Allow: /dashboard
-Allow: /invite
-Allow: /support
-Allow: /docs
-Allow: /docs/
-Allow: /commands
-Allow: /features
-Allow: /about
-Allow: /privacy
-Allow: /terms
-Allow: /imprint
-Allow: /status
-Allow: /changelog
-
-# Allow images and assets
-Allow: /*.png$
-Allow: /*.jpg$
-Allow: /*.jpeg$
-Allow: /*.gif$
-Allow: /*.svg$
-Allow: /*.webp$
-Allow: /*.ico$
-
-# Host directive
-Host: https://astra-bot.app
+Sitemap: https://astra-bot.app/sitemap.xml
