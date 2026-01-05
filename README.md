@@ -13,7 +13,7 @@
 
 <br />
 
-![Version](https://img.shields.io/badge/version-4.0.0-8B5CF6?style=flat-square&logo=github)
+![Version](https://img.shields.io/badge/version-4.0.1-8B5CF6?style=flat-square&logo=github)
 ![Node](https://img.shields.io/badge/node-20+-339933?style=flat-square&logo=node.js&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/typescript-5.x-3178C6?style=flat-square&logo=typescript&logoColor=white)
 ![Discord.js](https://img.shields.io/badge/discord.js-v14-5865F2?style=flat-square&logo=discord&logoColor=white)
@@ -590,7 +590,7 @@ Choose from **30+ built-in themes** or create your own custom theme. Themes appl
 
 ## 📦 Recent Updates
 
-### v4.0.0 — Multi-Language Support & Dashboard Fixes
+### v4.0.1 — Multi-Language Support & Dashboard Fixes
 > Released: January 5, 2026
 
 <details>
