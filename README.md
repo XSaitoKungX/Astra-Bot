@@ -590,7 +590,7 @@ Choose from **30+ built-in themes** or create your own custom theme. Themes appl
 ## 📦 Recent Updates
 
 ### v4.0.0-beta — Complete Dashboard Redesign & Prisma Migration
-> Released: December 28, 2025
+> Released: January 5, 2026
 
 <details>
 <summary><strong>What's new</strong></summary>

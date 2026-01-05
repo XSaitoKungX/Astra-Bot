@@ -100,6 +100,9 @@ model Guild {
   premium          Boolean @default(false)
   premiumUntil     DateTime?
   
+  // Bot presence tracking
+  botLeftAt        DateTime?  // When bot was kicked/left - data deleted after 30 days
+  
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   
@@ -257,6 +260,7 @@ model UserVote {
   @@index([discordId])
   @@index([votedAt])
   @@index([reminderSent, reminderScheduledFor])
+  @@index([discordId, platform, votedAt])
 }
 
 // ============================================
@@ -698,6 +702,91 @@ model TempVoiceChannel {
   @@index([guildId])
   @@index([ownerId])
   @@index([channelId])
+}
+
+// ============================================
+// SOCIAL MEDIA NOTIFICATIONS
+// ============================================
+
+model SocialFeed {
+  id        String   @id @default(cuid())
+  
+  guildId   String
+  
+  // Platform: twitch, youtube, tiktok, instagram, twitter
+  platform  String
+  
+  // Platform-specific account identifier
+  accountId       String   // Platform user ID
+  accountName     String   // Display name
+  accountUsername String   // @username or handle
+  accountAvatar   String?  // Profile picture URL
+  
+  // Discord notification settings
+  channelId       String   // Discord channel to post to
+  roleToMention   String?  // Role ID to ping
+  
+  // Notification types enabled
+  notifyLive      Boolean @default(true)   // Twitch/YouTube live
+  notifyVideo     Boolean @default(true)   // YouTube/TikTok videos
+  notifyPost      Boolean @default(true)   // Instagram/Twitter posts
+  notifyStory     Boolean @default(false)  // Instagram stories
+  notifyClip      Boolean @default(false)  // Twitch clips
+  
+  // Custom message templates (supports variables)
+  messageTemplate String?  // Custom announcement message
+  embedColor      String   @default("#5865F2")
+  
+  // State tracking
+  lastPostId      String?  // Last known post/video ID
+  lastLiveId      String?  // Last stream ID (for Twitch)
+  lastChecked     DateTime @default(now())
+  lastNotified    DateTime?
+  
+  // Platform-specific data as JSONB
+  metadata        Json     @default("{}")
+  
+  // Status
+  enabled         Boolean  @default(true)
+  errorCount      Int      @default(0)
+  lastError       String?
+  
+  createdBy       String   // Discord user who added this
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  
+  @@unique([guildId, platform, accountId])
+  @@index([guildId])
+  @@index([platform])
+  @@index([enabled, lastChecked])
+}
+
+model SocialFeedLog {
+  id        String   @id @default(cuid())
+  
+  guildId   String
+  feedId    String
+  
+  // What was posted
+  platform    String
+  contentType String   // live, video, post, story, clip
+  contentId   String   // Platform content ID
+  contentUrl  String
+  title       String?
+  thumbnail   String?
+  
+  // Discord message info
+  messageId   String?
+  channelId   String
+  
+  // Metrics at time of notification
+  metrics     Json     @default("{}")
+  
+  notifiedAt  DateTime @default(now())
+  
+  @@index([guildId])
+  @@index([feedId])
+  @@index([notifiedAt])
 }
 
 // ============================================
