@@ -42,17 +42,31 @@
     - [2. Configure via Dashboard](#2-configure-via-dashboard)
     - [3. Start Using Commands](#3-start-using-commands)
   - [🖥️ Dashboard](#️-dashboard)
-    - [Landing Page](#landing-page)
-    - [Theme System](#theme-system)
-    - [Dashboard Pages](#dashboard-pages)
-    - [Guild Management](#guild-management)
+    - [🌐 Landing Page \& Public Pages](#-landing-page--public-pages)
+    - [📚 Documentation](#-documentation)
+    - [🎨 Theme System](#-theme-system)
+    - [🌍 Multi-Language Support](#-multi-language-support)
+    - [📊 Dashboard Overview](#-dashboard-overview)
+    - [📈 Analytics \& Insights](#-analytics--insights)
+    - [👥 Member Management](#-member-management)
+    - [🤖 AI System](#-ai-system)
+    - [⭐ Leveling System](#-leveling-system)
+    - [💰 Economy System](#-economy-system)
+    - [🛡️ Moderation \& AutoMod](#️-moderation--automod)
+    - [🎫 Ticket System](#-ticket-system)
+    - [🎵 Music Player](#-music-player)
+    - [🔔 Welcome \& Notifications](#-welcome--notifications)
+    - [🎁 Giveaways \& Rewards](#-giveaways--rewards)
+    - [🎭 Role Management](#-role-management)
+    - [🔊 TempVoice System](#-tempvoice-system)
+    - [🛠️ Tools \& Utilities](#️-tools--utilities)
   - [💻 Command Examples](#-command-examples)
   - [🛠️ Tech Stack](#️-tech-stack)
     - [Backend](#backend)
     - [Frontend](#frontend)
     - [Architecture](#architecture)
   - [📦 Recent Updates](#-recent-updates)
-    - [v4.0.0 — Multi-Language Support \& Dashboard Fixes](#v400--multi-language-support--dashboard-fixes)
+    - [v4.0.1 — Multi-Language Support \& Dashboard Fixes](#v401--multi-language-support--dashboard-fixes)
     - [v3.0.2-beta — Landing Page Enhancement \& API Fixes](#v302-beta--landing-page-enhancement--api-fixes)
     - [v3.0.1-beta — Dashboard Settings Persistence Fix](#v301-beta--dashboard-settings-persistence-fix)
     - [v3.0.0-beta — MongoDB → PostgreSQL + Prisma Migration](#v300-beta--mongodb--postgresql--prisma-migration)
@@ -348,77 +362,327 @@ Astra comes with a **full-featured web dashboard** — no commands needed for co
 
 <br />
 
-### Landing Page
+### 🌐 Landing Page & Public Pages
 
 <details>
 <summary><b>View Screenshots</b></summary>
 
-<img src="https://github.com/user-attachments/assets/62ea2102-0e8a-4fde-b9bc-d59541c6f528" alt="Landing Page Hero" width="100%" />
-<img src="https://github.com/user-attachments/assets/acd084dd-89f1-43ef-b49f-7024f1cc9523" alt="Landing Page Features" width="100%" />
-<img src="https://github.com/user-attachments/assets/01fa8947-ba7e-4ea4-ab62-01351e0a26b0" alt="Landing Page Commands" width="100%" />
-<img src="https://github.com/user-attachments/assets/70c91bc2-1eaf-44e9-a145-af71e0c6abe0" alt="Landing Page Stats" width="100%" />
-<img src="https://github.com/user-attachments/assets/a61486be-4cc1-43e9-9c61-86fbbd43174b" alt="Landing Page Reviews" width="100%" />
-<img src="https://github.com/user-attachments/assets/5aef1794-6f37-4558-ab08-08672afaff63" alt="Landing Page Footer" width="100%" />
+<img src="https://github.com/user-attachments/assets/12eb6ab8-c51c-4452-ad91-f58a3ca91dc4" alt="Landing Page" width="100%" />
+
+| Page | Preview |
+|------|---------|
+| **Commands Page** | <img src="https://github.com/user-attachments/assets/9fb9f23e-2446-48f7-8491-aec7ca0ac158" alt="Commands Page" width="600" /> |
+| **Anime Page** | <img src="https://github.com/user-attachments/assets/979108b7-3632-4fdb-ba1a-acde4829e3ab" alt="Anime Page" width="600" /> |
+| **Anime Card** | <img src="https://github.com/user-attachments/assets/b086741c-49cc-413d-93a6-aa02d178ec04" alt="Anime Card" width="400" /> |
+| **Status Page** | <img src="https://github.com/user-attachments/assets/15ffa873-1bef-44e9-a8e3-8dc4673ecaa9" alt="Status Page" width="600" /> |
 
 </details>
 
 <br />
 
-### Theme System
-
-Choose from **30+ built-in themes** or create your own custom theme. Themes apply across the entire dashboard.
-
-<details>
-<summary><b>View Theme Examples</b></summary>
-
-| Theme | Preview |
-|-------|---------|
-| **Midnight** | <img src="https://github.com/user-attachments/assets/5f7e2a0a-0f80-40b6-95a1-e55006976b47" alt="Midnight Theme" width="600" /> |
-| **Abyss** | <img src="https://github.com/user-attachments/assets/462248c4-8997-4814-a2dc-22a80579f233" alt="Abyss Theme" width="600" /> |
-| **Obsidian** | <img src="https://github.com/user-attachments/assets/60fa2a98-8d64-4a58-ad14-6f8568919bf2" alt="Obsidian Theme" width="600" /> |
-| **Sakura** | <img src="https://github.com/user-attachments/assets/3eb59a6e-38d6-42e1-91fa-80df0382bdc3" alt="Sakura Theme" width="600" /> |
-| **Cream** | <img src="https://github.com/user-attachments/assets/9464eed9-519b-4032-9fad-00a0c84f4002" alt="Cream Theme" width="600" /> |
-| **Lavender** | <img src="https://github.com/user-attachments/assets/8671f132-7d3e-4bb8-85aa-b31da9e42e69" alt="Lavender Theme" width="600" /> |
-| **Matrix** | <img src="https://github.com/user-attachments/assets/7ff52416-4e89-4d38-8463-fb0ce8983aa3" alt="Matrix Theme" width="600" /> |
-| **Autumn** | <img src="https://github.com/user-attachments/assets/2e216fef-4050-485b-a28a-d6f376fb9f6b" alt="Autumn Theme" width="600" /> |
-
-*...and 22+ more themes including seasonal themes (Christmas, Halloween, Valentine's Day) + custom theme creator!*
-
-</details>
-
-<br />
-
-### Dashboard Pages
+### 📚 Documentation
 
 <details>
 <summary><b>View Screenshots</b></summary>
 
 | Page | Preview |
 |------|---------|
-| **Guild Selector** | <img src="https://github.com/user-attachments/assets/cff93e44-2cfd-4d8b-8a82-530d7c0c26de" alt="Guild Selector" width="600" /> |
-| **Changelog** | <img src="https://github.com/user-attachments/assets/8907d652-b48a-4a88-b129-1d6e0429c5e9" alt="Changelog" width="600" /> |
-| **Version Details** | <img src="https://github.com/user-attachments/assets/e4580e07-5ed5-46f1-ba6e-d8e2a55c3e00" alt="Version Details" width="600" /> |
+| **Docs Intro** | <img src="https://github.com/user-attachments/assets/4c97b075-6a3e-43a5-8213-600a5bbcae27" alt="Docs Intro" width="600" /> |
+| **Docs Features** | <img src="https://github.com/user-attachments/assets/9503940a-c6bb-4996-84b2-b80741a58674" alt="Docs Features" width="600" /> |
+| **Docs Commands** | <img src="https://github.com/user-attachments/assets/21e5371e-4da8-45a0-b22d-3c7aa48b1b4d" alt="Docs Commands" width="600" /> |
+| **Docs Guides** | <img src="https://github.com/user-attachments/assets/ef6f5fdc-42a9-4f78-8938-2e196a005af1" alt="Docs Guides" width="600" /> |
+| **Getting Started** | <img src="https://github.com/user-attachments/assets/2fe8eb51-c922-45fb-b32f-2643c258d16f" alt="Getting Started" width="600" /> |
+| **API Documentation** | <img src="https://github.com/user-attachments/assets/28b5455a-ab3c-4d6a-baa4-50abb50b06f6" alt="API Docs" width="600" /> |
 
 </details>
 
 <br />
 
-### Guild Management
+### 🎨 Theme System
+
+Choose from **30+ built-in themes** or create your own custom theme. Themes apply across the entire dashboard.
+
+<img src="https://github.com/user-attachments/assets/92f67776-55a1-4e9c-9273-2bcb54633f27" alt="Available Themes" width="300" />
+
+<details>
+<summary><b>Dark Themes</b></summary>
+
+| Theme | Preview |
+|-------|---------|
+| **Slate** | <img src="https://github.com/user-attachments/assets/dfd2d638-0414-4725-8c2d-1a0cfade99c2" alt="Dark Slate" width="600" /> |
+| **Midnight** | <img src="https://github.com/user-attachments/assets/712d5250-2c15-4541-a2f7-3746fe3e6a48" alt="Dark Midnight" width="600" /> |
+| **Dracula** | <img src="https://github.com/user-attachments/assets/4ce870a8-4c03-4c7e-ab51-7ca1038739d2" alt="Dark Dracula" width="600" /> |
+| **Nord** | <img src="https://github.com/user-attachments/assets/b5117d8e-d165-4708-ac4d-1750f20e9252" alt="Dark Nord" width="600" /> |
+| **Monokai** | <img src="https://github.com/user-attachments/assets/927031f4-3456-46d3-8eb1-ed65ba6fa2b8" alt="Dark Monokai" width="600" /> |
+| **Abyss** | <img src="https://github.com/user-attachments/assets/b01539f7-6293-404b-91bf-508c3945956a" alt="Dark Abyss" width="600" /> |
+| **Obsidian** | <img src="https://github.com/user-attachments/assets/01021d30-3686-4d4a-8fe7-994b431e646d" alt="Dark Obsidian" width="600" /> |
+| **Charcoal** | <img src="https://github.com/user-attachments/assets/9f105219-e108-45d2-a7a7-4693bff038f6" alt="Dark Charcoal" width="600" /> |
+
+</details>
+
+<details>
+<summary><b>Light Themes</b></summary>
+
+| Theme | Preview |
+|-------|---------|
+| **Snow** | <img src="https://github.com/user-attachments/assets/00329026-99aa-473c-b8e5-f6ff2304bdf1" alt="Light Snow" width="600" /> |
+| **Sakura** | <img src="https://github.com/user-attachments/assets/d41bf4e3-e106-4b02-a433-90bee56f4b68" alt="Light Sakura" width="600" /> |
+| **Latte** | <img src="https://github.com/user-attachments/assets/9dde5b6a-8410-46c1-86b6-57737af8b922" alt="Light Latte" width="600" /> |
+| **Honey** | <img src="https://github.com/user-attachments/assets/d8065f0a-62c7-4a5f-820d-081a13542daa" alt="Light Honey" width="600" /> |
+| **Lavender** | <img src="https://github.com/user-attachments/assets/193b7407-5bb0-4445-a154-3a7587505845" alt="Light Lavender" width="600" /> |
+| **Mint** | <img src="https://github.com/user-attachments/assets/70286f34-a95d-4e9d-b01b-713045559b3f" alt="Light Mint" width="600" /> |
+
+</details>
+
+<details>
+<summary><b>Colorful Themes</b></summary>
+
+| Theme | Preview |
+|-------|---------|
+| **Royal** | <img src="https://github.com/user-attachments/assets/d3a24228-8570-4389-ac88-6e71eae481b0" alt="Colorful Royal" width="600" /> |
+| **Sunset** | <img src="https://github.com/user-attachments/assets/f6e80ed8-82ae-4620-b2b4-99d189fb6710" alt="Colorful Sunset" width="600" /> |
+| **Ocean** | <img src="https://github.com/user-attachments/assets/c09d4bec-e0d7-4955-9a85-c849b94d0b70" alt="Colorful Ocean" width="600" /> |
+| **Forest** | <img src="https://github.com/user-attachments/assets/326a34f2-385a-40fa-8b18-7f07e137aa1c" alt="Colorful Forest" width="600" /> |
+| **Neon** | <img src="https://github.com/user-attachments/assets/a6d561fc-20f2-4790-b2bb-8c3900e32071" alt="Colorful Neon" width="600" /> |
+| **Aurora** | <img src="https://github.com/user-attachments/assets/904a0860-d5a0-49d2-8b15-0feb23e4c73b" alt="Colorful Aurora" width="600" /> |
+| **Ember** | <img src="https://github.com/user-attachments/assets/0d5b2dd4-3e34-4ac0-bae6-4eeefc6ebeee" alt="Colorful Ember" width="600" /> |
+| **Cosmos** | <img src="https://github.com/user-attachments/assets/91d80a3f-a361-4e6c-baa6-1087bb2246e8" alt="Colorful Cosmos" width="600" /> |
+| **Matrix** | <img src="https://github.com/user-attachments/assets/49598a46-296d-456f-b883-bdca323b7bd3" alt="Colorful Matrix" width="600" /> |
+
+</details>
+
+*...plus 8 seasonal themes (Christmas, Halloween, Valentine's Day, etc.) + custom theme creator!*
+
+<br />
+
+### 🌍 Multi-Language Support
+
+<img src="https://github.com/user-attachments/assets/8207b29c-2876-4cc2-ba26-4354539dd783" alt="Available Languages" width="200" />
+
+<br />
+
+### 📊 Dashboard Overview
+
+<details>
+<summary><b>View Screenshots</b></summary>
+
+| Page | Preview |
+|------|---------|
+| **Dashboard Overview** | <img src="https://github.com/user-attachments/assets/253a514b-9034-4b3a-985d-08e83431b884" alt="Dashboard Overview" width="600" /> |
+| **Server Selection** | <img src="https://github.com/user-attachments/assets/bab84311-acf2-4b22-a21d-e2f3d5e97b47" alt="Dashboard Servers" width="600" /> |
+| **Changelog** | <img src="https://github.com/user-attachments/assets/c1f3aabc-abe8-400a-b01e-e5eeff8491eb" alt="Changelog" width="600" /> |
+| **User Profile** | <img src="https://github.com/user-attachments/assets/018a39fc-a380-4fdb-b932-c295b3522ee3" alt="User Profile" width="600" /> |
+| **Dashboard Navigation** | <img src="https://github.com/user-attachments/assets/f1d72556-5caa-4c68-9327-4d04bcdcc4d9" alt="Dashboard Nav" width="300" /> |
+
+</details>
+
+<br />
+
+### 📈 Analytics & Insights
+
+<details>
+<summary><b>View Screenshots</b></summary>
+
+| Page | Preview |
+|------|---------|
+| **Analytics Overview** | <img src="https://github.com/user-attachments/assets/3c8ff810-6a94-4293-9387-67d83172b749" alt="Analytics Overview" width="600" /> |
+| **Activity Analytics** | <img src="https://github.com/user-attachments/assets/230489d8-334c-493d-899f-2a2dcf1b1107" alt="Analytics Activity" width="600" /> |
+| **Channel Analytics** | <img src="https://github.com/user-attachments/assets/5f67ed50-f45c-45af-a944-e00081c66bbe" alt="Analytics Channels" width="600" /> |
+| **Command Analytics** | <img src="https://github.com/user-attachments/assets/a1214713-8a63-470f-ae5b-09c6dc186c1a" alt="Analytics Commands" width="600" /> |
+| **Advanced Insights** | <img src="https://github.com/user-attachments/assets/4b2ec9b2-115d-4e96-99d7-aff8f8411836" alt="Advanced Insights" width="600" /> |
+| **Retention Analysis** | <img src="https://github.com/user-attachments/assets/ff3eac14-266d-464f-ab87-fd663c5aa489" alt="Retention" width="600" /> |
+| **Predictions** | <img src="https://github.com/user-attachments/assets/af95c776-d494-4180-906d-2afe5373c5f2" alt="Predictions" width="600" /> |
+| **Engagement** | <img src="https://github.com/user-attachments/assets/ab1fd261-52bd-4016-9821-48c7a3e33f67" alt="Engagement" width="600" /> |
+
+</details>
+
+<br />
+
+### 👥 Member Management
+
+<details>
+<summary><b>View Screenshots</b></summary>
+
+| Page | Preview |
+|------|---------|
+| **Members List** | <img src="https://github.com/user-attachments/assets/f066296e-25e0-4894-a20d-7e05974f4ecc" alt="Members Page" width="600" /> |
+| **Member Details** | <img src="https://github.com/user-attachments/assets/44b5674d-f7c9-4cc2-9149-ec787dbec74d" alt="Member Details" width="600" /> |
+| **Role Management** | <img src="https://github.com/user-attachments/assets/318ec9fe-833b-4dde-ac47-5aeec8d459a3" alt="Roles" width="600" /> |
+
+</details>
+
+<br />
+
+### 🤖 AI System
+
+<details>
+<summary><b>View Screenshots</b></summary>
+
+| Page | Preview |
+|------|---------|
+| **AI Settings #1** | <img src="https://github.com/user-attachments/assets/3db0de61-b8f9-4963-a0af-6a29fdf703e9" alt="AI Settings 1" width="600" /> |
+| **AI Settings #2** | <img src="https://github.com/user-attachments/assets/3a4f21b2-28a8-4e0c-a4df-30f25a443c49" alt="AI Settings 2" width="600" /> |
+| **AI Chat** | <img src="https://github.com/user-attachments/assets/35b167c9-0366-49c9-9326-0800ff5e7f92" alt="AI Chat" width="600" /> |
+
+</details>
+
+<br />
+
+### ⭐ Leveling System
+
+<details>
+<summary><b>View Screenshots</b></summary>
+
+| Page | Preview |
+|------|---------|
+| **Leaderboard** | <img src="https://github.com/user-attachments/assets/8b12e569-e0c7-47ba-890c-053e1c8d67f7" alt="Leaderboard" width="600" /> |
+| **General Settings #1** | <img src="https://github.com/user-attachments/assets/4bec50d0-bf79-417f-91a3-92ae9e930002" alt="Leveling General 1" width="600" /> |
+| **General Settings #2** | <img src="https://github.com/user-attachments/assets/d32b88e8-04da-4ad2-ada3-cf01c9e97a01" alt="Leveling General 2" width="600" /> |
+| **XP Boosts** | <img src="https://github.com/user-attachments/assets/a23d5d60-ee68-4daf-a9e6-e37b18a1853d" alt="XP Boosts" width="600" /> |
+| **Exclusions** | <img src="https://github.com/user-attachments/assets/f499c32d-9f31-4101-a6fa-99728fc341a1" alt="Exclusions" width="600" /> |
+| **Voice XP** | <img src="https://github.com/user-attachments/assets/124c1b64-c26c-4e1c-a1ef-ec66d5d70d96" alt="Voice XP" width="600" /> |
+| **Level Card** | <img src="https://github.com/user-attachments/assets/618c38a9-533b-4b4e-951d-4b3505e8d1fe" alt="Level Card" width="600" /> |
+| **Card Themes** | <img src="https://github.com/user-attachments/assets/71d1a62f-58dc-4450-8269-763c6292e8f3" alt="Card Themes" width="600" /> |
+| **Role Rewards** | <img src="https://github.com/user-attachments/assets/a7aaf22b-efa3-475c-a525-2dab67f770db" alt="Role Rewards" width="600" /> |
+
+</details>
+
+<br />
+
+### 💰 Economy System
+
+<details>
+<summary><b>View Screenshots</b></summary>
+
+| Page | Preview |
+|------|---------|
+| **Economy Overview** | <img src="https://github.com/user-attachments/assets/589ca305-c67a-483c-9c21-00847bf478cc" alt="Economy Overview" width="600" /> |
+| **Bank Settings** | <img src="https://github.com/user-attachments/assets/97bce205-96c4-4dee-9a90-728b1e46dab9" alt="Economy Bank" width="600" /> |
+| **Shop Overview** | <img src="https://github.com/user-attachments/assets/39292c19-21f5-4bbd-ba47-6aa68b3aab5f" alt="Shop Overview" width="600" /> |
+| **Create Item** | <img src="https://github.com/user-attachments/assets/ff14c1ac-4c00-414f-9b87-13e786d6fae6" alt="Create Item" width="600" /> |
+
+</details>
+
+<br />
+
+### 🛡️ Moderation & AutoMod
+
+<details>
+<summary><b>View Screenshots</b></summary>
+
+| Page | Preview |
+|------|---------|
+| **General Settings** | <img src="https://github.com/user-attachments/assets/671e0031-5a00-4b9e-8cea-c1b7e7dd39d8" alt="Moderation General" width="600" /> |
+| **Auto Punishment** | <img src="https://github.com/user-attachments/assets/43f4404d-da55-4c60-831d-a7f1a7d2a2d7" alt="Auto Punishment" width="600" /> |
+| **Roles & Channels** | <img src="https://github.com/user-attachments/assets/35a09e64-ae05-4e67-8f10-2e01310e0f95" alt="Roles Channels" width="600" /> |
+| **Activity Log** | <img src="https://github.com/user-attachments/assets/59eb0f38-b351-4f3c-8366-7c8af6fcf83e" alt="Activity" width="600" /> |
+| **AutoMod Protection** | <img src="https://github.com/user-attachments/assets/63e39e8f-6168-4f5b-a519-ad6e801ca55c" alt="AutoMod Protection" width="600" /> |
+| **Word Filter** | <img src="https://github.com/user-attachments/assets/03be46ed-f0dc-4e11-92b6-78955a7e588e" alt="Word Filter" width="600" /> |
+| **Exceptions** | <img src="https://github.com/user-attachments/assets/a1f597b7-12b0-44fb-872d-e96ff75e6473" alt="Exceptions" width="600" /> |
+| **Audit Log** | <img src="https://github.com/user-attachments/assets/d298251c-e52f-4525-acde-d745692d96d6" alt="Audit Log" width="600" /> |
+| **Logging** | <img src="https://github.com/user-attachments/assets/19d278f0-a4b1-4cd0-86fb-09b97418480a" alt="Logging" width="600" /> |
+
+</details>
+
+<br />
+
+### 🎫 Ticket System
+
+<details>
+<summary><b>View Screenshots</b></summary>
+
+| Page | Preview |
+|------|---------|
+| **Ticket Settings** | <img src="https://github.com/user-attachments/assets/311673d6-4a2b-4cc6-bbdb-b1cecbce9071" alt="Ticket System" width="600" /> |
+| **Ticket Messages** | <img src="https://github.com/user-attachments/assets/46baeac4-4699-4490-a3c0-4d69d8a5a754" alt="Ticket Messages" width="600" /> |
+| **Advanced Settings** | <img src="https://github.com/user-attachments/assets/9309ce12-3e7f-4705-a1a6-610ec4e59563" alt="Ticket Advanced" width="600" /> |
+
+</details>
+
+<br />
+
+### 🎵 Music Player
+
+<details>
+<summary><b>View Screenshots</b></summary>
+
+| Page | Preview |
+|------|---------|
+| **Music Player** | <img src="https://github.com/user-attachments/assets/78d9293e-2df8-41db-b7b6-8a41556b67c4" alt="Music Page" width="600" /> |
+| **Live Search** | <img src="https://github.com/user-attachments/assets/c4bdeca2-9f2d-4013-99ac-5b08e1431b46" alt="Music Search" width="600" /> |
+
+</details>
+
+<br />
+
+### 🔔 Welcome & Notifications
 
 <details>
 <summary><b>View Screenshots</b></summary>
 
 | Feature | Preview |
 |---------|---------|
-| **Server Overview** | <img src="https://github.com/user-attachments/assets/55b33604-9355-4c27-870d-b141d9f925ab" alt="Server Overview" width="600" /> |
-| **Leaderboard** | <img src="https://github.com/user-attachments/assets/8f718ecc-5520-4912-a2f2-48ebd3b48947" alt="Leaderboard" width="600" /> |
-| **Astra AI Chatbot** | <img src="https://github.com/user-attachments/assets/2ff7b19b-e830-4068-a47a-d29ba1acc824" alt="AI Chatbot" width="600" /> |
-| **Level Card Designer** | <img src="https://github.com/user-attachments/assets/940fa4d8-283d-4156-8b6d-77f13c445487" alt="Level Card" width="600" /> |
-| **Voting & Bot Lists** | <img src="https://github.com/user-attachments/assets/18a12798-07ba-40ec-9878-bb93fcb25c87" alt="Voting" width="600" /> |
-| **Guild Members** | <img src="https://github.com/user-attachments/assets/6c2b2735-d55a-4395-898a-7b00563060ce" alt="Guild Members" width="600" /> |
-| **Embed Creator** | <img src="https://github.com/user-attachments/assets/31c555f2-0c9a-4165-ba21-51054d1b316f" alt="Embed Creator" width="600" /> |
-| **Global Profile** | <img src="https://github.com/user-attachments/assets/1e858339-438b-4519-9fc3-e8c3a4aacb26" alt="Global Profile" width="600" /> |
-| **Guild Profile** | <img src="https://github.com/user-attachments/assets/84d92976-e32f-48ac-87f5-038fcd602d8d" alt="Guild Profile" width="600" /> |
+| **Welcome & Goodbye** | <img src="https://github.com/user-attachments/assets/24e0ff3f-8c27-4fcd-86a7-5b868018d14b" alt="Welcome System" width="600" /> |
+| **Social Notifications** | <img src="https://github.com/user-attachments/assets/884bb63a-cf3d-4500-b567-c8952940bf5c" alt="Social Notifications" width="600" /> |
+| **Add Notification** | <img src="https://github.com/user-attachments/assets/b9e273d2-a2c6-4469-a03f-2815a5731334" alt="Add Notification" width="600" /> |
+
+</details>
+
+<br />
+
+### 🎁 Giveaways & Rewards
+
+<details>
+<summary><b>View Screenshots</b></summary>
+
+| Feature | Preview |
+|---------|---------|
+| **Giveaways** | <img src="https://github.com/user-attachments/assets/6e6a8448-c4ea-481a-ae45-b4095f167e00" alt="Giveaways" width="600" /> |
+| **Vote Rewards** | <img src="https://github.com/user-attachments/assets/d06decf6-529a-44a3-90b2-f646264be3b5" alt="Vote Rewards" width="600" /> |
+
+</details>
+
+<br />
+
+### 🎭 Role Management
+
+<details>
+<summary><b>View Screenshots</b></summary>
+
+| Feature | Preview |
+|---------|---------|
+| **Self-Role Panel** | <img src="https://github.com/user-attachments/assets/8c82dc4d-5d1b-4e42-8fcb-72735d095689" alt="Self-Role" width="600" /> |
+| **Auto Roles** | <img src="https://github.com/user-attachments/assets/3b4e701b-0c59-44b2-b8ba-c487114148bd" alt="Auto Roles" width="600" /> |
+| **Verification** | <img src="https://github.com/user-attachments/assets/63acad9d-2bff-49e6-8838-94a98d9606f3" alt="Verification" width="600" /> |
+
+</details>
+
+<br />
+
+### 🔊 TempVoice System
+
+<details>
+<summary><b>View Screenshots</b></summary>
+
+| Feature | Preview |
+|---------|---------|
+| **TempVoice Settings** | <img src="https://github.com/user-attachments/assets/03f34847-9c37-4a6a-b5f4-2b4dec7a50bd" alt="TempVoice" width="600" /> |
+
+</details>
+
+<br />
+
+### 🛠️ Tools & Utilities
+
+<details>
+<summary><b>View Screenshots</b></summary>
+
+| Feature | Preview |
+|---------|---------|
+| **Embed Creator** | <img src="https://github.com/user-attachments/assets/341bca99-5c05-4e7c-bd0b-c3134e023a39" alt="Embed Creator" width="600" /> |
+| **Embed Templates** | <img src="https://github.com/user-attachments/assets/95b6a962-ec9b-4ac3-8cad-e32a5fd850d8" alt="Embed Templates" width="600" /> |
+| **Custom Commands** | <img src="https://github.com/user-attachments/assets/f57f47ec-d24c-4250-85b0-131564cef00d" alt="Custom Commands" width="600" /> |
+| **Dashboard Overview Guide** | <img src="https://github.com/user-attachments/assets/2adeb652-bd70-415e-9381-9e5cf22413a0" alt="Dashboard Guide" width="600" /> |
 
 </details>
 
@@ -426,9 +690,9 @@ Choose from **30+ built-in themes** or create your own custom theme. Themes appl
 
 <div align="center">
 
-*✨ The Astra Dashboard has many more features to discover — moderation logs, ticket management, welcome messages, auto-mod settings, music controls, economy shop, giveaways, and much more!*
+*✨ The Astra Dashboard has many more features to discover — all accessible through a beautiful, modern interface!*
 
-**[Open Dashboard →](https://astra.novaplex.xyz)**
+**[Open Dashboard →](https://astra-bot.app)**
 
 </div>
 

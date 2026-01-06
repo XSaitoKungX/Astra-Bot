@@ -109,8 +109,8 @@ export default defineConfig(({ mode }) => {
         },
       } : undefined,
       
-      // Chunk size - set to 600KB as remaining large chunks are vendor libraries
-      chunkSizeWarningLimit: 600,
+      // Chunk size warning
+      chunkSizeWarningLimit: 700,
       
       // Asset handling
       assetsInlineLimit: 4096, // 4kb - inline smaller assets as base64
@@ -131,151 +131,26 @@ export default defineConfig(({ mode }) => {
           entryFileNames: isProd ? 'assets/[name]-[hash].js' : 'assets/[name].js',
           assetFileNames: isProd ? 'assets/[name]-[hash][extname]' : 'assets/[name][extname]',
           
-          // Manual chunk splitting for optimal caching and smaller bundles
-          manualChunks: (id) => {
-            // Core React - MUST be first, loaded before everything else
-            if (id.includes('node_modules/react/') || 
-                id.includes('node_modules/react-dom/') ||
-                id.includes('node_modules/react-is/') ||
-                id.includes('node_modules/scheduler/') ||
-                id.includes('node_modules/prop-types/')) {
-              return 'vendor-react';
-            }
-            
-            // React Router
-            if (id.includes('node_modules/react-router') ||
-                id.includes('node_modules/@remix-run/router')) {
-              return 'vendor-router';
-            }
-            
-            // Framer Motion - large library, separate chunk
-            if (id.includes('node_modules/framer-motion')) {
-              return 'vendor-motion';
-            }
-            
-            // Icons - can be large
-            if (id.includes('node_modules/lucide-react')) {
-              return 'vendor-icons';
-            }
-            
-            // Charts - heavy library
-            if (id.includes('node_modules/recharts') ||
-                id.includes('node_modules/d3-')) {
-              return 'vendor-charts';
-            }
-            
-            // Markdown rendering
-            if (id.includes('node_modules/react-markdown') ||
-                id.includes('node_modules/remark') ||
-                id.includes('node_modules/rehype') ||
-                id.includes('node_modules/unified') ||
-                id.includes('node_modules/micromark') ||
-                id.includes('node_modules/mdast') ||
-                id.includes('node_modules/hast')) {
-              return 'vendor-markdown';
-            }
-            
-            // Syntax highlighting - split by language for smaller chunks
-            if (id.includes('node_modules/react-syntax-highlighter')) {
-              return 'vendor-syntax-core';
-            }
-            if (id.includes('node_modules/refractor') ||
-                id.includes('node_modules/prismjs')) {
-              return 'vendor-syntax-langs';
-            }
-            
-            // Form handling
-            if (id.includes('node_modules/react-hook-form') ||
-                id.includes('node_modules/zod') ||
-                id.includes('node_modules/@hookform')) {
-              return 'vendor-forms';
-            }
-            
-            // State management & data fetching
-            if (id.includes('node_modules/zustand') || 
-                id.includes('node_modules/@tanstack')) {
-              return 'vendor-state';
-            }
-            
-            // HTTP & utilities
-            if (id.includes('node_modules/axios')) {
-              return 'vendor-http';
-            }
-            
-            // Date utilities
-            if (id.includes('node_modules/date-fns') ||
-                id.includes('node_modules/dayjs')) {
-              return 'vendor-date';
-            }
-            
-            // Other small utilities - group together
-            if (id.includes('node_modules/react-hot-toast') ||
-                id.includes('node_modules/clsx') ||
-                id.includes('node_modules/tailwind-merge') ||
-                id.includes('node_modules/class-variance-authority')) {
-              return 'vendor-utils';
-            }
-            
-            // Landing page - separate for faster initial load
-            if (id.includes('/pages/LandingPage')) {
-              return 'page-landing';
-            }
-            
-            // Login page
-            if (id.includes('/pages/LoginPage')) {
-              return 'page-login';
-            }
-            
-            // Docs pages
-            if (id.includes('/pages/docs/')) {
-              return 'pages-docs';
-            }
-            
-            // Settings pages - lazy loaded, split by feature
-            if (id.includes('/pages/settings/')) {
-              if (id.includes('ModerationSettingsPage')) return 'page-settings-moderation';
-              if (id.includes('LevelingSettingsPage')) return 'page-settings-leveling';
-              if (id.includes('EconomySettingsPage')) return 'page-settings-economy';
-              if (id.includes('WelcomeSettingsPage')) return 'page-settings-welcome';
-              if (id.includes('TicketsSettingsPage')) return 'page-settings-tickets';
-              if (id.includes('AutomodSettingsPage')) return 'page-settings-automod';
-              if (id.includes('MusicSettingsPage')) return 'page-settings-music';
-              if (id.includes('GiveawaySettingsPage')) return 'page-settings-giveaway';
-              if (id.includes('LoggingSettingsPage')) return 'page-settings-logging';
-              return 'pages-settings-other';
-            }
-            
-            // Guild pages - lazy loaded, split further
-            if (id.includes('/pages/guild/')) {
-              // Heavy pages get their own chunk
-              if (id.includes('AnalyticsPage')) return 'page-analytics';
-              if (id.includes('ModerationPage')) return 'page-moderation';
-              if (id.includes('EconomyPage')) return 'page-economy';
-              if (id.includes('LevelingPage')) return 'page-leveling';
-              if (id.includes('MusicPage')) return 'page-music';
-              if (id.includes('TempVoicePage')) return 'page-tempvoice';
-              if (id.includes('TicketsPage')) return 'page-tickets';
-              if (id.includes('GiveawaysPage')) return 'page-giveaways';
-              return 'pages-guild';
-            }
-            
-            // Admin pages
-            if (id.includes('/pages/admin/')) {
-              return 'pages-admin';
-            }
-            
-            // Components - split by type for smaller chunks
-            if (id.includes('/components/')) {
-              // Heavy components get their own chunk
-              if (id.includes('DashboardLayout') || id.includes('Layout')) return 'components-layout';
-              if (id.includes('Chart') || id.includes('Graph')) return 'components-charts';
-              if (id.includes('Modal') || id.includes('Dialog')) return 'components-modals';
-              if (id.includes('Form') || id.includes('Input') || id.includes('Select')) return 'components-forms';
-              if (id.includes('Table') || id.includes('DataGrid')) return 'components-tables';
-              if (id.includes('Card')) return 'components-cards';
-              return 'components-ui';
-            }
+          // OBJECT-BASED manualChunks - proven to work with React.lazy
+          // Function-based manualChunks breaks React.lazy (Vite bug #17653)
+          manualChunks: {
+            // Core vendor bundle - React + essential libs that must load first
+            'vendor': [
+              'react',
+              'react-dom',
+              'react-router-dom',
+              'framer-motion',
+              'zustand',
+              '@tanstack/react-query',
+              'axios',
+              'react-hot-toast',
+              'i18next',
+              'react-i18next',
+              'lucide-react',
+            ],
           },
+          // Let Vite handle all other splitting automatically
+          // React.lazy() will create proper chunks for lazy-loaded pages
         },
       },
       
