@@ -13,7 +13,7 @@
 
 <br />
 
-![Version](https://img.shields.io/badge/version-4.0.1-8B5CF6?style=flat-square&logo=github)
+![Version](https://img.shields.io/badge/version-4.1.0-8B5CF6?style=flat-square&logo=github)
 ![Node](https://img.shields.io/badge/node-20+-339933?style=flat-square&logo=node.js&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/typescript-5.x-3178C6?style=flat-square&logo=typescript&logoColor=white)
 ![Discord.js](https://img.shields.io/badge/discord.js-v14-5865F2?style=flat-square&logo=discord&logoColor=white)
@@ -66,6 +66,7 @@
     - [Frontend](#frontend)
     - [Architecture](#architecture)
   - [📦 Recent Updates](#-recent-updates)
+    - [v4.1.0 — Multi-Language Dashboard \& Screenshot Gallery](#v410--multi-language-dashboard--screenshot-gallery)
     - [v4.0.1 — Multi-Language Support \& Dashboard Fixes](#v401--multi-language-support--dashboard-fixes)
     - [v3.0.2-beta — Landing Page Enhancement \& API Fixes](#v302-beta--landing-page-enhancement--api-fixes)
     - [v3.0.1-beta — Dashboard Settings Persistence Fix](#v301-beta--dashboard-settings-persistence-fix)
@@ -367,14 +368,14 @@ Astra comes with a **full-featured web dashboard** — no commands needed for co
 <details>
 <summary><b>View Screenshots</b></summary>
 
-<img src="https://github.com/user-attachments/assets/12eb6ab8-c51c-4452-ad91-f58a3ca91dc4" alt="Landing Page" width="100%" />
+<img src="./dashboard/public/screenshots/LandingPage.png" alt="Landing Page" width="100%" />
 
 | Page | Preview |
 |------|---------|
-| **Commands Page** | <img src="https://github.com/user-attachments/assets/9fb9f23e-2446-48f7-8491-aec7ca0ac158" alt="Commands Page" width="600" /> |
-| **Anime Page** | <img src="https://github.com/user-attachments/assets/979108b7-3632-4fdb-ba1a-acde4829e3ab" alt="Anime Page" width="600" /> |
-| **Anime Card** | <img src="https://github.com/user-attachments/assets/b086741c-49cc-413d-93a6-aa02d178ec04" alt="Anime Card" width="400" /> |
-| **Status Page** | <img src="https://github.com/user-attachments/assets/15ffa873-1bef-44e9-a8e3-8dc4673ecaa9" alt="Status Page" width="600" /> |
+| **Commands Page** | <img src="./dashboard/public/screenshots/CommandPage.png" alt="Commands Page" width="600" /> |
+| **Anime Page** | <img src="./dashboard/public/screenshots/AnimePage.png" alt="Anime Page" width="600" /> |
+| **Anime Card** | <img src="./dashboard/public/screenshots/AnimePage_Card.png" alt="Anime Card" width="400" /> |
+| **Status Page** | <img src="./dashboard/public/screenshots/StatusPage.png" alt="Status Page" width="600" /> |
 
 </details>
 
@@ -387,12 +388,12 @@ Astra comes with a **full-featured web dashboard** — no commands needed for co
 
 | Page | Preview |
 |------|---------|
-| **Docs Intro** | <img src="https://github.com/user-attachments/assets/4c97b075-6a3e-43a5-8213-600a5bbcae27" alt="Docs Intro" width="600" /> |
-| **Docs Features** | <img src="https://github.com/user-attachments/assets/9503940a-c6bb-4996-84b2-b80741a58674" alt="Docs Features" width="600" /> |
-| **Docs Commands** | <img src="https://github.com/user-attachments/assets/21e5371e-4da8-45a0-b22d-3c7aa48b1b4d" alt="Docs Commands" width="600" /> |
-| **Docs Guides** | <img src="https://github.com/user-attachments/assets/ef6f5fdc-42a9-4f78-8938-2e196a005af1" alt="Docs Guides" width="600" /> |
-| **Getting Started** | <img src="https://github.com/user-attachments/assets/2fe8eb51-c922-45fb-b32f-2643c258d16f" alt="Getting Started" width="600" /> |
-| **API Documentation** | <img src="https://github.com/user-attachments/assets/28b5455a-ab3c-4d6a-baa4-50abb50b06f6" alt="API Docs" width="600" /> |
+| **Docs Intro** | <img src="./dashboard/public/screenshots/Docs_Intro.png" alt="Docs Intro" width="600" /> |
+| **Docs Features** | <img src="./dashboard/public/screenshots/Docs_Features.png" alt="Docs Features" width="600" /> |
+| **Docs Commands** | <img src="./dashboard/public/screenshots/Docs_Commands.png" alt="Docs Commands" width="600" /> |
+| **Docs Guides** | <img src="./dashboard/public/screenshots/Docs_All_Guides.png" alt="Docs Guides" width="600" /> |
+| **Getting Started** | <img src="./dashboard/public/screenshots/Docs_Getting_Started.png" alt="Getting Started" width="600" /> |
+| **API Documentation** | <img src="./dashboard/public/screenshots/Docs_API_Reference.png" alt="API Docs" width="600" /> |
 
 </details>
 
@@ -402,7 +403,7 @@ Astra comes with a **full-featured web dashboard** — no commands needed for co
 
 Choose from **30+ built-in themes** or create your own custom theme. Themes apply across the entire dashboard.
 
-<img src="https://github.com/user-attachments/assets/92f67776-55a1-4e9c-9273-2bcb54633f27" alt="Available Themes" width="300" />
+<img src="./dashboard/public/screenshots/Available_Themes.png" alt="Available Themes" width="300" />
 
 <details>
 <summary><b>Dark Themes</b></summary>
@@ -457,7 +458,7 @@ Choose from **30+ built-in themes** or create your own custom theme. Themes appl
 
 ### 🌍 Multi-Language Support
 
-<img src="https://github.com/user-attachments/assets/8207b29c-2876-4cc2-ba26-4354539dd783" alt="Available Languages" width="200" />
+<img src="./dashboard/public/screenshots/Available_Languages.png" alt="Available Languages" width="200" />
 
 <br />
 
@@ -468,11 +469,11 @@ Choose from **30+ built-in themes** or create your own custom theme. Themes appl
 
 | Page | Preview |
 |------|---------|
-| **Dashboard Overview** | <img src="https://github.com/user-attachments/assets/253a514b-9034-4b3a-985d-08e83431b884" alt="Dashboard Overview" width="600" /> |
-| **Server Selection** | <img src="https://github.com/user-attachments/assets/bab84311-acf2-4b22-a21d-e2f3d5e97b47" alt="Dashboard Servers" width="600" /> |
-| **Changelog** | <img src="https://github.com/user-attachments/assets/c1f3aabc-abe8-400a-b01e-e5eeff8491eb" alt="Changelog" width="600" /> |
-| **User Profile** | <img src="https://github.com/user-attachments/assets/018a39fc-a380-4fdb-b932-c295b3522ee3" alt="User Profile" width="600" /> |
-| **Dashboard Navigation** | <img src="https://github.com/user-attachments/assets/f1d72556-5caa-4c68-9327-4d04bcdcc4d9" alt="Dashboard Nav" width="300" /> |
+| **Dashboard Overview** | <img src="./dashboard/public/screenshots/Guide_Overview.png" alt="Dashboard Overview" width="600" /> |
+| **Server Selection** | <img src="./dashboard/public/screenshots/Dashboard_ServersPage.png" alt="Dashboard Servers" width="600" /> |
+| **Changelog** | <img src="./dashboard/public/screenshots/Dashboard_Changelog.png" alt="Changelog" width="600" /> |
+| **User Profile** | <img src="./dashboard/public/screenshots/Global_UserProfile.png" alt="User Profile" width="600" /> |
+| **Dashboard Navigation** | <img src="./dashboard/public/screenshots/Dashboard_Navigation.png" alt="Dashboard Nav" width="300" /> |
 
 </details>
 
@@ -485,14 +486,14 @@ Choose from **30+ built-in themes** or create your own custom theme. Themes appl
 
 | Page | Preview |
 |------|---------|
-| **Analytics Overview** | <img src="https://github.com/user-attachments/assets/3c8ff810-6a94-4293-9387-67d83172b749" alt="Analytics Overview" width="600" /> |
-| **Activity Analytics** | <img src="https://github.com/user-attachments/assets/230489d8-334c-493d-899f-2a2dcf1b1107" alt="Analytics Activity" width="600" /> |
-| **Channel Analytics** | <img src="https://github.com/user-attachments/assets/5f67ed50-f45c-45af-a944-e00081c66bbe" alt="Analytics Channels" width="600" /> |
-| **Command Analytics** | <img src="https://github.com/user-attachments/assets/a1214713-8a63-470f-ae5b-09c6dc186c1a" alt="Analytics Commands" width="600" /> |
-| **Advanced Insights** | <img src="https://github.com/user-attachments/assets/4b2ec9b2-115d-4e96-99d7-aff8f8411836" alt="Advanced Insights" width="600" /> |
-| **Retention Analysis** | <img src="https://github.com/user-attachments/assets/ff3eac14-266d-464f-ab87-fd663c5aa489" alt="Retention" width="600" /> |
-| **Predictions** | <img src="https://github.com/user-attachments/assets/af95c776-d494-4180-906d-2afe5373c5f2" alt="Predictions" width="600" /> |
-| **Engagement** | <img src="https://github.com/user-attachments/assets/ab1fd261-52bd-4016-9821-48c7a3e33f67" alt="Engagement" width="600" /> |
+| **Analytics Overview** | <img src="./dashboard/public/screenshots/Guide_Analytics_Overview.png" alt="Analytics Overview" width="600" /> |
+| **Activity Analytics** | <img src="./dashboard/public/screenshots/Guide_Analytics_Activity.png" alt="Analytics Activity" width="600" /> |
+| **Channel Analytics** | <img src="./dashboard/public/screenshots/Guide_Analytics_Channels.png" alt="Analytics Channels" width="600" /> |
+| **Command Analytics** | <img src="./dashboard/public/screenshots/Guide_Analytics_Commands.png" alt="Analytics Commands" width="600" /> |
+| **Advanced Insights** | <img src="./dashboard/public/screenshots/Guide_Advanced_Insights_Overview.png" alt="Advanced Insights" width="600" /> |
+| **Retention Analysis** | <img src="./dashboard/public/screenshots/Guide_Advanced_Insights_Retention.png" alt="Retention" width="600" /> |
+| **Predictions** | <img src="./dashboard/public/screenshots/Guide_Advanced_Insights_Predictions.png" alt="Predictions" width="600" /> |
+| **Engagement** | <img src="./dashboard/public/screenshots/Guide_Advanced_Insights_Engagement.png" alt="Engagement" width="600" /> |
 
 </details>
 
@@ -505,9 +506,9 @@ Choose from **30+ built-in themes** or create your own custom theme. Themes appl
 
 | Page | Preview |
 |------|---------|
-| **Members List** | <img src="https://github.com/user-attachments/assets/f066296e-25e0-4894-a20d-7e05974f4ecc" alt="Members Page" width="600" /> |
-| **Member Details** | <img src="https://github.com/user-attachments/assets/44b5674d-f7c9-4cc2-9149-ec787dbec74d" alt="Member Details" width="600" /> |
-| **Role Management** | <img src="https://github.com/user-attachments/assets/318ec9fe-833b-4dde-ac47-5aeec8d459a3" alt="Roles" width="600" /> |
+| **Members List** | <img src="./dashboard/public/screenshots/Guide_Members_Overview.png" alt="Members Page" width="600" /> |
+| **Member Details** | <img src="./dashboard/public/screenshots/Guide_Member_Profile.png" alt="Member Details" width="600" /> |
+| **Role Management** | <img src="./dashboard/public/screenshots/Guide_Server_Roles.png" alt="Roles" width="600" /> |
 
 </details>
 
@@ -520,9 +521,9 @@ Choose from **30+ built-in themes** or create your own custom theme. Themes appl
 
 | Page | Preview |
 |------|---------|
-| **AI Settings #1** | <img src="https://github.com/user-attachments/assets/3db0de61-b8f9-4963-a0af-6a29fdf703e9" alt="AI Settings 1" width="600" /> |
+| **AI Settings #1** | <img src="./dashboard/public/screenshots/Guide_AISettings.png" alt="AI Settings 1" width="600" /> |
 | **AI Settings #2** | <img src="https://github.com/user-attachments/assets/3a4f21b2-28a8-4e0c-a4df-30f25a443c49" alt="AI Settings 2" width="600" /> |
-| **AI Chat** | <img src="https://github.com/user-attachments/assets/35b167c9-0366-49c9-9326-0800ff5e7f92" alt="AI Chat" width="600" /> |
+| **AI Chat** | <img src="./dashboard/public/screenshots/Guide_AIChat.png" alt="AI Chat" width="600" /> |
 
 </details>
 
@@ -535,15 +536,15 @@ Choose from **30+ built-in themes** or create your own custom theme. Themes appl
 
 | Page | Preview |
 |------|---------|
-| **Leaderboard** | <img src="https://github.com/user-attachments/assets/8b12e569-e0c7-47ba-890c-053e1c8d67f7" alt="Leaderboard" width="600" /> |
-| **General Settings #1** | <img src="https://github.com/user-attachments/assets/4bec50d0-bf79-417f-91a3-92ae9e930002" alt="Leveling General 1" width="600" /> |
+| **Leaderboard** | <img src="./dashboard/public/screenshots/Guide_Leaderboard_Levels.png" alt="Leaderboard" width="600" /> |
+| **General Settings #1** | <img src="./dashboard/public/screenshots/Guide_Leveling_General_1.png" alt="Leveling General 1" width="600" /> |
 | **General Settings #2** | <img src="https://github.com/user-attachments/assets/d32b88e8-04da-4ad2-ada3-cf01c9e97a01" alt="Leveling General 2" width="600" /> |
 | **XP Boosts** | <img src="https://github.com/user-attachments/assets/a23d5d60-ee68-4daf-a9e6-e37b18a1853d" alt="XP Boosts" width="600" /> |
 | **Exclusions** | <img src="https://github.com/user-attachments/assets/f499c32d-9f31-4101-a6fa-99728fc341a1" alt="Exclusions" width="600" /> |
 | **Voice XP** | <img src="https://github.com/user-attachments/assets/124c1b64-c26c-4e1c-a1ef-ec66d5d70d96" alt="Voice XP" width="600" /> |
-| **Level Card** | <img src="https://github.com/user-attachments/assets/618c38a9-533b-4b4e-951d-4b3505e8d1fe" alt="Level Card" width="600" /> |
-| **Card Themes** | <img src="https://github.com/user-attachments/assets/71d1a62f-58dc-4450-8269-763c6292e8f3" alt="Card Themes" width="600" /> |
-| **Role Rewards** | <img src="https://github.com/user-attachments/assets/a7aaf22b-efa3-475c-a525-2dab67f770db" alt="Role Rewards" width="600" /> |
+| **Level Card** | <img src="./dashboard/public/screenshots/Guide_Leveling_LevelCard.png" alt="Level Card" width="600" /> |
+| **Card Themes** | <img src="./dashboard/public/screenshots/Guide_LevelCard_Themes.png" alt="Card Themes" width="600" /> |
+| **Role Rewards** | <img src="./dashboard/public/screenshots/Guide_Role_Rewards.png" alt="Role Rewards" width="600" /> |
 
 </details>
 
@@ -556,9 +557,9 @@ Choose from **30+ built-in themes** or create your own custom theme. Themes appl
 
 | Page | Preview |
 |------|---------|
-| **Economy Overview** | <img src="https://github.com/user-attachments/assets/589ca305-c67a-483c-9c21-00847bf478cc" alt="Economy Overview" width="600" /> |
+| **Economy Overview** | <img src="./dashboard/public/screenshots/Guide_Economy_Overview.png" alt="Economy Overview" width="600" /> |
 | **Bank Settings** | <img src="https://github.com/user-attachments/assets/97bce205-96c4-4dee-9a90-728b1e46dab9" alt="Economy Bank" width="600" /> |
-| **Shop Overview** | <img src="https://github.com/user-attachments/assets/39292c19-21f5-4bbd-ba47-6aa68b3aab5f" alt="Shop Overview" width="600" /> |
+| **Shop Overview** | <img src="./dashboard/public/screenshots/Guide_Server_Shop_Overview.png" alt="Shop Overview" width="600" /> |
 | **Create Item** | <img src="https://github.com/user-attachments/assets/ff14c1ac-4c00-414f-9b87-13e786d6fae6" alt="Create Item" width="600" /> |
 
 </details>
@@ -572,15 +573,15 @@ Choose from **30+ built-in themes** or create your own custom theme. Themes appl
 
 | Page | Preview |
 |------|---------|
-| **General Settings** | <img src="https://github.com/user-attachments/assets/671e0031-5a00-4b9e-8cea-c1b7e7dd39d8" alt="Moderation General" width="600" /> |
+| **General Settings** | <img src="./dashboard/public/screenshots/Guide_Moderation_General.png" alt="Moderation General" width="600" /> |
 | **Auto Punishment** | <img src="https://github.com/user-attachments/assets/43f4404d-da55-4c60-831d-a7f1a7d2a2d7" alt="Auto Punishment" width="600" /> |
 | **Roles & Channels** | <img src="https://github.com/user-attachments/assets/35a09e64-ae05-4e67-8f10-2e01310e0f95" alt="Roles Channels" width="600" /> |
 | **Activity Log** | <img src="https://github.com/user-attachments/assets/59eb0f38-b351-4f3c-8366-7c8af6fcf83e" alt="Activity" width="600" /> |
-| **AutoMod Protection** | <img src="https://github.com/user-attachments/assets/63e39e8f-6168-4f5b-a519-ad6e801ca55c" alt="AutoMod Protection" width="600" /> |
+| **AutoMod Protection** | <img src="./dashboard/public/screenshots/Guide_AutoMod_Protection.png" alt="AutoMod Protection" width="600" /> |
 | **Word Filter** | <img src="https://github.com/user-attachments/assets/03be46ed-f0dc-4e11-92b6-78955a7e588e" alt="Word Filter" width="600" /> |
 | **Exceptions** | <img src="https://github.com/user-attachments/assets/a1f597b7-12b0-44fb-872d-e96ff75e6473" alt="Exceptions" width="600" /> |
-| **Audit Log** | <img src="https://github.com/user-attachments/assets/d298251c-e52f-4525-acde-d745692d96d6" alt="Audit Log" width="600" /> |
-| **Logging** | <img src="https://github.com/user-attachments/assets/19d278f0-a4b1-4cd0-86fb-09b97418480a" alt="Logging" width="600" /> |
+| **Audit Log** | <img src="./dashboard/public/screenshots/Guide_AuditLog.png" alt="Audit Log" width="600" /> |
+| **Logging** | <img src="./dashboard/public/screenshots/Guide_Logging_Channels.png" alt="Logging" width="600" /> |
 
 </details>
 
@@ -593,7 +594,7 @@ Choose from **30+ built-in themes** or create your own custom theme. Themes appl
 
 | Page | Preview |
 |------|---------|
-| **Ticket Settings** | <img src="https://github.com/user-attachments/assets/311673d6-4a2b-4cc6-bbdb-b1cecbce9071" alt="Ticket System" width="600" /> |
+| **Ticket Settings** | <img src="./dashboard/public/screenshots/Guide_Ticket_System.png" alt="Ticket System" width="600" /> |
 | **Ticket Messages** | <img src="https://github.com/user-attachments/assets/46baeac4-4699-4490-a3c0-4d69d8a5a754" alt="Ticket Messages" width="600" /> |
 | **Advanced Settings** | <img src="https://github.com/user-attachments/assets/9309ce12-3e7f-4705-a1a6-610ec4e59563" alt="Ticket Advanced" width="600" /> |
 
@@ -608,8 +609,8 @@ Choose from **30+ built-in themes** or create your own custom theme. Themes appl
 
 | Page | Preview |
 |------|---------|
-| **Music Player** | <img src="https://github.com/user-attachments/assets/78d9293e-2df8-41db-b7b6-8a41556b67c4" alt="Music Page" width="600" /> |
-| **Live Search** | <img src="https://github.com/user-attachments/assets/c4bdeca2-9f2d-4013-99ac-5b08e1431b46" alt="Music Search" width="600" /> |
+| **Music Player** | <img src="./dashboard/public/screenshots/Guide_MusicPage.png" alt="Music Page" width="600" /> |
+| **Live Search** | <img src="./dashboard/public/screenshots/Guide_MusicPage_Live_Search.png" alt="Music Search" width="600" /> |
 
 </details>
 
@@ -622,8 +623,8 @@ Choose from **30+ built-in themes** or create your own custom theme. Themes appl
 
 | Feature | Preview |
 |---------|---------|
-| **Welcome & Goodbye** | <img src="https://github.com/user-attachments/assets/24e0ff3f-8c27-4fcd-86a7-5b868018d14b" alt="Welcome System" width="600" /> |
-| **Social Notifications** | <img src="https://github.com/user-attachments/assets/884bb63a-cf3d-4500-b567-c8952940bf5c" alt="Social Notifications" width="600" /> |
+| **Welcome & Goodbye** | <img src="./dashboard/public/screenshots/Guide_Welcome_Goodbye.png" alt="Welcome System" width="600" /> |
+| **Social Notifications** | <img src="./dashboard/public/screenshots/Guide_Social_Notifications_Overview.png" alt="Social Notifications" width="600" /> |
 | **Add Notification** | <img src="https://github.com/user-attachments/assets/b9e273d2-a2c6-4469-a03f-2815a5731334" alt="Add Notification" width="600" /> |
 
 </details>
@@ -637,7 +638,7 @@ Choose from **30+ built-in themes** or create your own custom theme. Themes appl
 
 | Feature | Preview |
 |---------|---------|
-| **Giveaways** | <img src="https://github.com/user-attachments/assets/6e6a8448-c4ea-481a-ae45-b4095f167e00" alt="Giveaways" width="600" /> |
+| **Giveaways** | <img src="./dashboard/public/screenshots/Guide_Giveaways_System.png" alt="Giveaways" width="600" /> |
 | **Vote Rewards** | <img src="https://github.com/user-attachments/assets/d06decf6-529a-44a3-90b2-f646264be3b5" alt="Vote Rewards" width="600" /> |
 
 </details>
@@ -651,9 +652,9 @@ Choose from **30+ built-in themes** or create your own custom theme. Themes appl
 
 | Feature | Preview |
 |---------|---------|
-| **Self-Role Panel** | <img src="https://github.com/user-attachments/assets/8c82dc4d-5d1b-4e42-8fcb-72735d095689" alt="Self-Role" width="600" /> |
+| **Self-Role Panel** | <img src="./dashboard/public/screenshots/Guide_SelfRole_Create_Panel.png" alt="Self-Role" width="600" /> |
 | **Auto Roles** | <img src="https://github.com/user-attachments/assets/3b4e701b-0c59-44b2-b8ba-c487114148bd" alt="Auto Roles" width="600" /> |
-| **Verification** | <img src="https://github.com/user-attachments/assets/63acad9d-2bff-49e6-8838-94a98d9606f3" alt="Verification" width="600" /> |
+| **Verification** | <img src="./dashboard/public/screenshots/Guide_Verification_System.png" alt="Verification" width="600" /> |
 
 </details>
 
@@ -666,7 +667,7 @@ Choose from **30+ built-in themes** or create your own custom theme. Themes appl
 
 | Feature | Preview |
 |---------|---------|
-| **TempVoice Settings** | <img src="https://github.com/user-attachments/assets/03f34847-9c37-4a6a-b5f4-2b4dec7a50bd" alt="TempVoice" width="600" /> |
+| **TempVoice Settings** | <img src="./dashboard/public/screenshots/Guide_TempVoice.png" alt="TempVoice" width="600" /> |
 
 </details>
 
@@ -679,9 +680,9 @@ Choose from **30+ built-in themes** or create your own custom theme. Themes appl
 
 | Feature | Preview |
 |---------|---------|
-| **Embed Creator** | <img src="https://github.com/user-attachments/assets/341bca99-5c05-4e7c-bd0b-c3134e023a39" alt="Embed Creator" width="600" /> |
+| **Embed Creator** | <img src="./dashboard/public/screenshots/Guide_Embed_Creator.png" alt="Embed Creator" width="600" /> |
 | **Embed Templates** | <img src="https://github.com/user-attachments/assets/95b6a962-ec9b-4ac3-8cad-e32a5fd850d8" alt="Embed Templates" width="600" /> |
-| **Custom Commands** | <img src="https://github.com/user-attachments/assets/f57f47ec-d24c-4250-85b0-131564cef00d" alt="Custom Commands" width="600" /> |
+| **Custom Commands** | <img src="./dashboard/public/screenshots/Guide_Custom_Commands.png" alt="Custom Commands" width="600" /> |
 | **Dashboard Overview Guide** | <img src="https://github.com/user-attachments/assets/2adeb652-bd70-415e-9381-9e5cf22413a0" alt="Dashboard Guide" width="600" /> |
 
 </details>
@@ -853,6 +854,42 @@ Choose from **30+ built-in themes** or create your own custom theme. Themes appl
 <br />
 
 ## 📦 Recent Updates
+
+### v4.1.0 — Multi-Language Dashboard & Screenshot Gallery
+> Released: January 7, 2026
+
+<details>
+<summary><strong>What's new</strong></summary>
+
+**🌐 Complete Internationalization:**
+- Full multi-language support with 10 languages: English, German, French, Spanish, Portuguese, Italian, Polish, Russian, Japanese, Korean
+- 38 new i18n translation keys for dashboard section
+- Language selector in dashboard navigation
+- All locale files updated with comprehensive translations
+
+**📸 Screenshot Gallery:**
+- 78 new screenshots in `dashboard/public/screenshots/`
+- LandingPage carousel with 38 feature previews
+- README.md restructured with 21 categorized screenshot sections
+- Screenshots now hosted locally (no more GitHub attachment CORS issues)
+
+**⚡ Performance & SEO:**
+- Major SEO improvements: Meta tags, Open Graph, Twitter Cards, structured data
+- PageSpeed optimizations: Code splitting, lazy loading, preloading
+- React context error in i18n chunk fixed
+
+**🎵 Music Player Fixes:**
+- Fixed "Unknown interaction" errors (deferReply timing)
+- Fixed "No track available" race condition
+- Improved voice connection timeout handling
+- Added queue size check before playback
+- Better error messages for connection issues
+
+**🐛 Bug Fixes:**
+- Fixed uptime and channels display on landing page
+- Fixed React context error in i18n chunk
+
+</details>
 
 ### v4.0.1 — Multi-Language Support & Dashboard Fixes
 > Released: January 5, 2026
