@@ -332,6 +332,7 @@ model Ticket {
   
   channelId String   @unique
   discordId String   // Ticket creator
+  ticketNumber Int   @default(1) // Sequential ticket number per guild
   
   panelId   String?
   panelName String?
