@@ -87,7 +87,6 @@ model Guild {
   automodConfig       Json @default("{}")
   autoRolesConfig     Json @default("{}")
   musicConfig         Json @default("{}")
-  gamesConfig         Json @default("{}")
   votingConfig        Json @default("{}")
   verifyConfig        Json @default("{}")
   tempVoiceConfig     Json @default("{}")
@@ -861,37 +860,6 @@ model SavedEmbed {
 }
 
 // ============================================
-// GAMES
-// ============================================
-
-model GameStats {
-  id        String   @id @default(cuid())
-  
-  discordId String
-  guildId   String?
-  
-  gameType  String   // trivia, wordle, hangman, rpg, etc.
-  
-  // Stats as JSONB (game-specific)
-  stats     Json     @default("{}")
-  
-  // Common stats
-  gamesPlayed Int    @default(0)
-  gamesWon    Int    @default(0)
-  highScore   Int    @default(0)
-  totalScore  Int    @default(0)
-  
-  lastPlayed DateTime @default(now())
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-  
-  @@unique([discordId, guildId, gameType])
-  @@index([discordId])
-  @@index([guildId, gameType])
-  @@index([gameType, highScore(sort: Desc)])
-}
-
-// ============================================
 // ANALYTICS EVENTS (High volume - 2.4K docs)
 // ============================================
 
@@ -913,34 +881,6 @@ model AnalyticsEvent {
   @@index([guildId, eventType])
   @@index([guildId, timestamp])
   @@index([eventType, timestamp])
-}
-
-// ============================================
-// GAME CONFIGS
-// ============================================
-
-model GameConfig {
-  id        String   @id @default(cuid())
-  
-  guildId   String   @unique
-  
-  // Channel restrictions
-  gameChannels String[] @default([])
-  
-  // Game-specific configs as JSONB
-  trivia    Json     @default("{}")
-  wordGame  Json     @default("{}")
-  rpg       Json     @default("{}")
-  pets      Json     @default("{}")
-  achievements Json  @default("{}")
-  
-  // General settings
-  enabled   Boolean  @default(true)
-  
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  
-  @@index([guildId])
 }
 
 // ============================================
@@ -1021,58 +961,6 @@ model Review {
   @@index([discordId])
   @@index([rating])
   @@index([status, isPublic])
-}
-
-// ============================================
-// RPG CHARACTERS
-// ============================================
-
-model RPGCharacter {
-  id        String   @id @default(cuid())
-  
-  discordId String
-  guildId   String
-  
-  name      String
-  class     String   @default("warrior")
-  title     String?
-  
-  // Stats
-  level     Int      @default(1)
-  xp        Int      @default(0)
-  xpToNextLevel Int  @default(100)
-  health    Int      @default(100)
-  maxHealth Int      @default(100)
-  mana      Int      @default(50)
-  maxMana   Int      @default(50)
-  attack    Int      @default(10)
-  defense   Int      @default(10)
-  speed     Int      @default(10)
-  gold      Int      @default(0)
-  
-  // Location
-  currentLocation String @default("town")
-  
-  // Equipment & Inventory as JSONB
-  equipment Json     @default("{}")
-  inventory Json     @default("[]")
-  skills    Json     @default("[]")
-  
-  // Stats tracking as JSONB
-  stats     Json     @default("{}")
-  
-  // Progress
-  questsCompleted Int @default(0)
-  monstersKilled  Int @default(0)
-  deaths          Int @default(0)
-  
-  lastAdventure DateTime?
-  
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  
-  @@unique([discordId, guildId])
-  @@index([guildId, level(sort: Desc)])
 }
 
 // ============================================
@@ -1168,65 +1056,6 @@ model TempVoiceTemplate {
 }
 
 // ============================================
-// TRIVIA STATS
-// ============================================
-
-model TriviaStats {
-  id        String   @id @default(cuid())
-  
-  discordId String
-  guildId   String?
-  
-  // Stats
-  gamesPlayed    Int @default(0)
-  questionsAnswered Int @default(0)
-  correctAnswers Int @default(0)
-  totalPoints    Int @default(0)
-  
-  // Streaks
-  currentStreak  Int @default(0)
-  longestStreak  Int @default(0)
-  
-  // Category stats as JSONB
-  categoryStats  Json @default("{}")
-  
-  lastPlayed DateTime?
-  
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  
-  @@unique([discordId, guildId])
-  @@index([guildId, totalPoints(sort: Desc)])
-}
-
-// ============================================
-// USER ACHIEVEMENTS
-// ============================================
-
-model UserAchievements {
-  id        String   @id @default(cuid())
-  
-  discordId String
-  guildId   String?
-  
-  // Achievements as JSONB array
-  achievements Json  @default("[]")
-  
-  // Progress tracking
-  progress  Json     @default("{}")
-  
-  // Stats
-  totalUnlocked Int  @default(0)
-  totalPoints   Int  @default(0)
-  
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  
-  @@unique([discordId, guildId])
-  @@index([discordId])
-}
-
-// ============================================
 // VERIFICATION CONFIG
 // ============================================
 
@@ -1254,74 +1083,6 @@ model VerificationConfig {
   
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-}
-
-// ============================================
-// WORD GAMES
-// ============================================
-
-model WordGame {
-  id        String   @id @default(cuid())
-  
-  discordId String
-  guildId   String
-  channelId String
-  
-  gameType  String   // wordle, hangman, scramble, anagram
-  word      String
-  displayWord String @default("")
-  
-  // Game state
-  guesses       Json   @default("[]")
-  wrongGuesses  Json   @default("[]")
-  wordleGuesses Json   @default("[]")
-  status        String @default("active") // active, won, lost, abandoned
-  
-  // Attempts
-  maxAttempts   Int    @default(6)
-  attemptsLeft  Int    @default(6)
-  hintsUsed     Int    @default(0)
-  hangmanStage  Int    @default(0)
-  
-  // Timing
-  startedAt DateTime @default(now())
-  endedAt   DateTime?
-  timeTaken Float?
-  
-  @@index([discordId, guildId, gameType, status])
-  @@index([guildId, status])
-  @@index([channelId])
-}
-
-// ============================================
-// WORD GAME STATS
-// ============================================
-
-model WordGameStats {
-  id        String   @id @default(cuid())
-  
-  discordId String
-  guildId   String?
-  
-  // Stats per game type as JSONB
-  wordle    Json     @default("{}")
-  hangman   Json     @default("{}")
-  
-  // Overall stats
-  gamesPlayed   Int    @default(0)
-  gamesWon      Int    @default(0)
-  totalPoints   Int    @default(0)
-  
-  currentStreak Int  @default(0)
-  longestStreak Int  @default(0)
-  
-  lastPlayed DateTime?
-  
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  
-  @@unique([discordId, guildId])
-  @@index([guildId, gamesWon(sort: Desc)])
 }
 
 // ============================================
@@ -1404,62 +1165,6 @@ model Version {
   
   releaseDate DateTime @default(now())
   createdAt   DateTime @default(now())
-}
-
-// ============================================
-// PETS
-// ============================================
-
-model Pet {
-  id        String   @id @default(cuid())
-  
-  ownerId   String   // Discord user ID
-  guildId   String
-  
-  petId     String   @unique // Unique pet identifier
-  speciesId String
-  name      String
-  
-  level     Int      @default(1)
-  xp        Int      @default(0)
-  
-  happiness Int      @default(50)
-  energy    Int      @default(100)
-  hunger    Int      @default(50)
-  
-  isActive  Boolean  @default(false)
-  
-  stats     Json     @default("{}")
-  
-  lastFed   DateTime?
-  lastPlayed DateTime?
-  obtainedAt DateTime @default(now())
-  
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  
-  @@index([ownerId, guildId])
-  @@index([guildId, level(sort: Desc)])
-}
-
-model PetCollection {
-  id        String   @id @default(cuid())
-  
-  discordId String
-  guildId   String
-  
-  activePetId String?
-  
-  totalPetsAdopted Int @default(0)
-  totalPetsReleased Int @default(0)
-  
-  stats     Json     @default("{}")
-  
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  
-  @@unique([discordId, guildId])
-  @@index([guildId])
 }
 
 // ============================================
