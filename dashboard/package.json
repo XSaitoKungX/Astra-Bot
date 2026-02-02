@@ -34,7 +34,7 @@
     "cmdk": "^1.1.1",
     "country-flag-icons": "^1.6.4",
     "date-fns": "^4.1.0",
-    "emoji-picker-react": "^4.16.1",
+    "emoji-picker-react": "^4.17.3",
     "emojibase": "^17.0.0",
     "emojibase-data": "^17.0.0",
     "framer-motion": "^12.27.5",
