@@ -52,7 +52,7 @@
     "@types/nodemailer": "^7.0.5",
     "@types/pg": "^8.16.0",
     "@types/react-syntax-highlighter": "^15.5.13",
-    "axios": "^1.13.3",
+    "axios": "^1.13.5",
     "bcryptjs": "^3.0.3",
     "chokidar": "^5.0.0",
     "compression": "^1.8.1",
